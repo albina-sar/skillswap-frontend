@@ -6,9 +6,10 @@ export interface Skill {
   title: string
   description: string
   type: SkillType
-  category: string
+  categoryId: string
+  subcategoryId: string
   tags: string[]
-  imageUrl: string | null
+  imageUrl: string[]
   authorId: string
   createdAt: string
 }
