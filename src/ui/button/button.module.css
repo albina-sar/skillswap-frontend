@@ -1,0 +1,65 @@
+/* Базовые стили для всех кнопок */
+.base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px; /* Устанавливаем отступ сразу для всех элементов внутри текста и картинки */
+  padding: 12px 24px;
+  height: 48px;
+  border-radius: 12px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: opacity 0.2s; /* для плавной анимации например при наведении */
+  border: none;
+}
+
+/* когда у тега <button> имеется атрибут disabled */
+.base:disabled {
+  background: #E4E8DF;
+  color: #69735D;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.short {
+  width: fit-content; /* Дополнительный класс: ширина кнопки по контенту */
+}
+
+.large {
+  width: 100%; /* Дополнительный класс: растягивается на всю ширину контейнера */
+}
+
+/* Цветовые вариации (варианты primary-основной, outline - светлая с оконтовкой, reset_filter - кнопка сброса фильтов, white - белая кнопка) */
+.primary {
+  background: #ABD27A;
+  color: #253017;
+}
+
+.outline {
+  background: #FFF;
+  border: 1px solid #ABD27A;
+  color: #253017;
+}
+
+.reset_filter {
+  background: #F9FAF7;
+  color: #508826;
+}
+
+.white {
+  background: #FFF;
+  color: #253017;
+}
+
+/* Контейнер для изображения */
+.image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
