@@ -1,0 +1,70 @@
+.container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.img {
+  border-radius: 50%;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.xs {
+  width: var(--avatar-xs);
+  height: var(--avatar-xs);
+}
+
+.sm {
+  width: var(--avatar-sm);
+  height: var(--avatar-sm);
+}
+
+.md {
+  width: var(--avatar-md);
+  height: var(--avatar-md);
+}
+
+.lg {
+  width: var(--avatar-lg);
+  height: var(--avatar-lg);
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  position: absolute;
+  right: 0;
+  bottom: -2px;
+}
+
+.icon svg {
+  display: block;
+}
+
+.icon.edit {
+  width: 56px;
+  height: 56px;
+  background-color: #deebc5;
+}
+
+.icon.edit svg {
+  width: 24px;
+  height: 24px;
+}
+
+.icon.add {
+  width: 16px;
+  height: 16px;
+  background-color: #abd27a;
+}
+
+.icon.add svg {
+  width: 9px;
+  height: 9px;
+}
+
+
