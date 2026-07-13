@@ -1,3 +1,5 @@
+import { Category } from '../types'
+
 export const ROUTES = {
   HOME: '/',
   SKILL: '/skill/:id',
@@ -14,17 +16,6 @@ export const LOCAL_STORAGE_KEYS = {
   REQUESTS: 'skillswap_requests',
   THEME: 'skillswap_theme',
 } as const
-
-export interface Subcategory {
-  id: number;
-  name: string;
-}
-
-export interface Category {
-  id: number;
-  name: string;
-  subcategories: Subcategory[];
-}
 
 export const CATEGORIES_DATA: Category[] = [
   {
