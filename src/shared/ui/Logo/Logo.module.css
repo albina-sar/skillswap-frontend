@@ -1,0 +1,19 @@
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.image {
+  height: 40px;
+  width: 40px;
+  display: block;
+}
+
+.text {
+  font-family: 'Jost', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+  letter-spacing: -0.011em;
+}
