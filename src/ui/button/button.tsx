@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import styles from './button.module.css';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'outline' | 'reset_filter' | 'white';
+  variant?: 'primary' | 'outline' | 'outline_form' | 'reset_filter' | 'white';
   image?: React.ReactNode;
   imagePosition?: 'left' | 'right';
   size?: 'short' | 'large';
