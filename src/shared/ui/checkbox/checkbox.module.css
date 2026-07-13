@@ -1,0 +1,56 @@
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.checkboxContainer {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.emptyCheckbox {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+}
+
+.icon {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+
+  /* TODO: для цвета нужна css переменная с акцентным цветом */
+  color: #abd27a;
+  transition: opacity 0.15s;
+  opacity: 1;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+.labelText {
+  font-size: 16px;
+  line-height: 24px;
+
+  /* TODO: для цвета нужна css переменная с цветом основного текста */
+  color: #253017;
+}
