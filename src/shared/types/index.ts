@@ -42,3 +42,16 @@ export interface AuthUser {
   email: string
   token: string
 }
+
+//─── Category ─────────────────────────────────────────────
+
+export interface Subcategory {
+  id: string;
+  name: string;
+}
+
+export interface Category {
+  id: string;
+  name: string;
+  subcategories: Subcategory[];
+}
