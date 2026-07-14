@@ -45,6 +45,11 @@ export interface AuthUser {
   token: string
 }
 
+// ─── City ────────────────────────────────────────────────
+export type City = {
+  id: string
+  name: string
+}
 //─── Category ─────────────────────────────────────────────
 
 export interface Subcategory {
@@ -56,4 +61,5 @@ export interface Category {
   id: string;
   name: string;
   subcategories: Subcategory[];
+
 }
