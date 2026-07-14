@@ -1,2 +1,2 @@
-export { LikeButton } from './likeButton';
+export { LikeButton } from './LikeButton';
 export type { LikeButtonProps } from './types';
