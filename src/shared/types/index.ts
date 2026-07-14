@@ -22,7 +22,7 @@ export interface User {
   dateOfBirth: string
   photo: string
   about: string
-  skills: Skill[];
+  skills: string[];
 }
 
 // ─── Request ─────────────────────────────────────────────
