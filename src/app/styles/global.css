@@ -1,100 +1,79 @@
 /* ─── CSS Custom Properties ─────────────────────────────── */
 :root {
   /* Цвета текста */
-
-  --text-primary: #253017; /* Основной текст */
-  --text-primary-rgb: rgba(37, 48, 23, 1); /* RGB */
-  --text-primary-hsl: hsla(87, 36%, 14%, 1); /* HSL */
-
-  --text-caption: #69735d; /* Подписи */
-  --text-caption-rgb: rgba(105, 115, 93, 1);
-  --text-caption-hsl: hsla(87, 11%, 41%, 1);
-
-  --text-disabled: #9ca197; /* Неактивный текст */
-  --text-disabled-rgb: rgba(156, 161, 151, 1);
-  --text-disabled-hsl: hsla(87, 5%, 61%, 1);
-
-  --modal-overlay-color: #8e8e8e99;
+  --text-primary: #253017;
+  --text-primary-rgb: 37, 48, 23;
+  --text-primary-hsl: 87, 36%, 14%;
+  --text-caption: #69735d;
+  --text-caption-rgb: 105, 115, 93;
+  --text-caption-hsl: 87, 11%, 41%;
+  --text-disabled: #9ca197;
+  --text-disabled-rgb: 156, 161, 151;
+  --text-disabled-hsl: 87, 5%, 61%;
+  --modal-overlay-color: rgba(142 142 142 0.6);
 
   /* Кнопки и интерактив */
+  --toggle: #b2b9a9;
+  --toggle-rgb: 178, 185, 169;
+  --toggle-hsl: 87, 10%, 69%;
+  --disabled: #e4e8df;
+  --disabled-rgb: 228, 232, 223;
+  --disabled-hsl: 87, 16%, 89%;
+  --text-link: #508826;
+  --text-link-rgb: 80, 136, 38;
+  --text-link-hsl: 94, 56%, 34%;
+  --button-pressed: #508826;
+  --button-pressed-rgb: 80, 136, 38;
+  --button-pressed-hsl: 94, 56%, 34%;
+  --button-hover: #deebc5;
+  --button-hover-rgb: 222, 235, 197;
+  --button-hover-hsl: 81, 49%, 85%;
 
-  --toggle: #b2b9a9; /* Переключатель */
-  --toggle-rgb: rgba(178, 185, 169, 1);
-  --toggle-hsl: hsla(87, 10%, 69%, 1);
+  /* Фоны */
+  --background-main: #f9faf7;
+  --background-main-rgb: 249, 250, 247;
+  --background-main-hsl: 80, 23%, 97%;
+  --background-secondary: #fff;
+  --card-bg: #fff;
+  --card-bg-rgb: 255, 255, 255;
+  --card-bg-hsl: 0, 0%, 100%;
+  --input-bg: #fff;
+  --input-bg-rgb: 255, 255, 255;
+  --input-bg-hsl: 0, 0%, 100%;
 
-  --disabled: #e4e8df; /* Неактивный */
-  --disabled-rgb: rgba(228, 232, 223, 1);
-  --disabled-hsl: hsla(87, 16%, 89%, 1);
+  /* Акценты */
+  --accent: #abd27a;
+  --accent-rgb: 171, 210, 122;
+  --accent-hsl: 87, 49%, 65%;
+  --alarm: #e0796e;
+  --alarm-rgb: 224, 121, 110;
+  --alarm-hsl: 6, 65%, 65%;
+  --error: #bf3920;
+  --error-rgb: 191, 57, 32;
+  --error-hsl: 9, 71%, 44%;
 
-  --text-link: #508826; /* Цвет текстовых ссылок */
-  --text-link-rgb: rgba(80, 136, 38, 1);
-  --text-link-hsl: hsla(94, 56%, 34%, 1);
-
-  --button-pressed: #508826; /* Нажатая кнопка */
-  --button-pressed-rgb: rgba(80, 136, 38, 1);
-  --button-pressed-hsl: hsla(94, 56%, 34%, 1);
-
-  --button-hover: #deebc5; /* Ховер кнопки */
-  --button-hover-rgb: rgba(222, 235, 197, 1);
-  --button-hover-hsl: hsla(81, 49%, 85%, 1);
-
-  /* Фоны и карточки */
-
-  --card-bg: #ffffff; /* Фон карточек */
-  --card-bg-rgb: rgba(255, 255, 255, 1);
-  --card-bg-hsl: hsla(0, 0%, 100%, 1);
-
-  --input-bg: #ffffff; /* Фон полей ввода */
-  --input-bg-rgb:rgba(255, 255, 255, 1);
-  --input-bg-hsl: hsla(0, 0%, 100%, 1);
-
-  --background-main: #f9faf7; /* Основной фон */
-  --background-main-rgb: rgba(249, 250, 247, 1);
-  --background-main-hsl: hsla(80, 23%, 97%, 1);
-
-  /* Акценты и статусы */
-
-  --accent: #abd27a; /* Акцентный цвет */
-  --accent-rgb: rgba(171, 210, 122, 1);
-  --accent-hsl: hsla(87, 49%, 65%, 1);
-
-  --alarm: #e0796e; /* Тревога */
-  --alarm-rgb: rgba(224, 121, 110, 1);
-  --alarm-hsl: hsla(6, 65%, 65%, 1);
-
-  --error: #bf3920; /* Ошибка */
-  --error-rgb: rgba(191, 57, 32, 1);
-  --error-hsl: hsla(9, 71%, 44%, 1);
-
-  /* ТЕГИ */
-
-  --tag-business: #eee7f7; /* Бизнес и карьера */
-  --tag-business-rgb: rgba(238, 231, 247, 1);
-  --tag-business-hsl: hsla(266, 50%, 94%, 1);
-
-  --tag-creative: #f7e7f2; /* Творчество и искусство */
-  --tag-creative-rgb: rgba(247, 231, 242, 1);
-  --tag-creative-hsl: hsla(319, 50%, 94%, 1);
-
-  --tag-languages: #ebe5c5; /* Иностранные языки */
-  --tag-languages-rgb: rgba(235, 229, 197, 1);
-  --tag-languages-hsl: hsla(51, 49%, 85%, 1);
-
-  --tag-education: #e7f2f6; /* Образование и развитие */
-  --tag-education-rgb: rgba(231, 242, 246, 1);
-  --tag-education-hsl: hsla(196, 45%, 94%, 1);
-
-  --tag-home: #f7ebe5; /* Дом и уют */
-  --tag-home-rgb: rgba(247, 235, 229, 1);
-  --tag-home-hsl: hsla(20, 53%, 93%, 1);
-
-  --tag-health: #e9f7e7; /* Здоровье и lifestyle */
-  --tag-health-rgb: rgba(233, 247, 231, 1);
-  --tag-health-hsl: hsla(113, 50%, 94%, 1);
-
-  --tag-new: #e8ecf7; /* Новый тег? */
-  --tag-new-rgb: rgba(232, 236, 247, 1);
-  --tag-new-hsl: hsla(224, 48%, 94%, 1);
+  /* Теги */
+  --tag-business: #eee7f7;
+  --tag-business-rgb: 238, 231, 247;
+  --tag-business-hsl: 266, 50%, 94%;
+  --tag-creative: #f7e7f2;
+  --tag-creative-rgb: 247, 231, 242;
+  --tag-creative-hsl: 319, 50%, 94%;
+  --tag-languages: #ebe5c5;
+  --tag-languages-rgb: 235, 229, 197;
+  --tag-languages-hsl: 51, 49%, 85%;
+  --tag-education: #e7f2f6;
+  --tag-education-rgb: 231, 242, 246;
+  --tag-education-hsl: 196, 45%, 94%;
+  --tag-home: #f7ebe5;
+  --tag-home-rgb: 247, 235, 229;
+  --tag-home-hsl: 20, 53%, 93%;
+  --tag-health: #e9f7e7;
+  --tag-health-rgb: 233, 247, 231;
+  --tag-health-hsl: 113, 50%, 94%;
+  --tag-new: #e8ecf7;
+  --tag-new-rgb: 232, 236, 247;
+  --tag-new-hsl: 224, 48%, 94%;
 
   /* Отступы */
   --space-2xs: 4px;
@@ -107,6 +86,7 @@
   --space-3xl: 48px;
 
   /* Типография */
+
   --font-sans: system-ui, -apple-system, sans-serif;
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
@@ -129,9 +109,12 @@
 [data-theme='dark'] {
   --background-main: #0f172a;
   --background-secondary: #1e293b;
+  --card-bg: #1e293b;
+  --input-bg: #1e293b;
   --text-primary: #f1f5f9;
-  --text-secondary: #94a3b8;
-  --color-border: #334155;
+  --text-caption: #94a3b8;
+  --text-disabled: #64748b;
+  --disabled: #334155;
 }
 
 /* ─── Reset ──────────────────────────────────────────────── */
@@ -143,11 +126,12 @@
   padding: 0;
 }
 
+
 body {
   font-family: var(--font-sans);
   font-size: var(--font-size-base);
-  color: var(--color-text);
-  background-color: var(--color-bg);
+  color: var(--text-primary);
+  background-color: var(--background-main);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
