@@ -6,20 +6,25 @@ export interface Skill {
   title: string
   description: string
   type: SkillType
-  category: string
+  categoryId: string
+  subcategoryId: string
   tags: string[]
-  imageUrl: string | null
+  imageUrl: string[]
   authorId: string
   createdAt: string
+  likesCount: number
 }
 
 // ─── User ────────────────────────────────────────────────
 export interface User {
   id: string
   name: string
-  email: string
-  avatarUrl: string | null
-  createdAt: string
+  city: string
+  gender: string
+  dateOfBirth: string
+  photo: string
+  about: string
+  skills: string[];
 }
 
 // ─── Request ─────────────────────────────────────────────
@@ -41,4 +46,23 @@ export interface AuthUser {
   name: string
   email: string
   token: string
+}
+
+// ─── City ────────────────────────────────────────────────
+export type City = {
+  id: string
+  name: string
+}
+//─── Category ─────────────────────────────────────────────
+
+export interface Subcategory {
+  id: string;
+  name: string;
+}
+
+export interface Category {
+  id: string;
+  name: string;
+  subcategories: Subcategory[];
+
 }

@@ -1,1 +1,402 @@
-[]
+[
+  {
+    "id": "1",
+    "name": "Иван",
+    "city": "Москва",
+    "gender": "мужской",
+    "dateOfBirth": "1995-05-15",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjmiin-GAah1e7XtEynKrc9R4iXutBNqwQWnDfuZRo5g&s=10",
+    "about": "Люблю путешествовать и изучать новые языки. Готов помочь с английским и программированием.",
+    "skills": ["skill_001", "skill_002", "skill_003"]
+  },
+  {
+    "id": "2",
+    "name": "Мария",
+    "city": "Санкт-Петербург",
+    "gender": "женский",
+    "dateOfBirth": "1997-08-22",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQU8Dvoxj8DjBJOR41MFYVLLRGCdVI66V3BCAYqR9-egg&s=10",
+    "about": "Интересуюсь фотографией и дизайном. Могу помочь с графическим дизайном и фотошопом.",
+    "skills": ["skill_004", "skill_005"]
+  },
+  {
+    "id": "3",
+    "name": "Алексей",
+    "city": "Новосибирск",
+    "gender": "мужской",
+    "dateOfBirth": "1993-11-11",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRB1QgjJTvI8TUp4kBTWCSY1fUnlJTBtwPWmN0FkUYZEw&s=10",
+    "about": "Занимаюсь программированием и робототехникой. Готов делиться знаниями.",
+    "skills": ["skill_006", "skill_007"]
+  },
+  {
+    "id": "4",
+    "name": "Елена",
+    "city": "Казань",
+    "gender": "женский",
+    "dateOfBirth": "1999-02-14",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVUxJi6U9kCyCn2Veab3SGYZQjKnz9Nc-fDoAqECzcbw&s=10",
+    "about": "Интересуюсь музыкой и языками. Могу помочь с английским и гитарами.",
+    "skills": ["skill_008", "skill_009", "skill_010"]
+  },
+  {
+    "id": "5",
+    "name": "Дмитрий",
+    "city": "Ростов",
+    "gender": "мужской",
+    "dateOfBirth": "1988-07-07",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiNpvRg0ei_YUQ3yk58cxpkia5oLysKXS-icUqIdjvUw&s=10",
+    "about": "Люблю спорт и технологии. Могу помочь с программированием и фитнесом.",
+    "skills": ["skill_011", "skill_012"]
+  },
+  {
+    "id": "6",
+    "name": "Ольга",
+    "city": "Екатеринбург",
+    "gender": "женский",
+    "dateOfBirth": "1996-03-10",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSamzMyyQVD6cGeOVlexxP_EZrOWLy6BNpN_Cy7SXFjPg&s=10",
+    "about": "Интересуюсь йогой и здоровым образом жизни. Могу помочь с диетами и фитнесом.",
+    "skills": ["skill_013", "skill_014"]
+  },
+  {
+    "id": "7",
+    "name": "Сергей",
+    "city": "Самара",
+    "gender": "мужской",
+    "dateOfBirth": "1991-09-25",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsWM3QlbsfE6MjcOChILiajvG3EYI-y6Vua-L55G42AQ&s=10",
+    "about": "Занимаюсь фотографией и путешествиями. Могу помочь с фотографией и иностранными языками.",
+    "skills": ["skill_015", "skill_016"]
+  },
+  {
+    "id": "8",
+    "name": "Анастасия",
+    "city": "Уфа",
+    "gender": "женский",
+    "dateOfBirth": "1994-04-18",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUH8ha1-LSv_1HYinfz2pyMUuspROil1t27P86ouz74A&s",
+    "about": "Люблю читать и писать. Могу помочь с литературой и английским.",
+    "skills": ["skill_017", "skill_018"]
+  },
+  {
+    "id": "9",
+    "name": "Павел",
+    "city": "Краснодар",
+    "gender": "мужской",
+    "dateOfBirth": "1992-12-05",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTU88OuOT9Q7O_qav_LgSZTeFTut8rWgn1zaIsXwWk7OA&s=10",
+    "about": "Интересуюсь кулинарией и спортом. Могу помочь с рецептами и тренировками.",
+    "skills": ["skill_019", "skill_020"]
+  },
+  {
+    "id": "10",
+    "name": "Марина",
+    "city": "Воронеж",
+    "gender": "женский",
+    "dateOfBirth": "1998-06-30",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQM6e__WZkHsDDtoaYF9xjkDdmPcbT_XcDzsE7C1k8fnQ&s=10",
+    "about": "Занимаюсь танцами и живописью. Могу помочь с искусством и дизайном.",
+    "skills": ["skill_021", "skill_022"]
+  },
+  {
+    "id": "11",
+    "name": "Максим",
+    "city": "Ростов-на-Дону",
+    "gender": "мужской",
+    "dateOfBirth": "1994-02-20",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoUcJiv0sccWJj_7MbkbKzgNR70HwgBzhvwRauAYfbGg&s=10",
+    "about": "Люблю музыку и путешествия. Могу помочь с иностранными языками.",
+    "skills": ["skill_023", "skill_024"]
+  },
+  {
+    "id": "12",
+    "name": "Екатерина",
+    "city": "Киров",
+    "gender": "женский",
+    "dateOfBirth": "1996-09-15",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6xME6k_k5tUG7GVz8aSe8aDfL3WxrWLTRFv8GzZJYpw&s=10",
+    "about": "Интересуюсь кулинарией и искусством. Могу помочь с рецептами и живописью.",
+    "skills": ["skill_025", "skill_026"]
+  },
+  {
+    "id": "13",
+    "name": "Никита",
+    "city": "Волгоград",
+    "gender": "мужской",
+    "dateOfBirth": "1992-03-12",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfWoA1UnYRjMA4c3k2Kwwtr4seqE4EkTyY-S4wEd_SxA&s=10",
+    "about": "Занимаюсь спортом и программированием. Готов делиться знаниями.",
+    "skills": ["skill_027", "skill_028"]
+  },
+  {
+    "id": "14",
+    "name": "Алина",
+    "city": "Тула",
+    "gender": "женский",
+    "dateOfBirth": "1999-10-10",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzk5t-d-7RzrUoKWDgX4-b63Ogvw0m-EwJEzZqP1X8Pw&s=10",
+    "about": "Люблю йогу и музыку. Могу помочь с медитациями и английским.",
+    "skills": ["skill_029", "skill_030"]
+  },
+  {
+    "id": "15",
+    "name": "Роман",
+    "city": "Пенза",
+    "gender": "мужской",
+    "dateOfBirth": "1990-07-22",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTD3lwTTL1Y5D3FhpgajVqPzGlLmoeR3Il5ZD7ITp8GNw&s=10",
+    "about": "Занимаюсь спортом и технарскими проектами. Готов помочь с программированием.",
+    "skills": ["skill_031", "skill_032"]
+  },
+  {
+    "id": "16",
+    "name": "Ксения",
+    "city": "Белгород",
+    "gender": "женский",
+    "dateOfBirth": "1997-04-02",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZikkqG0dNhThkmza0W4TktDMCuvC9ShK5G0pZ3vGovg&s=10",
+    "about": "Интересуюсь искусством и фотографией. Могу помочь с фото и дизайном.",
+    "skills": ["skill_033", "skill_034"]
+  },
+  {
+    "id": "17",
+    "name": "Игорь",
+    "city": "Курск",
+    "gender": "мужской",
+    "dateOfBirth": "1992-05-30",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNt-aOw0iKIlAJ1IieQ94xtut8l01ifYLQQwcQAC-r2g&s=10",
+    "about": "Люблю музыку и путешествия. Могу помочь с иностранными языками.",
+    "skills": ["skill_035", "skill_036"]
+  },
+  {
+    "id": "18",
+    "name": "Виктория",
+    "city": "Барнаул",
+    "gender": "женский",
+    "dateOfBirth": "1998-11-05",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQS5K1O4V1YpimyoomGcji_KBfottHeyZsY0JbWz0GLFA&s=10",
+    "about": "Занимаюсь спортом и художественной гимнастикой. Могу помочь с фитнесом.",
+    "skills": ["skill_037", "skill_038"]
+  },
+  {
+    "id": "19",
+    "name": "Константин",
+    "city": "Иркутск",
+    "gender": "мужской",
+    "dateOfBirth": "1992-02-14",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDc1exym2_r9zit8XvGJI9gOWQToYGnptQtkV-qANCEQ&s=10",
+    "about": "Интересуюсь техникой и программированием. Готов делиться знаниями.",
+    "skills": ["skill_039", "skill_040"]
+  },
+  {
+    "id": "20",
+    "name": "Юлия",
+    "city": "Челябинск",
+    "gender": "женский",
+    "dateOfBirth": "1996-12-01",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMw66c1VyverbpoR3lltDztlu_LLHUO1mPOmsDYJev_Q&s=10",
+    "about": "Люблю путешествовать и изучать языки. Могу помочь с английским и туризмом.",
+    "skills": ["skill_041", "skill_042"]
+  },
+  {
+    "id": "21",
+    "name": "Михаил",
+    "city": "Тверь",
+    "gender": "мужской",
+    "dateOfBirth": "1991-09-09",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5X0p4agMbMP2rmQaiGG--qyulSodW9F96iqOm59-V2Q&s=10",
+    "about": "Занимаюсь программированием и спортом. Готов помочь с кодом и тренировками.",
+    "skills": ["skill_043", "skill_044"]
+  },
+  {
+    "id": "22",
+    "name": "Алеся",
+    "city": "Магнитогорск",
+    "gender": "женский",
+    "dateOfBirth": "1997-06-17",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvzVNoI-MNIFd5Qf0FnYqONzK006keDwuTbJ9A9AbI5A&s=10",
+    "about": "Интересуюсь фотографией и путешествиями. Могу помочь с фото и иностранными языками.",
+    "skills": ["skill_045", "skill_046"]
+  },
+  {
+    "id": "23",
+    "name": "Денис",
+    "city": "Ярославль",
+    "gender": "мужской",
+    "dateOfBirth": "1992-03-04",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOJaFCWnN5S-gYFrYzaPoB4RTNmEUWXn5K6JO6YvWbYA&s=10",
+    "about": "Люблю музыку и спорт. Могу помочь с тренировками и иностранными языками.",
+    "skills": ["skill_047", "skill_048"]
+  },
+  {
+    "id": "24",
+    "name": "Валерия",
+    "city": "Томск",
+    "gender": "женский",
+    "dateOfBirth": "1997-01-25",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNva7JVZnvYip58JzvqF4_c-fY269XH99rOS3RvlOhIA&s=10",
+    "about": "Занимаюсь живописью и дизайном. Могу помочь с художественными проектами.",
+    "skills": ["skill_049", "skill_050"]
+  },
+  {
+    "id": "25",
+    "name": "Павел",
+    "city": "Барнаул",
+    "gender": "мужской",
+    "dateOfBirth": "1990-10-10",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ60RCbk1bsxwy4QiGbeJf8Sy0RYEdv1tPuc96oS4Si8w&s=10",
+    "about": "Интересуюсь спортом и технологиями. Готов помочь с программированием и тренировками.",
+    "skills": ["skill_051", "skill_052"]
+  },
+  {
+    "id": "26",
+    "name": "Екатерина",
+    "city": "Казань",
+    "gender": "женский",
+    "dateOfBirth": "1993-09-12",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0XkzUo8WqkFv7QqF6sZxJ9Y7W9HJk7X_0xYQv4U5n9A&s=10",
+    "about": "Люблю изучать языки и путешествовать. Могу помочь с английским и испанским.",
+    "skills": ["skill_053", "skill_054"]
+  },
+  {
+    "id": "27",
+    "name": "Дмитрий",
+    "city": "Москва",
+    "gender": "мужской",
+    "dateOfBirth": "1988-12-05",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjK1X6dT5Lh0zF_4JzY9U5X0S7W8X9Y0Z1a2B3C4D5E6F&s=10",
+    "about": "Интересуюсь автомобилями и технологиями. Могу помочь с ремонтом и программированием.",
+    "skills": ["skill_055", "skill_056"]
+  },
+  {
+    "id": "28",
+    "name": "Анна",
+    "city": "Санкт-Петербург",
+    "gender": "женский",
+    "dateOfBirth": "1994-11-21",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0Xf2GJ8Y5W6K9R4A7b7U8V7W6X7Y8Z9V0a1B2C3D4E5F&s=10",
+    "about": "Люблю готовить и заниматься фитнесом. Могу помочь с диетами и тренировками.",
+    "skills": ["skill_057", "skill_058"]
+  },
+  {
+    "id": "29",
+    "name": "Владимир",
+    "city": "Новосибирск",
+    "gender": "мужской",
+    "dateOfBirth": "1990-03-14",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvK1X2Y3Z4W5U6V7W8X9Y0Z1A2B3C4D5E6F7G8H9I0J&s=10",
+    "about": "Занимаюсь спортом и программированием. Готов помочь с кодом и тренировками.",
+    "skills": ["skill_059", "skill_060"]
+  },
+  {
+    "id": "30",
+    "name": "Елена",
+    "city": "Казань",
+    "gender": "женский",
+    "dateOfBirth": "1996-07-19",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxYzG7W8X9Y0Z1A2B3C4D5E6F7G8H9I0J1K2L3M4N5O&s=10",
+    "about": "Люблю музыку и искусство. Могу помочь с живописью и дизайном.",
+    "skills": ["skill_061", "skill_062"]
+  },
+  {
+    "id": "31",
+    "name": "Максим",
+    "city": "Москва",
+    "gender": "мужской",
+    "dateOfBirth": "1991-02-10",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQk5z0L8W9X0Z1A2B3C4D5E6F7G8H9I0J1K2L3M4N5O6P&s=10",
+    "about": "Интересуюсь спортом и гаджетами. Могу помочь с обзорами и рекомендациями.",
+    "skills": ["skill_063", "skill_064"]
+  },
+  {
+    "id": "32",
+    "name": "Ирина",
+    "city": "Екатеринбург",
+    "gender": "женский",
+    "dateOfBirth": "1995-04-11",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0XfYzG1W2V3U4W5X6Y7Z8A9B0C1D2E3F4G5H6I7J8K&s=10",
+    "about": "Люблю йогу и медитации. Могу помочь с релаксацией и здоровьем.",
+    "skills": ["skill_065", "skill_066"]
+  },
+  {
+    "id": "33",
+    "name": "Александр",
+    "city": "Курск",
+    "gender": "мужской",
+    "dateOfBirth": "1989-05-25",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0XfYzG1W2V3U4W5X6Y7Z8A9B0C1D2E3F4G5H6I7J8K&s=10",
+    "about": "Занимаюсь музыкой и техникой. Могу помочь с ремонтом и настройкой гаджетов.",
+    "skills": ["skill_067", "skill_068"]
+  },
+  {
+    "id": "34",
+    "name": "Виктория",
+    "city": "Томск",
+    "gender": "женский",
+    "dateOfBirth": "1997-09-30",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzYzG7W8X9Y0Z1A2B3C4D5E6F7G8H9I0J1K2L3M4N5O6P&s=10",
+    "about": "Люблю живопись и дизайн. Могу помочь с арт-проектами.",
+    "skills": ["skill_069", "skill_070"]
+  },
+  {
+    "id": "35",
+    "name": "Даниил",
+    "city": "Волгоград",
+    "gender": "мужской",
+    "dateOfBirth": "1992-03-03",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0XfYzG1W2V3U4W5X6Y7Z8A9B0C1D2E3F4G5H6I7J8K&s=10",
+    "about": "Интересуюсь спортом и кулинарией. Готов помочь с рецептами и тренировками.",
+    "skills": ["skill_071", "skill_072"]
+  },
+  {
+    "id": "36",
+    "name": "Анастасия",
+    "city": "Воронеж",
+    "gender": "женский",
+    "dateOfBirth": "1996-08-05",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXyYzG7W8Y9Z0Z1A2B3C4D5E6F7G8H9I0J1K2L3M4N5O6P&s=10",
+    "about": "Люблю читать и писать. Могу помочь с литературой и английским.",
+    "skills": ["skill_073", "skill_074"]
+  },
+  {
+    "id": "37",
+    "name": "Павел",
+    "city": "Киров",
+    "gender": "мужской",
+    "dateOfBirth": "1989-02-18",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzXyYzG7W8Y9Z0Z1A2B3C4D5E6F7G8H9I0J1K2L3M4N5O6P&s=10",
+    "about": "Занимаюсь спортом и программированием. Готов помочь с кодом и тренировками.",
+    "skills": ["skill_075", "skill_076"]
+  },
+  {
+    "id": "38",
+    "name": "Елена",
+    "city": "Казань",
+    "gender": "женский",
+    "dateOfBirth": "1994-10-12",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXzYzG7W8Y9Z0Z1A2B3C4D5E6F7G8H9I0J1K2L3M4N5O6P&s=10",
+    "about": "Люблю фотографию и путешествия. Могу помочь с фото и иностранными языками.",
+    "skills": ["skill_077", "skill_078"]
+  },
+  {
+    "id": "39",
+    "name": "Максим",
+    "city": "Москва",
+    "gender": "мужской",
+    "dateOfBirth": "1990-11-23",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQk0YzG7W8Y9Z0Z1A2B3C4D5E6F7G8H9I0J1K2L3M4N5O6P&s=10",
+    "about": "Интересуюсь технологиями и спортом. Могу помочь с гаджетами и тренировками.",
+    "skills": ["skill_079", "skill_080"]
+  },
+  {
+    "id": "40",
+    "name": "Евгений",
+    "city": "Краснодар",
+    "gender": "мужской",
+    "dateOfBirth": "1987-06-15",
+    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2YzG7W8Y9Z0Z1A2B3C4D5E6F7G8H9I0J1K2L3M4N5O6P&s=10",
+    "about": "Люблю музыку и путешествия. Могу помочь с иностранными языками и культурой.",
+    "skills": ["skill_081", "skill_082"]
+  }
+]

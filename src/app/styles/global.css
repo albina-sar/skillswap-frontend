@@ -87,7 +87,9 @@
 
   /* Типография */
 
-  --font-sans: system-ui, -apple-system, sans-serif;
+  --font-sans: 'Roboto', -apple-system, sans-serif;
+  --font-heading: 'Jost', -apple-system, sans-serif;
+  --font-name: 'Open-Sans', -apple-system, sans-serif;
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
   --font-size-lg: 1.125rem;
@@ -103,6 +105,12 @@
   /* Тени */
   --shadow-sm: 0 1px 2px rgb(0 0 0 / 5%);
   --shadow-md: 0 4px 6px rgb(0 0 0 / 7%);
+
+  /* Avatar size */
+  --avatar-xs: 48px;
+  --avatar-sm: 54px;
+  --avatar-md: 100px;
+  --avatar-lg: 244px;
 }
 
 /* Тёмная тема — добавить поддержку через data-theme="dark" */
