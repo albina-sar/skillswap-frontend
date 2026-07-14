@@ -12,6 +12,7 @@ export interface Skill {
   imageUrl: string[]
   authorId: string
   createdAt: string
+  likesCount: number
 }
 
 // ─── User ────────────────────────────────────────────────
