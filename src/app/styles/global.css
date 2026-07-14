@@ -1,25 +1,112 @@
 /* ─── CSS Custom Properties ─────────────────────────────── */
 :root {
-  /* Colors */
-  --color-primary: #6366f1;
-  --color-primary-hover: #4f46e5;
-  --color-bg: #fff;
-  --color-bg-secondary: #f9fafb;
-  --color-text: #111827;
-  --color-text-secondary: #6b7280;
-  --color-border: #e5e7eb;
-  --color-error: #ef4444;
-  --color-success: #22c55e;
+  /* Цвета текста */
 
-  /* Spacing */
-  --space-xs: 4px;
-  --space-sm: 8px;
+  --text-primary: #253017; /* Основной текст */
+  --text-primary-rgb: rgba(37, 48, 23, 1); /* RGB */
+  --text-primary-hsl: hsla(87, 36%, 14%, 1); /* HSL */
+
+  --text-caption: #69735d; /* Подписи */
+  --text-caption-rgb: rgba(105, 115, 93, 1);
+  --text-caption-hsl: hsla(87, 11%, 41%, 1);
+
+  --text-disabled: #9ca197; /* Неактивный текст */
+  --text-disabled-rgb: rgba(156, 161, 151, 1);
+  --text-disabled-hsl: hsla(87, 5%, 61%, 1);
+
+  --modal-overlay-color: #8e8e8e99;
+
+  /* Кнопки и интерактив */
+
+  --toggle: #b2b9a9; /* Переключатель */
+  --toggle-rgb: rgba(178, 185, 169, 1);
+  --toggle-hsl: hsla(87, 10%, 69%, 1);
+
+  --disabled: #e4e8df; /* Неактивный */
+  --disabled-rgb: rgba(228, 232, 223, 1);
+  --disabled-hsl: hsla(87, 16%, 89%, 1);
+
+  --text-link: #508826; /* Цвет текстовых ссылок */
+  --text-link-rgb: rgba(80, 136, 38, 1);
+  --text-link-hsl: hsla(94, 56%, 34%, 1);
+
+  --button-pressed: #508826; /* Нажатая кнопка */
+  --button-pressed-rgb: rgba(80, 136, 38, 1);
+  --button-pressed-hsl: hsla(94, 56%, 34%, 1);
+
+  --button-hover: #deebc5; /* Ховер кнопки */
+  --button-hover-rgb: rgba(222, 235, 197, 1);
+  --button-hover-hsl: hsla(81, 49%, 85%, 1);
+
+  /* Фоны и карточки */
+
+  --card-bg: #ffffff; /* Фон карточек */
+  --card-bg-rgb: rgba(255, 255, 255, 1);
+  --card-bg-hsl: hsla(0, 0%, 100%, 1);
+
+  --input-bg: #ffffff; /* Фон полей ввода */
+  --input-bg-rgb:rgba(255, 255, 255, 1);
+  --input-bg-hsl: hsla(0, 0%, 100%, 1);
+
+  --background-main: #f9faf7; /* Основной фон */
+  --background-main-rgb: rgba(249, 250, 247, 1);
+  --background-main-hsl: hsla(80, 23%, 97%, 1);
+
+  /* Акценты и статусы */
+
+  --accent: #abd27a; /* Акцентный цвет */
+  --accent-rgb: rgba(171, 210, 122, 1);
+  --accent-hsl: hsla(87, 49%, 65%, 1);
+
+  --alarm: #e0796e; /* Тревога */
+  --alarm-rgb: rgba(224, 121, 110, 1);
+  --alarm-hsl: hsla(6, 65%, 65%, 1);
+
+  --error: #bf3920; /* Ошибка */
+  --error-rgb: rgba(191, 57, 32, 1);
+  --error-hsl: hsla(9, 71%, 44%, 1);
+
+  /* ТЕГИ */
+
+  --tag-business: #eee7f7; /* Бизнес и карьера */
+  --tag-business-rgb: rgba(238, 231, 247, 1);
+  --tag-business-hsl: hsla(266, 50%, 94%, 1);
+
+  --tag-creative: #f7e7f2; /* Творчество и искусство */
+  --tag-creative-rgb: rgba(247, 231, 242, 1);
+  --tag-creative-hsl: hsla(319, 50%, 94%, 1);
+
+  --tag-languages: #ebe5c5; /* Иностранные языки */
+  --tag-languages-rgb: rgba(235, 229, 197, 1);
+  --tag-languages-hsl: hsla(51, 49%, 85%, 1);
+
+  --tag-education: #e7f2f6; /* Образование и развитие */
+  --tag-education-rgb: rgba(231, 242, 246, 1);
+  --tag-education-hsl: hsla(196, 45%, 94%, 1);
+
+  --tag-home: #f7ebe5; /* Дом и уют */
+  --tag-home-rgb: rgba(247, 235, 229, 1);
+  --tag-home-hsl: hsla(20, 53%, 93%, 1);
+
+  --tag-health: #e9f7e7; /* Здоровье и lifestyle */
+  --tag-health-rgb: rgba(233, 247, 231, 1);
+  --tag-health-hsl: hsla(113, 50%, 94%, 1);
+
+  --tag-new: #e8ecf7; /* Новый тег? */
+  --tag-new-rgb: rgba(232, 236, 247, 1);
+  --tag-new-hsl: hsla(224, 48%, 94%, 1);
+
+  /* Отступы */
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
   --space-md: 16px;
-  --space-lg: 24px;
-  --space-xl: 32px;
-  --space-2xl: 48px;
+  --space-lg: 20px;
+  --space-xl: 24px;
+  --space-2xl: 32px;
+  --space-3xl: 48px;
 
-  /* Typography */
+  /* Типография */
   --font-sans: system-ui, -apple-system, sans-serif;
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
@@ -27,22 +114,23 @@
   --font-size-xl: 1.25rem;
   --font-size-2xl: 1.5rem;
 
-  /* Borders */
+  /* Радиусы границ */
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 12px;
+  --radius-xl: 20px;
 
-  /* Shadows */
+  /* Тени */
   --shadow-sm: 0 1px 2px rgb(0 0 0 / 5%);
   --shadow-md: 0 4px 6px rgb(0 0 0 / 7%);
 }
 
 /* Тёмная тема — добавить поддержку через data-theme="dark" */
 [data-theme='dark'] {
-  --color-bg: #0f172a;
-  --color-bg-secondary: #1e293b;
-  --color-text: #f1f5f9;
-  --color-text-secondary: #94a3b8;
+  --background-main: #0f172a;
+  --background-secondary: #1e293b;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
   --color-border: #334155;
 }
 
