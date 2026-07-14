@@ -46,12 +46,12 @@ export interface AuthUser {
 //─── Category ─────────────────────────────────────────────
 
 export interface Subcategory {
-  id: number;
+  id: string;
   name: string;
 }
 
 export interface Category {
-  id: number;
+  id: string;
   name: string;
   subcategories: Subcategory[];
 }
