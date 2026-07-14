@@ -1,0 +1,5 @@
+git checkout -b feature/shared-ui-components
+mkdir -p src/shared/ui
+touch src/shared/ui/.gitkeep
+git add src/shared/ui/.gitkeep
+git commit -m "feat: добавила папку ui для компонентов"

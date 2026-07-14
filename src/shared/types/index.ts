@@ -6,11 +6,13 @@ export interface Skill {
   title: string
   description: string
   type: SkillType
-  category: string
+  categoryId: string
+  subcategoryId: string
   tags: string[]
-  imageUrl: string | null
+  imageUrl: string[]
   authorId: string
   createdAt: string
+  likesCount: number
 }
 
 // ─── User ────────────────────────────────────────────────
@@ -47,4 +49,17 @@ export interface AuthUser {
 export type City = {
   id: string
   name: string
+}
+//─── Category ─────────────────────────────────────────────
+
+export interface Subcategory {
+  id: string;
+  name: string;
+}
+
+export interface Category {
+  id: string;
+  name: string;
+  subcategories: Subcategory[];
+
 }
