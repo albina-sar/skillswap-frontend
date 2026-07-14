@@ -17,9 +17,12 @@ export interface Skill {
 export interface User {
   id: string
   name: string
-  email: string
-  avatarUrl: string | null
-  createdAt: string
+  city: string
+  gender: string
+  dateOfBirth: string
+  photo: string
+  about: string
+  skills: Skill[];
 }
 
 // ─── Request ─────────────────────────────────────────────
