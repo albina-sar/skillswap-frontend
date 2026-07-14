@@ -20,7 +20,9 @@
   --space-2xl: 48px;
 
   /* Typography */
-  --font-sans: system-ui, -apple-system, sans-serif;
+  --font-sans: 'Roboto', -apple-system, sans-serif;
+  --font-heading: 'Jost', -apple-system, sans-serif;
+  --font-name: 'Open-Sans', -apple-system, sans-serif;
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
   --font-size-lg: 1.125rem;
