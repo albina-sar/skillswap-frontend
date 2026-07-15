@@ -3,5 +3,5 @@
   min-height: 368px;
   padding: 20px;
   border-radius: var(--radius-lg);
-  background-color: var(--color-bg);
+  background-color: var(--card-bg);
 }
