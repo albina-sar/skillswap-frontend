@@ -9,10 +9,10 @@ export const ProfileUIComponent: FC<ProfileUIProps> = ({image, name}) => {
     console.log('заглушка для отображения popup menu');
   }
   return(
-    <div className={styles.container} onClick={handleClick}>
+    <button className={styles.container} onClick={handleClick}>
       <span className={styles.text}>{name}</span>
       <Avatar image={image} name={name} size='xs' />
-    </div>
+    </button>
   )
 }
 
