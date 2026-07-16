@@ -25,6 +25,7 @@ export interface User {
   photo: string
   about: string
   skills: string[];
+  wantsToLearn: string[];
 }
 
 // ─── Request ─────────────────────────────────────────────
