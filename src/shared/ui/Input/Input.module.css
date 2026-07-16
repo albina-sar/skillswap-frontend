@@ -1,0 +1,204 @@
+/* 1. КОНТЕЙНЕР (обертка) */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+/* 2. LABEL (подпись над полем) */
+.label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  transition: color 0.2s ease;
+}
+
+/* Звездочка для обязательного поля */
+.required {
+  color: var(--error);
+  margin-left: 4px;
+  font-weight: 600;
+}
+
+/* 3. ОБЕРТКА ДЛЯ ИНПУТА (для иконок) */
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+/* 4. САМО ПОЛЕ ВВОДА */
+.input {
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--font-size-base);
+  font-family: inherit;
+  background-color: var(--input-bg);
+  border: 2px solid var(--toggle);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+  outline: none;
+  box-sizing: border-box;
+}
+
+/* Плейсхолдер (текст-подсказка) */
+.input::placeholder {
+  color: var(--text-disabled);
+  font-weight: 400;
+}
+
+/* 5. СОСТОЯНИЕ FOCUS (поле в фокусе) */
+.input:focus {
+  border-color: var(--text-link);
+  box-shadow: 0 0 0 3px rgb(80 136 38 / 15%);
+}
+
+/* 6. СОСТОЯНИЕ ERROR (ошибка) */
+.error .input {
+  border-color: var(--error);
+  background-color: rgb(191 57 32 / 8%);
+}
+
+.error .input:focus {
+  border-color: var(--error);
+  box-shadow: 0 0 0 3px rgb(191 57 32 / 10%);
+}
+
+/* Текст ошибки под полем */
+.errorText {
+  font-size: var(--font-size-sm);
+  color: var(--error);
+  margin-top: var(--space-2xs);
+  animation: fade-in 0.3s ease;
+}
+
+/* 7. СОСТОЯНИЕ DISABLED (отключено) */
+.disabled .input {
+  background-color: var(--disabled);
+  color: var(--text-disabled);
+  cursor: not-allowed;
+  border-color: var(--text-disabled);
+}
+
+.disabled .label {
+  color: var(--text-disabled);
+}
+
+/* 8. ИКОНКИ (лупа, глаз) */
+
+/* Левая иконка (лупа для поиска) */
+.leftIcon {
+  position: absolute;
+  left: var(--space-md);
+  color: var(--text-disabled);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+/* Правая иконка (глаз для пароля) */
+.rightIcon {
+  position: absolute;
+  right: var(--space-md);
+  background: none;
+  border: none;
+  color: var(--text-disabled);
+  cursor: pointer;
+  padding: var(--space-2xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+  border-radius: var(--radius-sm);
+}
+
+.rightIcon:hover {
+  color: var(--text-link);
+  background-color: rgb(80 136 38 / 5%);
+}
+
+.rightIcon:focus-visible {
+  outline: 2px solid var(--text-link);
+  outline-offset: 2px;
+}
+
+/* 9. ОТСТУПЫ ДЛЯ ИНПУТА С ИКОНКАМИ */
+
+/* Если есть иконка слева → отступ у инпута */
+.leftIcon + .input {
+  padding-left: 44px;
+}
+
+/* Если есть иконка справа → отступ у инпута */
+.inputWrapper:has(.rightIcon) .input {
+  padding-right: 44px;
+}
+
+/* Если есть и левая, и правая иконки */
+.inputWrapper:has(.leftIcon):has(.rightIcon) .input {
+  padding-left: 44px;
+  padding-right: 44px;
+}
+
+/* 10. TEXTAREA (многострочное поле) */
+.textarea .input {
+  resize: vertical;
+  min-height: 80px;
+  padding: var(--space-sm) var(--space-md);
+  line-height: 1.5;
+}
+
+/* 11. ПОИСК (search) — дополнительные скругления */
+.container:has(.leftIcon) .input {
+  border-radius: var(--radius-xl);
+}
+
+/* 12. АНИМАЦИЯ ДЛЯ ОШИБКИ */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 13. АДАПТИВ (мобильные устройства) */
+@media (width <= 768px) {
+  .input {
+    padding: var(--space-xs) var(--space-sm);
+    font-size: var(--font-size-sm);
+  }
+
+  .label {
+    font-size: var(--font-size-sm);
+  }
+
+  .errorText {
+    font-size: 12px;
+  }
+
+  .leftIcon + .input {
+    padding-left: 38px;
+  }
+
+  .inputWrapper:has(.rightIcon) .input {
+    padding-right: 38px;
+  }
+
+  .leftIcon {
+    left: var(--space-sm);
+  }
+
+  .rightIcon {
+    right: var(--space-sm);
+  }
+}

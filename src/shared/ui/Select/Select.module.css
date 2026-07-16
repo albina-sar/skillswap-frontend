@@ -1,0 +1,112 @@
+/* 1. КОНТЕЙНЕР */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+/* 2. LABEL (подпись) */
+.label {
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  color: var(--text-primary);
+  transition: color 0.2s ease;
+}
+
+/* Звездочка для обязательного поля */
+.required {
+  color: var(--error);
+  margin-left: 4px;
+  font-weight: 600;
+}
+
+/* 3. САМ SELECT */
+.select {
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--font-size-base);
+  font-family: inherit;
+  background-color: var(--input-bg);
+  border: 2px solid var(--toggle);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+
+  /* Добавляем свою стрелку (▼) */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2369745d' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 40px;
+}
+
+/* 4. СОСТОЯНИЕ FOCUS (в фокусе) */
+.select:focus {
+  border-color: var(--text-link);
+  box-shadow: 0 0 0 3px rgb(80 136 38 / 15%);
+}
+
+/* 5. СОСТОЯНИЕ ERROR (ошибка) */
+.error .select {
+  border-color: var(--error);
+  background-color: rgb(191 57 32 / 8%);
+}
+
+.error .select:focus {
+  border-color: var(--error);
+  box-shadow: 0 0 0 3px rgb(191 57 32 / 10%);
+}
+
+/* Текст ошибки */
+.errorText {
+  font-size: var(--font-size-sm);
+  color: var(--error);
+  margin-top: var(--space-2xs);
+  animation: fade-in 0.3s ease;
+}
+
+/* 6. СОСТОЯНИЕ DISABLED (отключено) */
+.disabled .select {
+  background-color: var(--disabled);
+  color: var(--text-disabled);
+  cursor: not-allowed;
+  border-color: var(--text-disabled);
+}
+
+.disabled .label {
+  color: var(--text-disabled);
+}
+
+/* 7. АНИМАЦИЯ ДЛЯ ОШИБКИ */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 8. АДАПТИВ (мобильные устройства) */
+@media (width <= 768px) {
+  .select {
+    padding: var(--space-xs) var(--space-sm);
+    font-size: var(--font-size-sm);
+    padding-right: 36px;
+    background-position: right 12px center;
+  }
+
+  .label {
+    font-size: var(--font-size-sm);
+  }
+
+  .errorText {
+    font-size: 12px;
+  }
+}
