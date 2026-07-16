@@ -11,6 +11,7 @@
   align-items: center;
   z-index: 1000;
 }
+
 .modalContent {
   display: flex;
   flex-direction: column;
