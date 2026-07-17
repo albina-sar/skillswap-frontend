@@ -23,26 +23,22 @@
   flex-shrink: 0;
 }
 
-.emptyCheckbox {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 1;
-}
-
 .icon {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  color: var(--accent);
+  color: #000;
   transition: opacity 0.15s;
   opacity: 1;
 }
 
 .hidden {
   opacity: 0;
+}
+
+.checked {
+  color: var(--button-pressed);
 }
 
 .labelText {
