@@ -1,11 +1,8 @@
 // ─── Skill ───────────────────────────────────────────────
-export type SkillType = 'teach' | 'learn'
-
 export interface Skill {
   id: string
   title: string
   description: string
-  type: SkillType
   categoryId: string
   subcategoryId: string
   tags: string[]
