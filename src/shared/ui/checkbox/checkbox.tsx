@@ -3,18 +3,19 @@ import { checkboxProps } from './types';
 import clsx from 'clsx';
 import { useState } from 'react';
 
-export const Checkbox = ({ icon, onChange, label }: checkboxProps) => {
+export const Checkbox = ({ icon, onChange, label, value }: checkboxProps) => {
   const [isChecked, setIsChecked] = useState(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setIsChecked(event.target.checked);
-    onChange(event);
+    onChange(event.target.value);
   };
 
   return (
     <label className={styles.item}>
       <input
         type="checkbox"
+        value={value}
         checked={isChecked}
         onChange={handleChange}
         aria-label={label}

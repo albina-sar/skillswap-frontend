@@ -1,5 +1,6 @@
 export type checkboxProps = {
     icon: "check" | "minus";
-    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onChange: (value: string) => void;
     label: string;
+    value: string;
 }
