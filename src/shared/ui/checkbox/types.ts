@@ -1,6 +1,6 @@
 export type checkboxProps = {
     icon: "check" | "minus";
-    onChange: (value: string) => void;
+    onChange: (value: string, checked: boolean) => void;
     label: string;
     value: string;
 }

@@ -8,7 +8,7 @@ export const Checkbox = ({ icon, onChange, label, value }: checkboxProps) => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setIsChecked(event.target.checked);
-    onChange(event.target.value);
+    onChange(event.target.value, event.target.checked);
   };
 
   return (
