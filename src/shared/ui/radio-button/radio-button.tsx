@@ -7,7 +7,7 @@ export const RadioButton = ({
   value,
   label,
   isChecked,
-  isDisabled,
+  isDisabled = false,
   onChange,
 }: radioButtonProps) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
