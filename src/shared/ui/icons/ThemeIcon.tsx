@@ -6,7 +6,7 @@ interface ThemeIconProps {
   className?: string
 }
 
-export const ThemeIcon: React.FC<ThemeIconProps> = ({ isDark, className }) => (
+export const ThemeIcon: React.FC<ThemeIconProps> = ({ className }) => (
   <svg
     className={clsx(className)}
     width="24"
