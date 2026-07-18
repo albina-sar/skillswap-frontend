@@ -24,10 +24,9 @@ export const ProfileSidebar: React.FC = () => {
     <div className={styles.container}>
       <div className={styles.sidebar}>
         {sections.map(section => (
-          <nav>
+          <nav key={section.id}>
             <Link
               to={section.path}
-              key={section.id}
               className={`${styles.item} ${
                 location.pathname === section.path ? styles.active : ''
               }`}
