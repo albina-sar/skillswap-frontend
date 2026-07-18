@@ -165,7 +165,8 @@
 
 /* 11. ПОИСК (search) — дополнительные скругления */
 .container:has(.leftIcon) .input {
-  border-radius: var(--radius-xl);
+  border: none;
+  border-radius: var(--radius-md);
 }
 
 /* 12. АНИМАЦИЯ ДЛЯ ОШИБКИ */
