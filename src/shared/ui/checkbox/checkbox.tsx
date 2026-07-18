@@ -1,14 +1,11 @@
 import styles from './checkbox.module.css';
 import { checkboxProps } from './types';
 import clsx from 'clsx';
-import { useState } from 'react';
 
-export const Checkbox = ({ icon, onChange, label, value, isDisabled = false }: checkboxProps) => {
-  const [isChecked, setIsChecked] = useState(false);
+export const Checkbox = ({ icon, onChange, label, value, isChecked, isDisabled = false }: checkboxProps) => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setIsChecked(event.target.checked);
-    onChange(event.target.value, event.target.checked);
+    onChange(event.target.value);
   };
 
   return (
