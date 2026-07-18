@@ -3,7 +3,7 @@ import { checkboxProps } from './types';
 import clsx from 'clsx';
 import { useState } from 'react';
 
-export const Checkbox = ({ icon, onChange, label, value }: checkboxProps) => {
+export const Checkbox = ({ icon, onChange, label, value, isDisabled = false }: checkboxProps) => {
   const [isChecked, setIsChecked] = useState(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,6 +20,7 @@ export const Checkbox = ({ icon, onChange, label, value }: checkboxProps) => {
         onChange={handleChange}
         aria-label={label}
         className={styles.visuallyHidden}
+        disabled={isDisabled}
       />
       <span className={styles.checkboxContainer}>
         <svg
