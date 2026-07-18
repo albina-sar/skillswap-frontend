@@ -1,7 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import styles from './Modal.module.css'
 import type { ModalProps } from './types'
-import { Button } from '../button/button';
 
 export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   const modalRef = useRef<HTMLDivElement>(null);
@@ -34,16 +33,13 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
         className={styles.modalContent}
       >
         {children}
-        <Button onClick={onClose} variant="primary" size="large">
-            Закрыть
-        </Button>
       </div>
     </div>
   );
 };
 
 // Пример
-// function ModalApp() {
+// export function ModalApp() {
 //   const [isModalOpen, setModalOpen] = useState(false);
 
 //   const openModal = () => setModalOpen(true);
