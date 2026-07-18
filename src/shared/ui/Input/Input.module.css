@@ -36,7 +36,7 @@
   font-size: var(--font-size-base);
   font-family: inherit;
   background-color: var(--input-bg);
-  border: 2px solid var(--toggle);
+  border: 1px solid var(--toggle);
   border-radius: var(--radius-md);
   color: var(--text-primary);
   transition: all 0.2s ease;
@@ -59,7 +59,6 @@
 /* 6. СОСТОЯНИЕ ERROR (ошибка) */
 .error .input {
   border-color: var(--error);
-  background-color: rgb(191 57 32 / 8%);
 }
 
 .error .input:focus {
@@ -125,6 +124,17 @@
 .rightIcon:focus-visible {
   outline: 2px solid var(--text-link);
   outline-offset: 2px;
+}
+
+.leftIcon svg,
+.rightIcon svg {
+  color: var(--text-disabled);
+  transition: color 0.2s ease;
+}
+
+/* При наведении на глаз — меняем цвет */
+.rightIcon:hover svg {
+  color: var(--text-link);
 }
 
 /* 9. ОТСТУПЫ ДЛЯ ИНПУТА С ИКОНКАМИ */

@@ -1,3 +1,6 @@
+import EyeOpenIcon from '@/shared/assets/icons/Eye.svg'
+import EyeClosedIcon from '@/shared/assets/icons/EyeSlash.svg'
+import SearchIcon from '@/shared/assets/icons/Search.svg'
 import { useState } from 'react'
 import styles from './Input.module.css'
 import type { InputProps } from './types'
@@ -50,7 +53,7 @@ export const Input = ({
     if (variant === 'search') {
       return (
         <div className={styles.leftIcon}>
-          <span style={{ fontSize: '18px' }}>🔍</span>
+          <img src={SearchIcon} alt="Поиск" width={20} height={20} />
         </div>
       )
     }
@@ -68,9 +71,12 @@ export const Input = ({
           tabIndex={-1}
           aria-label={showPassword ? 'Скрыть пароль' : 'Показать пароль'}
         >
-          <span style={{ fontSize: '18px' }}>
-            {showPassword ? '🙈' : '👁️'}
-          </span>
+          <img
+            src={showPassword ? EyeClosedIcon : EyeOpenIcon}
+            alt={showPassword ? 'Скрыть пароль' : 'Показать пароль'}
+            width={20}
+            height={20}
+          />
         </button>
       )
     }
