@@ -3,6 +3,8 @@ export type RadioGroupProps = {
     groupName: string;
     title?: string;
     isDisabled?: boolean;
+    selectedValue: string;
+    onChange: (value: string) => void;
 }
 
 type GroupItem = {

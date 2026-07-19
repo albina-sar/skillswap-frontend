@@ -1,10 +1,8 @@
-import { useState } from 'react';
 import { RadioButton } from '../radio-button';
 import { RadioGroupProps } from './type';
 import styles from './RadioGroup.module.css'
 
-export const RadioGroup = ({itemsList, groupName, title, isDisabled = false}: RadioGroupProps) => {
-  const [selectedValue, setSelectedValue] = useState('');
+export const RadioGroup = ({itemsList, groupName, title, isDisabled = false, selectedValue, onChange}: RadioGroupProps) => {
 
   return (
     <div className={styles.radioGroupItem}>
@@ -14,10 +12,10 @@ export const RadioGroup = ({itemsList, groupName, title, isDisabled = false}: Ra
           <li key={item.id}>
             <RadioButton
               name={groupName}
-              value={item.name}
+              value={item.id}
               label={item.name}
-              isChecked={selectedValue === item.name}
-              onChange={setSelectedValue}
+              isChecked={selectedValue === item.id}
+              onChange={onChange}
               isDisabled={isDisabled}
             />
            </li> 
