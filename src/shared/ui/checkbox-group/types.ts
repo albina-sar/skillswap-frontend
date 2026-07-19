@@ -15,6 +15,8 @@ export type CheckboxGroupProps = {
     isDisabled?: boolean;
     visibleCount?: number;
     expandButtonText?: string;
+    selectedValues: string[];
+    onChange: (values: string[]) => void;
 }
 
 export type CheckboxGroupItemProps = {

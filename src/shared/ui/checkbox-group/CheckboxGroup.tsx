@@ -9,20 +9,19 @@ export const CheckboxGroup = ({
   title,
   isDisabled = false,
   visibleCount,
-  expandButtonText
+  expandButtonText,
+  selectedValues,
+  onChange
 }: CheckboxGroupProps) => {
-
-  const [selectedValues, setSelectedValues] = useState<string[]>([]);
   const [expandedIds, setExpandedIds] = useState<string[]>([]);
   const [showAll, setShowAll] = useState(false);
 
   // Добавить/убрать одно значение из selectedValues
   const toggleValue = (value: string) => {
-    setSelectedValues((prev) =>
-      prev.includes(value)
-        ? prev.filter((v) => v !== value)
-        : [...prev, value]
-    );
+    const newValue = selectedValues.includes(value)
+      ? selectedValues.filter((v) => v !== value)
+      : [...selectedValues, value];
+    onChange(newValue);
   };
 
   // Клик по чекбоксу основного элемента (категории)
@@ -34,11 +33,10 @@ export const CheckboxGroup = ({
     const childIds = item.subcategories.map((s) => s.id);
     const allSelected = childIds.every((id) => selectedValues.includes(id));
 
-    setSelectedValues((prev) =>
-      allSelected
-        ? prev.filter((v) => !childIds.includes(v))
-        : [...new Set([...prev, ...childIds])]
-    );
+    const newValue = allSelected
+      ? selectedValues.filter((v) => !childIds.includes(v))
+      : [...new Set([...selectedValues, ...childIds])];
+    onChange(newValue);
   };
 
   // Раскрыть/свернуть категорию
