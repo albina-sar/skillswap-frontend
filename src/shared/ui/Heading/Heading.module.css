@@ -1,0 +1,16 @@
+.heading {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  color: var(--text-primary);
+  letter-spacing: -0.011em;
+}
+
+.lg {
+  font-size: 2rem;
+  line-height: 40px;
+}
+
+.md {
+  font-size: var(--font-size-2xl);
+  line-height: 28px;
+}
