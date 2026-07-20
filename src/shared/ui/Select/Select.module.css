@@ -21,10 +21,19 @@
   font-weight: 600;
 }
 
-/* 3. САМ SELECT */
+/* 3. ОБЁРТКА ДЛЯ SELECT + СТРЕЛКИ */
+.selectWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+/* 4. САМ SELECT */
 .select {
   width: 100%;
   padding: var(--space-sm) var(--space-md);
+  padding-right: 40px;
   font-size: var(--font-size-base);
   font-family: inherit;
   background-color: var(--input-bg);
@@ -35,21 +44,25 @@
   outline: none;
   cursor: pointer;
   appearance: none;
-
-  /* Добавляем свою стрелку (▼) */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2369745d' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 14px center;
-  padding-right: 40px;
 }
 
-/* 4. СОСТОЯНИЕ FOCUS (в фокусе) */
+/* 5. СТРЕЛКА (иконка) */
+.chevronIcon {
+  position: absolute;
+  right: 14px;
+  pointer-events: none;
+  width: 12px;
+  height: 12px;
+  color: var(--text-disabled);
+}
+
+/* 6. СОСТОЯНИЕ FOCUS */
 .select:focus {
   border-color: var(--text-link);
   box-shadow: 0 0 0 3px rgb(80 136 38 / 15%);
 }
 
-/* 5. СОСТОЯНИЕ ERROR (ошибка) */
+/* 7. СОСТОЯНИЕ ERROR */
 .error .select {
   border-color: var(--error);
   background-color: rgb(191 57 32 / 8%);
@@ -68,7 +81,7 @@
   animation: fade-in 0.3s ease;
 }
 
-/* 6. СОСТОЯНИЕ DISABLED (отключено) */
+/* 8. СОСТОЯНИЕ DISABLED */
 .disabled .select {
   background-color: var(--disabled);
   color: var(--text-disabled);
@@ -80,7 +93,7 @@
   color: var(--text-disabled);
 }
 
-/* 7. АНИМАЦИЯ ДЛЯ ОШИБКИ */
+/* 9. АНИМАЦИЯ ДЛЯ ОШИБКИ */
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -93,13 +106,16 @@
   }
 }
 
-/* 8. АДАПТИВ (мобильные устройства) */
+/* 10. АДАПТИВ */
 @media (width <= 768px) {
   .select {
     padding: var(--space-xs) var(--space-sm);
     font-size: var(--font-size-sm);
     padding-right: 36px;
-    background-position: right 12px center;
+  }
+
+  .chevronIcon {
+    right: 12px;
   }
 
   .label {

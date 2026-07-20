@@ -1,4 +1,4 @@
-export type InputVariant = 'default' | 'search' | 'password' | 'textarea' | 'date'
+export type InputVariant = 'default' | 'search' | 'password' | 'textarea' | 'date' | 'edit'
 
 export interface InputProps {
   variant?: InputVariant
@@ -11,4 +11,5 @@ export interface InputProps {
   name?: string
   required?: boolean
   className?: string
+  showClear?: boolean
 }

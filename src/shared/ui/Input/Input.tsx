@@ -1,9 +1,11 @@
-import EyeOpenIcon from '@/shared/assets/icons/Eye.svg'
-import EyeClosedIcon from '@/shared/assets/icons/EyeSlash.svg'
-import SearchIcon from '@/shared/assets/icons/Search.svg'
 import { useState } from 'react'
 import styles from './Input.module.css'
 import type { InputProps } from './types'
+import SearchIcon from '@/shared/assets/icons/Search.svg'
+import EyeOpenIcon from '@/shared/assets/icons/Eye.svg'
+import EyeClosedIcon from '@/shared/assets/icons/EyeSlash.svg'
+import EditIcon from '@/shared/assets/icons/Edit.svg'
+import CrossIcon from '@/shared/assets/icons/CrossBlack.svg'
 
 export const Input = ({
   variant = 'default',
@@ -16,14 +18,11 @@ export const Input = ({
   name,
   required = false,
   className = '',
+  showClear = false,
 }: InputProps) => {
-  // Состояние для переключения видимости пароля
   const [showPassword, setShowPassword] = useState(false)
 
-  // Есть ли ошибка
   const hasError = !!error
-
-  // Генерируем ID для поля
   const inputId = `input-${name || Math.random().toString(36).substring(2, 9)}`
 
   // Определяем тип input
@@ -48,7 +47,7 @@ export const Input = ({
     .filter(Boolean)
     .join(' ')
 
-  // РЕНДЕРИМ ИКОНКУ СЛЕВА (ЛУПА ДЛЯ ПОИСКА)
+  // ===== ЛУПА (поиск) =====
   const renderLeftIcon = () => {
     if (variant === 'search') {
       return (
@@ -60,7 +59,7 @@ export const Input = ({
     return null
   }
 
-  // РЕНДЕРИМ ИКОНКУ СПРАВА (ГЛАЗ ДЛЯ ПАРОЛЯ)
+  // ===== ГЛАЗ (пароль) =====
   const renderRightIcon = () => {
     if (variant === 'password') {
       return (
@@ -83,7 +82,36 @@ export const Input = ({
     return null
   }
 
-  // РЕНДЕРИМ САМО ПОЛЕ ВВОДА
+  // ===== КАРАНДАШ (редактирование) =====
+  const renderEditIcon = () => {
+    if (variant === 'edit') {
+      return (
+        <div className={styles.rightIcon}>
+          <img src={EditIcon} alt="Редактировать" width={20} height={20} />
+        </div>
+      )
+    }
+    return null
+  }
+
+  // ===== КРЕСТИК (очистка) =====
+  const renderClearButton = () => {
+    if (showClear && value.length > 0 && !disabled) {
+      return (
+        <button
+          type="button"
+          className={styles.clearButton}
+          onClick={() => onChange('')}
+          aria-label="Очистить поле"
+        >
+          <img src={CrossIcon} alt="Очистить" width={24} height={24} />
+        </button>
+      )
+    }
+    return null
+  }
+
+  // ===== ПОЛЕ ВВОДА =====
   const renderInput = () => {
     const commonProps = {
       id: inputId,
@@ -105,7 +133,7 @@ export const Input = ({
     return <input {...commonProps} type={getInputType()} />
   }
 
-  // ОСНОВНОЙ РЕНДЕР
+  // ===== РЕНДЕР =====
   return (
     <div className={containerClasses}>
       {label && (
@@ -118,6 +146,8 @@ export const Input = ({
       <div className={styles.inputWrapper}>
         {renderLeftIcon()}
         {renderInput()}
+        {renderClearButton()}
+        {renderEditIcon()}
         {renderRightIcon()}
       </div>
 

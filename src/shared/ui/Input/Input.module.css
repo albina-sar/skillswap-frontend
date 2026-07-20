@@ -86,7 +86,7 @@
   color: var(--text-disabled);
 }
 
-/* 8. ИКОНКИ (лупа, глаз) */
+/* 8. ИКОНКИ (лупа, глаз, карандаш, крестик) */
 
 /* Левая иконка (лупа для поиска) */
 .leftIcon {
@@ -100,7 +100,7 @@
   transition: color 0.2s ease;
 }
 
-/* Правая иконка (глаз для пароля) */
+/* Правая иконка (глаз для пароля, карандаш для редактирования) */
 .rightIcon {
   position: absolute;
   right: var(--space-md);
@@ -126,27 +126,58 @@
   outline-offset: 2px;
 }
 
-.leftIcon svg,
-.rightIcon svg {
+.leftIcon img,
+.rightIcon img {
+  display: block;
+}
+
+/* 9. КНОПКА ОЧИСТКИ (крестик) */
+.clearButton {
+  position: absolute;
+  right: var(--space-md);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-2xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: var(--text-disabled);
   transition: color 0.2s ease;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
 }
 
-/* При наведении на глаз — меняем цвет */
-.rightIcon:hover svg {
-  color: var(--text-link);
+.clearButton:hover {
+  color: var(--text-primary);
+  background-color: rgb(0 0 0 / 5%);
 }
 
-/* 9. ОТСТУПЫ ДЛЯ ИНПУТА С ИКОНКАМИ */
+.clearButton img {
+  display: block;
+}
 
-/* Если есть иконка слева → отступ у инпута */
+/* 10. ОТСТУПЫ ДЛЯ ИНПУТА С ИКОНКАМИ */
+
+/* Если есть иконка слева - отступ у инпута */
 .leftIcon + .input {
   padding-left: 44px;
 }
 
-/* Если есть иконка справа → отступ у инпута */
+/* Если есть иконка справа - отступ у инпута */
 .inputWrapper:has(.rightIcon) .input {
   padding-right: 44px;
+}
+
+/* Если есть кнопка очистки - отступ у инпута */
+.inputWrapper:has(.clearButton) .input {
+  padding-right: 44px;
+}
+
+/* Если есть и крестик, и глаз — оба справа */
+.inputWrapper:has(.clearButton):has(.rightIcon) .input {
+  padding-right: 72px;
 }
 
 /* Если есть и левая, и правая иконки */
@@ -155,21 +186,21 @@
   padding-right: 44px;
 }
 
-/* 10. TEXTAREA (многострочное поле) */
+/* 11. TEXTAREA (многострочное поле) */
 .textarea .input {
-  resize: vertical;
+  resize: none;
   min-height: 80px;
   padding: var(--space-sm) var(--space-md);
   line-height: 1.5;
 }
 
-/* 11. ПОИСК (search) — дополнительные скругления */
+/* 12. ПОИСК (search) — убираем бордер и делаем обычное закругление */
 .container:has(.leftIcon) .input {
   border: none;
   border-radius: var(--radius-md);
 }
 
-/* 12. АНИМАЦИЯ ДЛЯ ОШИБКИ */
+/* 13. АНИМАЦИЯ ДЛЯ ОШИБКИ */
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -182,7 +213,7 @@
   }
 }
 
-/* 13. АДАПТИВ (мобильные устройства) */
+/* 14. АДАПТИВ (мобильные устройства) */
 @media (width <= 768px) {
   .input {
     padding: var(--space-xs) var(--space-sm);
@@ -205,11 +236,20 @@
     padding-right: 38px;
   }
 
+  .inputWrapper:has(.clearButton) .input {
+    padding-right: 38px;
+  }
+
+  .inputWrapper:has(.clearButton):has(.rightIcon) .input {
+    padding-right: 64px;
+  }
+
   .leftIcon {
     left: var(--space-sm);
   }
 
-  .rightIcon {
+  .rightIcon,
+  .clearButton {
     right: var(--space-sm);
   }
 }

@@ -1,5 +1,6 @@
 import type { SelectProps } from './types'
 import styles from './Select.module.css'
+import ChevronDownIcon from '@/shared/assets/icons/ChevronDown.svg'
 
 export const Select = ({
   value,
@@ -13,13 +14,9 @@ export const Select = ({
   name,
   className = '',
 }: SelectProps) => {
-  // Есть ли ошибка
   const hasError = !!error
-
-  // Генерируем ID для поля
   const selectId = `select-${name || Math.random().toString(36).substring(2, 9)}`
 
-  // Собираем классы для контейнера
   const containerClasses = [
     styles.container,
     hasError && styles.error,
@@ -31,7 +28,6 @@ export const Select = ({
 
   return (
     <div className={containerClasses}>
-      {/* LABEL (подпись над полем) */}
       {label && (
         <label htmlFor={selectId} className={styles.label}>
           {label}
@@ -39,30 +35,36 @@ export const Select = ({
         </label>
       )}
 
-      {/* САМ SELECT */}
-      <select
-        id={selectId}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        disabled={disabled}
-        required={required}
-        name={name}
-        className={styles.select}
-      >
-        {/* Первый пункт — плейсхолдер (не выбирается) */}
-        <option value="" disabled>
-          {placeholder}
-        </option>
-
-        {/* Опции из массива */}
-        {options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.label}
+      <div className={styles.selectWrapper}>
+        <select
+          id={selectId}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          disabled={disabled}
+          required={required}
+          name={name}
+          className={styles.select}
+        >
+          <option value="" disabled>
+            {placeholder}
           </option>
-        ))}
-      </select>
+          {options.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
 
-      {/* ТЕКСТ ОШИБКИ */}
+        {/* Стрелка */}
+        <img
+          src={ChevronDownIcon}
+          alt=""
+          className={styles.chevronIcon}
+          width={12}
+          height={12}
+        />
+      </div>
+
       {hasError && <div className={styles.errorText}>{error}</div>}
     </div>
   )
