@@ -1,0 +1,30 @@
+.stepContainer {
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    gap: var(--space-sm);
+    width: 212px;
+}
+
+.title {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-2xl);
+    font-weight: 500;
+}
+
+.icon {
+    height: 4px;
+    border-radius: var(--radius-md);
+    color: var(--disabled);
+}
+
+.progressList {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-md);
+    width: 100%;
+}
+
+.filled {
+    color: var(--accent);
+}
