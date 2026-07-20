@@ -26,7 +26,7 @@ export function AppRouter() {
           <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
           <Route path={ROUTES.CREATE} element={<CreateSkillPage />} />
 
-          <Route path="*" element={<NotFoundPage />} />
+          <Route path="*" element={<NotFoundPage errorCode={404} />} />
         </Routes>
       </Suspense>
     </BrowserRouter>
