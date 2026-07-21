@@ -82,25 +82,25 @@
 /* Цвет фона иконок */
 
 .business {
-  background-color: #eee7f7;
+  background-color: var(--tag-business);
 }
 
 .art {
-  background-color: #f7e7f2;
+  background-color: var(--tag-creative);
 }
 
 .languages {
-  background-color: #ebe5c5;
+  background-color: var(--tag-languages);
 }
 
 .education {
-  background-color: #e7f2f6;
+  background-color: var(--tag-education);
 }
 
 .home {
-  background-color: #f7ebe5;
+  background-color: var(--tag-home);
 }
 
 .health {
-  background-color: #e9f7e7;
+  background-color: var(--tag-health);
 }
