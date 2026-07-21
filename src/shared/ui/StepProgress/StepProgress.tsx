@@ -5,6 +5,7 @@ import clsx from "clsx";
 export const StepProgress = ({ currentStep, stepsAmount }: StepProgressProps) => {
     if (currentStep > stepsAmount) {
         console.error(`StepProgress: currentStep (${currentStep}) не может быть больше stepsAmount (${stepsAmount})`);
+        return null;
     } else {
         const stepNumbers = Array.from({ length: stepsAmount }, (_, i) => i + 1);
         return (
