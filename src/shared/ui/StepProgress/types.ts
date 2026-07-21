@@ -1,7 +1,5 @@
-type Step = 1 | 2 | 3;
-
 export type StepProgressProps = {
-    currentStep: Step;
+    currentStep: number;
     stepsAmount: number;
 }
 
