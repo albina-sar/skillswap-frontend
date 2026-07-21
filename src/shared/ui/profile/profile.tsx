@@ -1,42 +1,46 @@
-import { FC, memo, useState } from 'react';
+import { FC, memo, useEffect, useRef, useState } from 'react'
 
-import { Avatar } from '@/components/avatar-element';
+import { Avatar } from '@/components/avatar-element'
 
-import { UserMenu } from './UserMenu';
-import { ProfileUIProps } from './types';
-import styles from './profile.module.css';
+import { UserMenu } from './UserMenu'
+import { ProfileUIProps } from './types'
+import styles from './profile.module.css'
 
-export const ProfileUIComponent: FC<ProfileUIProps> = ({
-  image,
-  name,
-}) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+export const ProfileUIComponent: FC<ProfileUIProps> = ({ image, name }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const wrapperRef = useRef<HTMLDivElement>(null)
 
-  const handleClick = () => {
-    setIsMenuOpen((prev) => !prev);
-  };
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev)
+  }
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
+        setIsMenuOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [])
 
   return (
-    <div className={styles.wrapper}>
-      <button
-        className={styles.container}
-        onClick={handleClick}
-        type="button"
-      >
+    <div ref={wrapperRef} className={styles.wrapper}>
+      <button className={styles.container} onClick={toggleMenu} type="button">
         <span className={styles.text}>{name}</span>
 
-        <Avatar
-          image={image}
-          name={name}
-          size="xs"
-        />
+        <Avatar image={image} name={name} size="xs" />
       </button>
 
       {isMenuOpen && <UserMenu />}
     </div>
-  );
-};
+  )
+}
 
-ProfileUIComponent.displayName = 'ProfileUI';
+ProfileUIComponent.displayName = 'ProfileUI'
 
-export const ProfileUI = memo(ProfileUIComponent);
+export const ProfileUI = memo(ProfileUIComponent)
