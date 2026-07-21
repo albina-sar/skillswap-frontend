@@ -3,20 +3,33 @@ import { AvatarUI } from '@/shared/ui/avatar'
 import { Button } from '../button/button'
 import { Tag } from '@/shared/ui/Tag'
 import { LikeButton } from '@/shared/ui/likeButton'
-import type { User } from '@/shared/types'
+import type { Skill, User } from '@/shared/types'
+import { OverflowTags } from '@/shared/ui/OverflowTags'
 
 import styles from './UserCard.module.css'
 
 interface UserCardProps {
   user: User
-  teachSkill: string
-  learnSkills: string[]
+  teachSkill: Skill
+  learnSkills: Skill[]
   variant?: 'catalog' | 'skill'
   likesCount?: number
   isLiked?: boolean
   onLikeToggle?: () => void
   onDetailsClick?: () => void
 }
+
+const tagBackgroundMap: Record<string, string> = {
+  '1': 'var(--tag-business)',
+  '2': 'var(--tag-creative)',
+  '3': 'var(--tag-languages)',
+  '4': 'var(--tag-education)',
+  '5': 'var(--tag-home)',
+  '6': 'var(--tag-health)',
+}
+
+const getTagBackground = (subcategoryId: string) =>
+  tagBackgroundMap[subcategoryId[0]] ?? 'var(--tag-new)'
 
 const getAge = (dateOfBirth: string) => {
   const birth = new Date(dateOfBirth)
@@ -64,10 +77,6 @@ export function UserCard({
 }: UserCardProps) {
   const age = getAge(user.dateOfBirth)
 
-  const visibleLearn = variant === 'catalog' ? learnSkills.slice(0, 2) : learnSkills
-
-  const hiddenLearn = Math.max(0, learnSkills.length - visibleLearn.length)
-
   return (
     <Card className={styles.userCard}>
       <header className={styles.header}>
@@ -100,22 +109,21 @@ export function UserCard({
             <h4 className={styles.title}>Может научить</h4>
 
             <div className={styles.tags}>
-              <Tag label={teachSkill} backgroundColor="#ABD27A" textColor="#253017" />
+              <Tag
+                label={teachSkill.title}
+                backgroundColor={getTagBackground(teachSkill.subcategoryId)}
+                textColor="var(--text-primary)"
+              />
             </div>
           </section>
 
           <section className={styles.section}>
             <h4 className={styles.title}>Хочет научиться</h4>
 
-            <div className={styles.tags}>
-              {visibleLearn.map((skill) => (
-                <Tag key={skill} label={skill} backgroundColor="#D8E8F8" textColor="#253017" />
-              ))}
-
-              {hiddenLearn > 0 && (
-                <Tag label={`+${hiddenLearn}`} backgroundColor="#F2F6ED" textColor="#253017" />
-              )}
-            </div>
+            <OverflowTags
+              skills={learnSkills}
+              getBackgroundColor={(skill) => getTagBackground(skill.subcategoryId)}
+            />
           </section>
         </div>
 
