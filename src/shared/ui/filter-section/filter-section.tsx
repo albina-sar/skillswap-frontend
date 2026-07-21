@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { RadioGroup } from '@/shared/ui/radio-group';
 import { CheckboxGroup } from '@/shared/ui/checkbox-group';
 import { Card } from '../Card';
@@ -6,8 +6,12 @@ import { getDefaultFilterValues,  FilterValue } from '@/features/filters/model/f
 import { FilterSectionProps } from './types';
 import styles from './filter-section.module.css';
 
-export const FilterSection = ({ groups }: FilterSectionProps) => {
+export const FilterSection = ({ groups, onFiltersChange }: FilterSectionProps) => {
   const [values, setValues] = useState(() => getDefaultFilterValues(groups));
+
+   useEffect(() => {
+    onFiltersChange(values);
+  }, [values, onFiltersChange]);
 
   const activeCount = groups.reduce((count, group) => {
     const value = values[group.id];
