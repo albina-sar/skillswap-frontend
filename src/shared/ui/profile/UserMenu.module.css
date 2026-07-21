@@ -1,0 +1,45 @@
+.menu {
+  position: absolute;
+  top: calc(100% + var(--space-xs));
+  right: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  width: 260px;
+  padding: 40px;
+  background: var(--background-secondary);
+  border: 1px solid var(--toggle);
+  border-radius: var(--radius-lg);
+}
+
+.link,
+.logoutButton {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  width: 100%;
+  padding: 0;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+}
+
+.logoutButton span {
+  white-space: nowrap;
+}
+
+.logoutText {
+  margin-right: auto;
+  white-space: nowrap;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
