@@ -1,9 +1,10 @@
 import type { ReactNode } from 'react'
 
-export type HeadingSize = 'lg' | 'md'
+// Уровень заголовка: задаёт тег <h1>…<h4> и парные ему стили из UI-кита
+export type HeadingLevel = 1 | 2 | 3 | 4
 
 export interface HeadingProps {
   children: ReactNode
-  size?: HeadingSize
+  level?: HeadingLevel
   className?: string
 }
