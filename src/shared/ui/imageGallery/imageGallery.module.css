@@ -34,8 +34,8 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: rgb(228, 232, 223);
-  color: rgba(105, 115, 93, 1);
+  background: rgb(228 232 223);
+  color: rgb(105 115 93 / 100%);
 }
 
 .mainSlide :global(.swiper-button-prev) svg,
@@ -79,13 +79,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.5);
+  background: rgb(255 255 255 / 50%);
   border-radius: 10px;
   pointer-events: none;
 }
 
 .overlayCount {
-  color: rgb(37, 48, 23);
+  color: rgb(37 48 23);
   font-size: 16px;
   font-family: inherit;
   font-weight: 400;
