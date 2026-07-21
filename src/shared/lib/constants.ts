@@ -146,4 +146,10 @@ export const MOCK_CITIES = [
   { id: '39', name: 'Архангельск' },
   { id: '40', name: 'Кострома' },
   { id: '41', name: 'Новороссийск' },
+]
+
+export const GENDER_OPTIONS = [
+  { value: '', label: 'Не указан' },
+  { value: 'male', label: 'Мужской' },
+  { value: 'female', label: 'Женский' },
 ] as const
