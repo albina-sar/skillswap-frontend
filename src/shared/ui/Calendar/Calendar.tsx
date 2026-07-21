@@ -10,12 +10,14 @@ import { Button } from '../button/button';
 import { CustomHeader } from './CustomHeader';
 import { CustomInput } from './CustomInput';
 
+import { CalendarProps } from './types';
+
 registerLocale("ru", ru);
 setDefaultLocale("ru");
 
-export const Calendar = () => {
+export const Calendar = ({ onSubmit }: CalendarProps) => {
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+    const [selectedDate, setSelectedDate] = useState<Date | null>(null);
     const [visibleDate, setVisibleDate] = useState<Date | null>(null);
     const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
     
@@ -29,8 +31,13 @@ export const Calendar = () => {
     };
 
     const handleApply = () => {
-        setSelectedDate(visibleDate);
-        setIsOpen(false);
+        if (visibleDate) {
+            setSelectedDate(visibleDate)
+        }
+        if (selectedDate) {
+            onSubmit(selectedDate);
+            setIsOpen(false);
+        }
     };
 
     return (
