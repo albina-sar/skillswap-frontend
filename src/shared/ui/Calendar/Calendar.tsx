@@ -33,9 +33,7 @@ export const Calendar = ({ onSubmit }: CalendarProps) => {
     const handleApply = () => {
         if (visibleDate) {
             setSelectedDate(visibleDate)
-        }
-        if (selectedDate) {
-            onSubmit(selectedDate);
+            onSubmit(visibleDate);
             setIsOpen(false);
         }
     };
