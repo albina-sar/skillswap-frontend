@@ -1,0 +1,1 @@
+export { ModalSuccessSuggestion } from './ModalSuccessSuggestion';

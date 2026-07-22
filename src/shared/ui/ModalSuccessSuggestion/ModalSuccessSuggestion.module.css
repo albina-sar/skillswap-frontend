@@ -1,0 +1,15 @@
+.textContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  text-align: center;
+}
+
+.title {
+  font-family: var(--font-heading);
+}
+
+.textParagraph {
+  max-width: 436px;
+  padding: 0 30px;
+}
