@@ -1,0 +1,96 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  width: 436px;
+}
+
+.upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  width: 436px;
+  min-height: 96px;
+  padding: 16px 20px;
+  border: 1px dashed var(--text-caption);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+}
+
+.selected {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  width: 100%;
+}
+
+.count {
+  color: var(--text-caption);
+  font-size: var(--font-size-sm);
+}
+
+.previews {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--space-xs);
+  list-style: none;
+}
+
+.preview {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1;
+  background-color: var(--disabled);
+  border-radius: var(--radius-md);
+}
+
+.preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.removeButton {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  color: var(--background-secondary);
+  font-size: var(--font-size-base);
+  line-height: 1;
+  background-color: var(--text-disabled);
+  border-radius: 50%;
+}
+
+.removeButton:hover,
+.removeButton:focus-visible {
+  background-color: var(--error);
+}
+
+.limitReached {
+  cursor: default;
+}
+
+.input {
+  display: none;
+}
+
+.prompt {
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+  text-align: center;
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  color: var(--text-link);
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+}
