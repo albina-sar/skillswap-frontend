@@ -1,5 +1,5 @@
 export interface ImageUploadProps {
-  onChange: (file: File) => void
+  onChange: (files: File[]) => void
   accept?: string
   className?: string
 }
