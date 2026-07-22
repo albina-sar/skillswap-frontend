@@ -1,5 +1,3 @@
-// src/shared/ui/Popover/types.ts
-
 import { ReactNode } from 'react'
 
 export type PopoverPlacement =
@@ -12,6 +10,8 @@ export type PopoverPlacement =
   | 'top-start'
   | 'top-end'
 
+export type PopoverSize = 'default' | 'userMenu' | 'largePopover'
+
 export interface PopoverProps {
   trigger: ReactNode
   children: ReactNode
@@ -23,4 +23,5 @@ export interface PopoverProps {
   width?: string | number
   maxWidth?: string | number
   disableAnimation?: boolean
+  size?: PopoverSize
 }

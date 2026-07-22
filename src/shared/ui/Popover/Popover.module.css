@@ -1,10 +1,8 @@
-/* 1. КОНТЕЙНЕР */
 .container {
   position: relative;
   display: inline-block;
 }
 
-/* 2. ТРИГГЕР */
 .triggerWrapper {
   display: inline-block;
   cursor: pointer;
@@ -20,7 +18,6 @@
   color: inherit;
 }
 
-/* 3. ПОПОВЕР — ОСНОВНЫЕ СТИЛИ */
 .popup {
   position: absolute;
   z-index: 1000;
@@ -37,40 +34,24 @@
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-
-  /* Анимация */
   opacity: 0;
   transform: scale(0.95) translateY(-4px);
   transition: opacity 0.15s ease, transform 0.15s ease;
   transform-origin: top left;
   pointer-events: none;
+  overscroll-behavior: contain;
 }
 
-/* Открытое состояние */
 .popup.open {
   opacity: 1;
   transform: scale(1) translateY(0);
   pointer-events: auto;
 }
 
-/* Отключение анимации */
 .popup.noAnimation {
   transition: none !important;
 }
 
-/* 4. СТРЕЛКА */
-.arrow {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background-color: var(--background-secondary, #FFF);
-  border-left: 1px solid var(--toggle, #E6E8E8);
-  border-top: 1px solid var(--toggle, #E6E8E8);
-  transform: rotate(45deg);
-  z-index: 1;
-}
-
-/* 5. СОДЕРЖИМОЕ */
 .content {
   display: flex;
   flex-direction: column;
@@ -81,19 +62,10 @@
   flex: 1;
 }
 
-/* 6. ПОЗИЦИИ ПОПОВЕРА */
-
-/* ----- BOTTOM (снизу) ----- */
 .placement-bottom-left,
 .placement-bottom-start {
   top: calc(100% + 8px);
   left: 0;
-}
-
-.placement-bottom-left .arrow,
-.placement-bottom-start .arrow {
-  top: -6px;
-  left: 16px;
 }
 
 .placement-bottom-right,
@@ -102,24 +74,10 @@
   right: 0;
 }
 
-.placement-bottom-right .arrow,
-.placement-bottom-end .arrow {
-  top: -6px;
-  right: 16px;
-}
-
-/* ----- TOP (сверху) ----- */
 .placement-top-left,
 .placement-top-start {
   bottom: calc(100% + 8px);
   left: 0;
-}
-
-.placement-top-left .arrow,
-.placement-top-start .arrow {
-  bottom: -6px;
-  left: 16px;
-  transform: rotate(225deg);
 }
 
 .placement-top-right,
@@ -128,14 +86,6 @@
   right: 0;
 }
 
-.placement-top-right .arrow,
-.placement-top-end .arrow {
-  bottom: -6px;
-  right: 16px;
-  transform: rotate(225deg);
-}
-
-/* 7. АДАПТИВ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ */
 @media (width <= 768px) {
   .popup:not(.userMenu, .largePopover) {
     width: 90vw;
@@ -152,24 +102,11 @@
     right: 0;
   }
 
-  .placement-bottom-left .arrow:not(.userMenu, .largePopover),
-  .placement-bottom-start .arrow:not(.userMenu, .largePopover) {
-    left: auto;
-    right: 16px;
-  }
-
   .placement-top-left:not(.userMenu, .largePopover),
   .placement-top-start:not(.userMenu, .largePopover) {
     bottom: calc(100% + 8px);
     left: auto;
     right: 0;
-  }
-
-  .placement-top-left .arrow:not(.userMenu, .largePopover),
-  .placement-top-start .arrow:not(.userMenu, .largePopover) {
-    left: auto;
-    right: 16px;
-    transform: rotate(225deg);
   }
 }
 
@@ -184,8 +121,6 @@
     gap: 24px;
   }
 }
-
-/* 8. КАСТОМНЫЙ КЛАСС ДЛЯ МЕНЮ ПОЛЬЗОВАТЕЛЯ (260×152)              */
 
 .userMenu {
   width: 260px !important;
@@ -208,7 +143,6 @@
   overflow: hidden !important;
 }
 
-/* Элементы меню пользователя */
 .userMenuItem {
   display: flex;
   align-items: center;
@@ -307,7 +241,6 @@
   margin-bottom: 32px;
 }
 
-/* Адаптив для меню пользователя */
 @media (width <= 768px) {
   .userMenu {
     width: 220px !important;
@@ -402,8 +335,6 @@
   }
 }
 
-/* 9. КАСТОМНЫЙ КЛАСС ДЛЯ БОЛЬШОГО ПОПАПА (1136×1040)              */
-
 .popup.largePopover {
   width: 1136px !important;
   max-width: 1136px !important;
@@ -423,7 +354,6 @@
   background-color: var(--background-secondary, #FFF) !important;
 }
 
-/* Адаптив для большого попапа */
 @media (width <= 1200px) {
   .popup.largePopover {
     width: 90vw !important;

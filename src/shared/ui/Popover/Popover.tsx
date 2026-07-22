@@ -13,28 +13,58 @@ export const Popover = ({
   width,
   maxWidth,
   disableAnimation = false,
+  size = 'default',
 }: PopoverProps) => {
   const [uncontrolledIsOpen, setUncontrolledIsOpen] = useState(false)
   const isOpen = controlledIsOpen !== undefined ? controlledIsOpen : uncontrolledIsOpen
 
   const containerRef = useRef<HTMLDivElement>(null)
   const popupRef = useRef<HTMLDivElement>(null)
+  const isMouseDownOnPopup = useRef(false)
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
-        if (controlledIsOpen === undefined) {
-          setUncontrolledIsOpen(false)
-        }
-        onOpenChange?.(false)
+    const handleMouseDown = (event: MouseEvent) => {
+      const target = event.target as Node
+      const isOnPopup = popupRef.current?.contains(target) || false
+      const isOnContainer = containerRef.current?.contains(target) || false
+
+      if (isOnPopup || isOnContainer) {
+        isMouseDownOnPopup.current = true
+      } else {
+        isMouseDownOnPopup.current = false
       }
     }
 
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
+    const handleMouseUp = (event: MouseEvent) => {
+      // Если mousedown был на попапе, а mouseup на документе - не закрываем
+      if (isMouseDownOnPopup.current) {
+        isMouseDownOnPopup.current = false
+        return
+      }
+
+      const target = event.target as Node
+      const isOnPopup = popupRef.current?.contains(target) || false
+      const isOnContainer = containerRef.current?.contains(target) || false
+
+      if (isOnPopup || isOnContainer) {
+        return
+      }
+
+      if (controlledIsOpen === undefined) {
+        setUncontrolledIsOpen(false)
+      }
+      onOpenChange?.(false)
     }
-  }, [controlledIsOpen, onOpenChange])
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleMouseDown)
+      document.addEventListener('mouseup', handleMouseUp)
+      return () => {
+        document.removeEventListener('mousedown', handleMouseDown)
+        document.removeEventListener('mouseup', handleMouseUp)
+      }
+    }
+  }, [isOpen, controlledIsOpen, onOpenChange])
 
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
@@ -51,17 +81,6 @@ export const Popover = ({
       document.removeEventListener('keydown', handleEscape)
     }
   }, [isOpen, controlledIsOpen, onOpenChange])
-
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
-    return () => {
-      document.body.style.overflow = ''
-    }
-  }, [isOpen])
 
   const toggle = () => {
     const newState = !isOpen
@@ -97,6 +116,7 @@ export const Popover = ({
     styles[`placement-${placement}`],
     isOpen ? styles.open : styles.closed,
     disableAnimation && styles.noAnimation,
+    size !== 'default' && styles[size],
     className,
   ]
     .filter(Boolean)
@@ -112,10 +132,11 @@ export const Popover = ({
           ref={popupRef}
           style={popupStyle}
         >
-          <div className={styles.arrow} />
           <div className={styles.content}>{children}</div>
         </div>
       )}
     </div>
   )
 }
+
+
