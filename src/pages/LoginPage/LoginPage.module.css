@@ -1,0 +1,125 @@
+.page {
+  min-height: 100vh;
+  padding: 40px 36px;
+  background: var(--background-main);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.closeButton {
+  min-width: 147px;
+  height: 48px;
+  padding: var(--space-sm) var(--space-xl);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  border-radius: var(--radius-lg);
+  background: var(--input-bg);
+  color: var(--text-primary);
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+}
+
+.closeButton img {
+  width: 24px;
+  height: 24px;
+}
+
+.closeButton:hover {
+  background: var(--button-hover);
+}
+
+
+.title {
+  margin-top: -1px;
+  text-align: center;
+  font-family: var(--font-heading);
+  font-size: var(--font-size-2xl);
+  font-weight: 500;
+  line-height: 32px;
+}
+
+.content {
+  max-width: 1136px;
+  margin: 32px auto 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.formCard {
+  min-height: 692px;
+  padding: 112px 60px;
+}
+
+.form {
+  width: 100%;
+}
+
+.socialButtons {
+  display: grid;
+  gap: 16px;
+}
+
+.divider {
+  margin: 24px 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-primary);
+  line-height: 24px;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  height: 1px;
+  flex: 1;
+  background: var(--disabled);
+}
+
+.fields {
+  display: grid;
+  gap: 16px;
+}
+
+.fieldsWithError input {
+  border-color: var(--error);
+}
+
+.fields input {
+  height: 48px;
+}
+
+.errorMessage {
+  margin-top: 20px;
+  color: var(--error);
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.submitButton {
+  margin-top: 32px;
+}
+
+.registerLink {
+  width: fit-content;
+  margin: 12px auto 0;
+  display: block;
+  color: var(--text-link);
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+}
+
+.registerLink:hover {
+  text-decoration: underline;
+}
+
+.welcomeCard {
+  max-width: 100%;
+}
