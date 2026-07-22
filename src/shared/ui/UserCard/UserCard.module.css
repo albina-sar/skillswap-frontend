@@ -1,5 +1,114 @@
 .userCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  position: relative;
   width: 324px;
   min-height: 368px;
-  padding: 20px;
+  padding: var(--space-lg);
+  box-sizing: border-box;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-2xs);
+}
+
+.nameCatalog {
+  margin: 0;
+  font-family: var(--font-name);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: -0.011em;
+  color: var(--text-primary);
+}
+
+.nameSkill {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: -0.011em;
+  color: var(--text-primary);
+}
+
+.meta {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0.02em;
+  color: var(--text-primary);
+}
+
+.like {
+  position: absolute;
+  top: var(--space-lg);
+  right: var(--space-lg);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  flex: 1;
+  width: 100%;
+}
+
+.about {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--text-primary);
+}
+
+.sections {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0.02em;
+  color: var(--text-primary);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xs);
+}
+
+.button {
+  margin-top: auto;
+  width: 100%;
 }
