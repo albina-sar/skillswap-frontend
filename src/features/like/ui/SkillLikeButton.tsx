@@ -2,8 +2,8 @@ import { LikeButton } from '@/shared/ui/likeButton'
 import { useLike } from '../hooks'
 
 interface SkillLikeButtonProps {
-  skillId: number
-  baseLikeCount: number // Количество лайков из стора/бэкенда
+  skillId: string
+  baseLikeCount: number
 }
 
 export function SkillLikeButton({ skillId, baseLikeCount }: SkillLikeButtonProps) {

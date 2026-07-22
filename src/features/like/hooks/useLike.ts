@@ -2,9 +2,9 @@ import { useLocalStorage } from '../../../shared/hooks/useLocalStorage'
 
 const LIKED_SKILLS_STORAGE_KEY = 'likedSkills'
 
-export function useLike(skillId: number, baseLikeCount: number) {
+export function useLike(skillId: string, baseLikeCount: number) {
   // Используем готовый хук команды для работы с localStorage
-  const [likedSkills, setLikedSkills] = useLocalStorage<number[]>(LIKED_SKILLS_STORAGE_KEY, [])
+  const [likedSkills, setLikedSkills] = useLocalStorage<string[]>(LIKED_SKILLS_STORAGE_KEY, [])
 
   // Проверяем, есть ли текущий скилл в списке лайкнутых
   const isLiked = likedSkills.includes(skillId)
