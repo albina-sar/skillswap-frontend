@@ -1,0 +1,1 @@
+export { SkillLikeButton } from './SkillLikeButton';
