@@ -7,7 +7,6 @@ import skillsReducer from '@/entities/skill/model/skillsSlice'
 export const store = configureStore({
   reducer: {
     users: usersReducer,
-    // skills: skillsReducer,
     skills: skillsReducer,
     // auth: authReducer,
   },
