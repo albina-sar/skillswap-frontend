@@ -7,15 +7,25 @@ import styles from './OverflowTags.module.css'
 
 interface OverflowTagsProps {
   skills: Skill[]
+  enableOverflow?: boolean
   getBackgroundColor?: (skill: Skill) => string
 }
 
-export function OverflowTags({ skills, getBackgroundColor }: OverflowTagsProps) {
+export function OverflowTags({
+  skills,
+  enableOverflow = true,
+  getBackgroundColor,
+}: OverflowTagsProps) {
   const containerRef = useRef<HTMLDivElement>(null)
 
   const [visibleCount, setVisibleCount] = useState(skills.length)
 
   useLayoutEffect(() => {
+    if (!enableOverflow) {
+      setVisibleCount(skills.length)
+      return
+    }
+
     const container = containerRef.current
 
     if (!container) return
@@ -28,7 +38,7 @@ export function OverflowTags({ skills, getBackgroundColor }: OverflowTagsProps) 
     let usedWidth = 0
     let count = 0
 
-    const hiddenTagWidth = 45 // примерная ширина +N
+    const hiddenTagWidth = 45
 
     for (const item of items) {
       const itemWidth = item.offsetWidth
@@ -48,25 +58,28 @@ export function OverflowTags({ skills, getBackgroundColor }: OverflowTagsProps) 
     }
 
     setVisibleCount(Math.max(count, 1))
-  }, [skills])
+  }, [skills, enableOverflow])
 
-  const hiddenCount = skills.length - visibleCount
+  const visibleSkills = enableOverflow ? skills.slice(0, visibleCount) : skills
+  const hiddenCount = enableOverflow ? skills.length - visibleCount : 0
 
   return (
-    <div className={styles.tagsWrapper}>
-      <div ref={containerRef} className={styles.measure} aria-hidden="true">
-        {skills.map((skill) => (
-          <Tag
-            key={skill.id}
-            label={skill.title}
-            backgroundColor={getBackgroundColor ? getBackgroundColor(skill) : 'var(--tag-new)'}
-            textColor="var(--text-primary)"
-          />
-        ))}
-      </div>
+    <div className={`${styles.tagsWrapper} ${!enableOverflow ? styles.wrap : ''}`}>
+      {enableOverflow && (
+        <div ref={containerRef} className={styles.measure} aria-hidden="true">
+          {skills.map((skill) => (
+            <Tag
+              key={skill.id}
+              label={skill.title}
+              backgroundColor={getBackgroundColor ? getBackgroundColor(skill) : 'var(--tag-new)'}
+              textColor="var(--text-primary)"
+            />
+          ))}
+        </div>
+      )}
 
-      <div className={styles.tags}>
-        {skills.slice(0, visibleCount).map((skill) => (
+      <div className={`${styles.tags} ${!enableOverflow ? styles.wrap : ''}`}>
+        {visibleSkills.map((skill) => (
           <Tag
             key={skill.id}
             label={skill.title}

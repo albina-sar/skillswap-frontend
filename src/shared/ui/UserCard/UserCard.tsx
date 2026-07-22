@@ -122,6 +122,7 @@ export function UserCard({
 
             <OverflowTags
               skills={learnSkills}
+              enableOverflow={variant === 'catalog'}
               getBackgroundColor={(skill) => getTagBackground(skill.subcategoryId)}
             />
           </section>

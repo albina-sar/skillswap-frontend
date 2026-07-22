@@ -17,3 +17,8 @@
   gap: 8px;
   width: 100%;
 }
+
+.wrap {
+  overflow: visible;
+  flex-wrap: wrap;
+}
