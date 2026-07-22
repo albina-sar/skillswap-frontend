@@ -4,7 +4,7 @@ import { Navigation } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import type { Swiper as SwiperType } from 'swiper'
-import type { MyGalleryProps } from './type'
+import type { MyGalleryProps } from './types'
 import styles from './imageGallery.module.css'
 
 const MAX_VISIBLE_THUMBS = 3
@@ -72,7 +72,7 @@ const ImageGalleryUIComponent: FC<MyGalleryProps> = ({ images = [] }) => {
             />
             {thumb.isLast && thumb.count > 1 && (
               <div className={styles.thumbOverlay}>
-                <span className={styles.overlayCount}>+{thumb.count - 1}</span>
+                <span className={styles.overlayCount}>+{thumb.count}</span>
               </div>
             )}
           </button>
