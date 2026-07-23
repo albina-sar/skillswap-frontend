@@ -1,11 +1,8 @@
 // ─── Skill ───────────────────────────────────────────────
-export type SkillType = 'teach' | 'learn'
-
 export interface Skill {
   id: string
   title: string
   description: string
-  type: SkillType
   categoryId: string
   subcategoryId: string
   tags: string[]
@@ -24,7 +21,8 @@ export interface User {
   dateOfBirth: string
   photo: string
   about: string
-  skills: string[];
+  skills: string[]
+  wantsToLearn: string[]
 }
 
 // ─── Request ─────────────────────────────────────────────
@@ -56,13 +54,15 @@ export type City = {
 //─── Category ─────────────────────────────────────────────
 
 export interface Subcategory {
-  id: string;
-  name: string;
+  id: string
+  name: string
 }
 
-export interface Category {
-  id: string;
-  name: string;
-  subcategories: Subcategory[];
+export type CategoryIcon = 'business' | 'art' | 'languages' | 'education' | 'home' | 'health'
 
+export interface Category {
+  id: string
+  name: string
+  icon: CategoryIcon
+  subcategories: Subcategory[]
 }

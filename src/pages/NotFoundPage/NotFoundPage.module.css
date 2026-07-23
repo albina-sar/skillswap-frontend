@@ -1,0 +1,74 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  height: 60px;
+  background: var(--background-secondary);
+  border-bottom: 1px solid var(--text-disabled);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--space-lg);
+  color: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-2xl);
+}
+
+.content {
+  text-align: center;
+  max-width: 460px;
+}
+
+.illustration {
+  margin-bottom: var(--space-lg);
+}
+
+.errorImage {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: var(--font-size-2xl);
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.description {
+  font-size: var(--font-size-base);
+  color: var(--text-caption);
+  margin-bottom: var(--space-xl);
+}
+
+.actions {
+  display: flex;
+  gap: var(--space-xl);
+  justify-content: space-between;
+
+  button {
+    inline-size: 218px;
+  }
+}
+
+.footer {
+  height: 60px;
+  background: var(--background-secondary);
+  border-top: 1px solid var(--text-disabled);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--space-lg);
+  color: var(--text-primary);
+  flex-shrink: 0;
+}

@@ -1,0 +1,379 @@
+.container {
+  position: relative;
+  display: inline-block;
+}
+
+.triggerWrapper {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.trigger {
+  display: inline-block;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+
+.popup {
+  position: absolute;
+  z-index: 1000;
+  width: max-content;
+  max-width: 556px;
+  min-height: 616px;
+  padding: 60px;
+  background-color: var(--background-secondary, #FFF);
+  border: 1px solid var(--toggle, #E6E8E8);
+  border-radius: var(--radius-lg, 12px);
+  box-shadow: var(--shadow-md, 0 4px 20px rgb(0 0 0 / 8%));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  opacity: 0;
+  transform: scale(0.95) translateY(-4px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  transform-origin: top left;
+  pointer-events: none;
+  overscroll-behavior: contain;
+}
+
+.popup.open {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  pointer-events: auto;
+}
+
+.popup.noAnimation {
+  transition: none !important;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  flex: 1;
+}
+
+.placement-bottom-start {
+  top: calc(100% + 8px);
+  left: 0;
+}
+
+.placement-bottom-end {
+  top: calc(100% + 8px);
+  right: 0;
+}
+
+.placement-top-start {
+  bottom: calc(100% + 8px);
+  left: 0;
+}
+
+.placement-top-end {
+  bottom: calc(100% + 8px);
+  right: 0;
+}
+
+@media (width <= 768px) {
+  .popup:not(.userMenu, .largePopover) {
+    width: 90vw;
+    max-width: none;
+    min-height: 80vh;
+    padding: 32px 24px;
+    right: 0;
+  }
+
+  .placement-bottom-start:not(.userMenu, .largePopover) {
+    top: calc(100% + 8px);
+    left: auto;
+    right: 0;
+  }
+
+  .placement-top-start:not(.userMenu, .largePopover) {
+    bottom: calc(100% + 8px);
+    left: auto;
+    right: 0;
+  }
+}
+
+@media (width <= 480px) {
+  .popup:not(.userMenu, .largePopover) {
+    width: 95vw;
+    min-height: 85vh;
+    padding: 24px 16px;
+  }
+
+  .content:not(.userMenu .content, .largePopover .content) {
+    gap: 24px;
+  }
+}
+
+.userMenu {
+  width: 260px;
+  height: 152px;
+  min-height: 0;
+  max-height: 152px;
+  max-width: 260px;
+  flex: none;
+  flex-grow: 0;
+  flex-shrink: 0;
+  padding: 0;
+  margin: 0;
+  background-color: #FFF;
+  border: 1px solid #E6E8E8;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgb(0 0 0 / 5%);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  overflow: hidden;
+}
+
+.userMenuItem {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  text-decoration: none;
+  height: 24px;
+  align-self: flex-start;
+  flex-shrink: 0;
+  margin: 0;
+}
+
+.userMenuItem:hover {
+  opacity: 0.7;
+}
+
+.userMenuItemText {
+  width: 130px;
+  height: 24px;
+  font-family: Roboto, -apple-system, sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: #2D3328;
+  white-space: nowrap;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  line-height: 0;
+  font-size: 16px;
+}
+
+.userMenuItem:first-child {
+  margin-top: 32px;
+  margin-bottom: 24px;
+}
+
+.logoutItem {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 24px;
+  align-self: flex-start;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.logoutWrapper {
+  width: 180px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.logoutWrapper:hover {
+  opacity: 0.7;
+}
+
+.logoutText {
+  font-family: Roboto, -apple-system, sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: #2D3328;
+  white-space: nowrap;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  line-height: 0;
+  font-size: 16px;
+}
+
+.logoutIcon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  color: #2D3328;
+  display: grid;
+  place-items: center;
+}
+
+.logoutItem:last-child {
+  margin-bottom: 32px;
+}
+
+@media (width <= 768px) {
+  .userMenu {
+    width: 220px;
+    height: 132px;
+    max-height: 132px;
+    max-width: 220px;
+  }
+
+  .userMenuItem {
+    height: 20px;
+  }
+
+  .userMenuItem:first-child {
+    margin-top: 26px;
+    margin-bottom: 20px;
+  }
+
+  .userMenuItemText {
+    width: 110px;
+    height: 20px;
+    font-size: 14px;
+  }
+
+  .logoutItem {
+    height: 20px;
+  }
+
+  .logoutItem:last-child {
+    margin-bottom: 26px;
+  }
+
+  .logoutWrapper {
+    width: 150px;
+    height: 20px;
+    gap: 6px;
+  }
+
+  .logoutText {
+    font-size: 14px;
+  }
+
+  .logoutIcon {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (width <= 480px) {
+  .userMenu {
+    width: 200px;
+    height: 120px;
+    max-height: 120px;
+    max-width: 200px;
+  }
+
+  .userMenuItem {
+    height: 18px;
+  }
+
+  .userMenuItem:first-child {
+    margin-top: 24px;
+    margin-bottom: 16px;
+  }
+
+  .userMenuItemText {
+    width: 100px;
+    height: 18px;
+    font-size: 13px;
+  }
+
+  .logoutItem {
+    height: 18px;
+  }
+
+  .logoutItem:last-child {
+    margin-bottom: 24px;
+  }
+
+  .logoutWrapper {
+    width: 135px;
+    height: 18px;
+    gap: 4px;
+  }
+
+  .logoutText {
+    font-size: 13px;
+  }
+
+  .logoutIcon {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.largePopover {
+  width: 1136px;
+  max-width: 1136px;
+  min-width: 1136px;
+  height: auto;
+  min-height: 1040px;
+  max-height: 1040px;
+  padding: 60px;
+  border: 1px solid var(--toggle, #E6E8E8);
+  border-radius: var(--radius-lg, 12px);
+  box-shadow: var(--shadow-md, 0 4px 20px rgb(0 0 0 / 8%));
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  overflow-y: auto;
+  box-sizing: border-box;
+  background-color: var(--background-secondary, #FFF);
+}
+
+@media (width <= 1200px) {
+  .largePopover {
+    width: 90vw;
+    max-width: 90vw;
+    min-width: 0;
+    min-height: 80vh;
+    max-height: 90vh;
+  }
+}
+
+@media (width <= 768px) {
+  .largePopover {
+    width: 95vw;
+    max-width: 95vw;
+    min-height: 85vh;
+    max-height: 95vh;
+    padding: 32px 24px;
+  }
+}
+
+@media (width <= 480px) {
+  .largePopover {
+    width: 98vw;
+    max-width: 98vw;
+    min-height: 90vh;
+    max-height: 98vh;
+    padding: 24px 16px;
+  }
+}

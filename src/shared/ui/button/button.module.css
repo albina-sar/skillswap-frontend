@@ -3,14 +3,14 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 12px; /* Устанавливаем отступ сразу для всех элементов внутри текста и картинки */
-  padding: 12px 24px;
+  gap: var(--space-sm); /* Устанавливаем отступ сразу для всех элементов внутри текста и картинки */
+  padding: var(--space-sm) var(--space-xl);
   height: 48px;
-  border-radius: 12px;
-  font-family: Roboto, sans-serif;
+  border-radius: var(--radius-lg);
+  font-family: var(--font-sans);
   font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
+  font-size: var(--font-size-base);
+  line-height: var(--font-size-2xl);
   letter-spacing: 0.02em;
   cursor: pointer;
   transition: opacity 0.2s; /* для плавной анимации например при наведении */
@@ -19,8 +19,8 @@
 
 /* когда у тега <button> имеется атрибут disabled */
 .base:disabled {
-  background: #E4E8DF;
-  color: #69735D;
+  background: var(--disabled);
+  color: var(--text-caption);
   cursor: not-allowed;
   opacity: 0.7;
 }
@@ -35,30 +35,30 @@
 
 /* Цветовые вариации (варианты primary-основной, outline - светлая с оконтовкой, reset_filter - кнопка сброса фильтов, white - белая кнопка) */
 .primary {
-  background: #ABD27A;
-  color: #253017;
+  background: var(--accent);
+  color: var(--text-primary);
 }
 
 .outline {
-  background: #FFF;
-  border: 1px solid #ABD27A;
-  color: #253017;
+  background: var(--background-secondary);
+  border: 1px solid var(--accent);
+  color: var(--text-primary);
 }
 
 .outline_form {
-  background: #FFF;
-  border: 1px solid #69735D;
-  color: #253017;
+  background: var(--background-secondary);
+  border: 1px solid var(--text-caption);
+  color: var(--text-primary);
 }
 
 .reset_filter {
-  background: #F9FAF7;
-  color: #508826;
+  background: var(--background-main);
+  color: var(--text-link);
 }
 
 .white {
-  background: #FFF;
-  color: #253017;
+  background: var(--background-secondary);
+  color: var(--text-primary);
 }
 
 /* Контейнер для изображения */
