@@ -62,25 +62,21 @@
   flex: 1;
 }
 
-.placement-bottom-left,
 .placement-bottom-start {
   top: calc(100% + 8px);
   left: 0;
 }
 
-.placement-bottom-right,
 .placement-bottom-end {
   top: calc(100% + 8px);
   right: 0;
 }
 
-.placement-top-left,
 .placement-top-start {
   bottom: calc(100% + 8px);
   left: 0;
 }
 
-.placement-top-right,
 .placement-top-end {
   bottom: calc(100% + 8px);
   right: 0;
@@ -95,14 +91,12 @@
     right: 0;
   }
 
-  .placement-bottom-left:not(.userMenu, .largePopover),
   .placement-bottom-start:not(.userMenu, .largePopover) {
     top: calc(100% + 8px);
     left: auto;
     right: 0;
   }
 
-  .placement-top-left:not(.userMenu, .largePopover),
   .placement-top-start:not(.userMenu, .largePopover) {
     bottom: calc(100% + 8px);
     left: auto;
@@ -123,24 +117,24 @@
 }
 
 .userMenu {
-  width: 260px !important;
-  height: 152px !important;
-  min-height: 0 !important;
-  max-height: 152px !important;
-  max-width: 260px !important;
-  flex: none !important;
-  flex-grow: 0 !important;
-  flex-shrink: 0 !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  background-color: #FFF !important;
-  border: 1px solid #E6E8E8 !important;
-  border-radius: 12px !important;
-  box-shadow: 0 4px 20px rgb(0 0 0 / 5%) !important;
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 0 !important;
-  overflow: hidden !important;
+  width: 260px;
+  height: 152px;
+  min-height: 0;
+  max-height: 152px;
+  max-width: 260px;
+  flex: none;
+  flex-grow: 0;
+  flex-shrink: 0;
+  padding: 0;
+  margin: 0;
+  background-color: #FFF;
+  border: 1px solid #E6E8E8;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgb(0 0 0 / 5%);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  overflow: hidden;
 }
 
 .userMenuItem {
@@ -243,10 +237,10 @@
 
 @media (width <= 768px) {
   .userMenu {
-    width: 220px !important;
-    height: 132px !important;
-    max-height: 132px !important;
-    max-width: 220px !important;
+    width: 220px;
+    height: 132px;
+    max-height: 132px;
+    max-width: 220px;
   }
 
   .userMenuItem {
@@ -290,10 +284,10 @@
 
 @media (width <= 480px) {
   .userMenu {
-    width: 200px !important;
-    height: 120px !important;
-    max-height: 120px !important;
-    max-width: 200px !important;
+    width: 200px;
+    height: 120px;
+    max-height: 120px;
+    max-width: 200px;
   }
 
   .userMenuItem {
@@ -335,51 +329,51 @@
   }
 }
 
-.popup.largePopover {
-  width: 1136px !important;
-  max-width: 1136px !important;
-  min-width: 1136px !important;
-  height: auto !important;
-  min-height: 1040px !important;
-  max-height: 1040px !important;
-  padding: 60px !important;
-  border: 1px solid var(--toggle, #E6E8E8) !important;
-  border-radius: var(--radius-lg, 12px) !important;
-  box-shadow: var(--shadow-md, 0 4px 20px rgb(0 0 0 / 8%)) !important;
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 0 !important;
-  overflow-y: auto !important;
-  box-sizing: border-box !important;
-  background-color: var(--background-secondary, #FFF) !important;
+.largePopover {
+  width: 1136px;
+  max-width: 1136px;
+  min-width: 1136px;
+  height: auto;
+  min-height: 1040px;
+  max-height: 1040px;
+  padding: 60px;
+  border: 1px solid var(--toggle, #E6E8E8);
+  border-radius: var(--radius-lg, 12px);
+  box-shadow: var(--shadow-md, 0 4px 20px rgb(0 0 0 / 8%));
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  overflow-y: auto;
+  box-sizing: border-box;
+  background-color: var(--background-secondary, #FFF);
 }
 
 @media (width <= 1200px) {
-  .popup.largePopover {
-    width: 90vw !important;
-    max-width: 90vw !important;
-    min-width: 0 !important;
-    min-height: 80vh !important;
-    max-height: 90vh !important;
+  .largePopover {
+    width: 90vw;
+    max-width: 90vw;
+    min-width: 0;
+    min-height: 80vh;
+    max-height: 90vh;
   }
 }
 
 @media (width <= 768px) {
-  .popup.largePopover {
-    width: 95vw !important;
-    max-width: 95vw !important;
-    min-height: 85vh !important;
-    max-height: 95vh !important;
-    padding: 32px 24px !important;
+  .largePopover {
+    width: 95vw;
+    max-width: 95vw;
+    min-height: 85vh;
+    max-height: 95vh;
+    padding: 32px 24px;
   }
 }
 
 @media (width <= 480px) {
-  .popup.largePopover {
-    width: 98vw !important;
-    max-width: 98vw !important;
-    min-height: 90vh !important;
-    max-height: 98vh !important;
-    padding: 24px 16px !important;
+  .largePopover {
+    width: 98vw;
+    max-width: 98vw;
+    min-height: 90vh;
+    max-height: 98vh;
+    padding: 24px 16px;
   }
 }

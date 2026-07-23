@@ -10,8 +10,6 @@ export const Popover = ({
   placement = 'bottom-start',
   offset = 8,
   className = '',
-  width,
-  maxWidth,
   disableAnimation = false,
   size = 'default',
 }: PopoverProps) => {
@@ -36,7 +34,6 @@ export const Popover = ({
     }
 
     const handleMouseUp = (event: MouseEvent) => {
-      // Если mousedown был на попапе, а mouseup на документе - не закрываем
       if (isMouseDownOnPopup.current) {
         isMouseDownOnPopup.current = false
         return
@@ -106,8 +103,6 @@ export const Popover = ({
     : trigger
 
   const popupStyle = {
-    ...(width && { width: typeof width === 'number' ? `${width}px` : width }),
-    ...(maxWidth && { maxWidth: typeof maxWidth === 'number' ? `${maxWidth}px` : maxWidth }),
     ...(offset && { marginTop: `${offset}px` }),
   }
 
