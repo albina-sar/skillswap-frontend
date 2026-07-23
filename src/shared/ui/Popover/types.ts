@@ -6,7 +6,7 @@ export type PopoverPlacement =
   | 'top-start'
   | 'top-end'
 
-export type PopoverSize = 'default' | 'userMenu' | 'largePopover'
+export type PopoverSize = 'small' | 'medium' | 'large'
 
 export interface PopoverProps {
   trigger: ReactNode
@@ -14,8 +14,6 @@ export interface PopoverProps {
   isOpen?: boolean
   onOpenChange?: (isOpen: boolean) => void
   placement?: PopoverPlacement
-  offset?: number
   className?: string
-  disableAnimation?: boolean
   size?: PopoverSize
 }
