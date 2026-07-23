@@ -1,0 +1,60 @@
+.headerContainer {
+    padding: 0 36px;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2xl);
+}
+
+.logoLink {
+    display: flex;
+    flex-shrink: 0;
+}
+
+.navigation {
+    list-style-type: none;
+    display: flex;
+    gap: var(--space-xl);
+    flex-shrink: 0;
+}
+
+.navButton {
+    color: var(--text-primary);
+    text-wrap-mode: nowrap;
+    display: flex;
+    gap: var(--space-2xs);
+    flex-shrink: 0;
+}
+
+.navButton img {
+    flex-shrink: 0;
+}
+
+.authBar {
+    display: flex;
+    align-items: center;
+}
+
+.authBar.auth {
+    gap: var(--space-lg);
+}
+
+.authBar.unAuth {
+    gap: var(--space-2xl);
+}
+
+.authTrue {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xl);
+}
+
+.authFalse {
+    display: flex;
+    gap: var(--space-xs)
+}
+
+.quickActions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+}
