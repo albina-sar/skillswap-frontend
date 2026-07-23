@@ -58,7 +58,10 @@ export default function CatalogPage() {
       }
 
       // Фильтр по полу автора
-      if (filters.gender !== 'any' && author?.gender !== filters.gender) return false
+      const normalizedGender =
+        author?.gender === 'мужской' ? 'male' : author?.gender === 'женский' ? 'female' : 'any'
+
+      if (filters.gender !== 'any' && normalizedGender !== filters.gender) return false
 
       // Фильтр по городу (сравниваем названия городов)
       if (Array.isArray(filters.city) && filters.city.length > 0) {
