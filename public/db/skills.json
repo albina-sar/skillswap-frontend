@@ -5,7 +5,11 @@
     "description": "Привет! Я играю на барабанах уже больше 10 лет. Научу основам техники, играть любимые ритмы, импровизировать и звучать уверенно даже без партитуры!",
     "categoryId": "2",
     "subcategoryId": "204",
-    "tags": ["Барабаны", "Музыка", "Ритм"],
+    "tags": [
+      "Барабаны",
+      "Музыка",
+      "Ритм"
+    ],
     "imageUrl": [
       "https://images.unsplash.com/photo-1511192336575-5a79af67a629?w=500&q=80",
       "https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?w=500&q=80",
@@ -14,7 +18,8 @@
     ],
     "authorId": "1",
     "createdAt": "2026-07-01T12:00:00Z",
-    "likesCount": 24
+    "likesCount": 24,
+    "learningType": "teach"
   },
   {
     "id": "skill_002",
@@ -22,7 +27,10 @@
     "description": "Помогу преодолеть языковой барьер. Обсуждаем мемы, кино, технологии и жизненные темы. Никакой скучной зубрежки!",
     "categoryId": "3",
     "subcategoryId": "301",
-    "tags": ["Английский", "Разговорный клуб"],
+    "tags": [
+      "Английский",
+      "Разговорный клуб"
+    ],
     "imageUrl": [
       "https://images.unsplash.com/photo-1544717305-2782549b5136?w=500&q=80",
       "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=500&q=80",
@@ -31,7 +39,8 @@
     ],
     "authorId": "2",
     "createdAt": "2026-06-28T09:15:00Z",
-    "likesCount": 42
+    "likesCount": 42,
+    "learningType": "learn"
   },
   {
     "id": "skill_003",
@@ -39,7 +48,10 @@
     "description": "Разберем, как анализировать аудиторию, настраивать таргет и запускать первые рекламные кампании с минимальным бюджетом.",
     "categoryId": "1",
     "subcategoryId": "102",
-    "tags": ["Маркетинг", "Реклама"],
+    "tags": [
+      "Маркетинг",
+      "Реклама"
+    ],
     "imageUrl": [
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&q=80",
       "https://images.unsplash.com/photo-1533750516457-a7f992034fec?w=500&q=80",
@@ -48,7 +60,8 @@
     ],
     "authorId": "3",
     "createdAt": "2026-07-03T15:30:00Z",
-    "likesCount": 18
+    "likesCount": 18,
+    "learningType": "teach"
   },
   {
     "id": "skill_004",
@@ -56,7 +69,10 @@
     "description": "Провожу мягкие тренировки для любого уровня подготовки. Помогу выпрямить спину, укрепить тело и найти внутренний дзен.",
     "categoryId": "6",
     "subcategoryId": "601",
-    "tags": ["Йога", "Медитация"],
+    "tags": [
+      "Йога",
+      "Медитация"
+    ],
     "imageUrl": [
       "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=500&q=80",
       "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=500&q=80",
@@ -65,7 +81,8 @@
     ],
     "authorId": "4",
     "createdAt": "2026-07-05T08:00:00Z",
-    "likesCount": 51
+    "likesCount": 51,
+    "learningType": "learn"
   },
   {
     "id": "skill_005",
@@ -73,7 +90,10 @@
     "description": "Научу рисовать легкие воздушные скетчи, смешивать цвета и не бояться чистого листа.",
     "categoryId": "2",
     "subcategoryId": "201",
-    "tags": ["Рисование", "Акварель"],
+    "tags": [
+      "Рисование",
+      "Акварель"
+    ],
     "imageUrl": [
       "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=500&q=80",
       "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=500&q=80",
@@ -82,7 +102,8 @@
     ],
     "authorId": "5",
     "createdAt": "2026-07-02T11:20:00Z",
-    "likesCount": 33
+    "likesCount": 33,
+    "learningType": "teach"
   },
   {
     "id": "skill_006",
@@ -90,7 +111,11 @@
     "description": "Поделюсь опытом выстраивания Scrum/Kanban процессов, решения конфликтов внутри команды и мотивации разработчиков.",
     "categoryId": "1",
     "subcategoryId": "101",
-    "tags": ["Agile", "Scrum", "Менеджмент"],
+    "tags": [
+      "Agile",
+      "Scrum",
+      "Менеджмент"
+    ],
     "imageUrl": [
       "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=500&q=80",
       "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=500&q=80",
@@ -99,7 +124,8 @@
     ],
     "authorId": "6",
     "createdAt": "2026-07-06T14:15:00Z",
-    "likesCount": 29
+    "likesCount": 29,
+    "learningType": "learn"
   },
   {
     "id": "skill_007",
@@ -107,7 +133,10 @@
     "description": "Научу печь идеальные капкейки, макаронс и собирать стильные бенто-торты прямо на вашей кухне.",
     "categoryId": "5",
     "subcategoryId": "503",
-    "tags": ["Выпечка", "Кулинария"],
+    "tags": [
+      "Выпечка",
+      "Кулинария"
+    ],
     "imageUrl": [
       "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=500&q=80",
       "https://images.unsplash.com/photo-1550617931-e17a7b70dce2?w=500&q=80",
@@ -116,7 +145,8 @@
     ],
     "authorId": "7",
     "createdAt": "2026-07-04T10:00:00Z",
-    "likesCount": 47
+    "likesCount": 47,
+    "learningType": "teach"
   },
   {
     "id": "skill_008",
@@ -124,7 +154,10 @@
     "description": "Помогу перестать бояться публичных выступлений, настроить голос и научиться аргументировать свою позицию.",
     "categoryId": "1",
     "subcategoryId": "103",
-    "tags": ["Ораторское искусство", "Переговоры"],
+    "tags": [
+      "Ораторское искусство",
+      "Переговоры"
+    ],
     "imageUrl": [
       "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=500&q=80",
       "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=500&q=80",
@@ -133,7 +166,8 @@
     ],
     "authorId": "8",
     "createdAt": "2026-07-01T16:40:00Z",
-    "likesCount": 19
+    "likesCount": 19,
+    "learningType": "learn"
   },
   {
     "id": "skill_009",
@@ -141,7 +175,10 @@
     "description": "Расскажу, как перестать убивать свои цветы, правильно пересаживать монстеры и бороться с вредителями.",
     "categoryId": "5",
     "subcategoryId": "504",
-    "tags": ["Растения", "Цветоводство"],
+    "tags": [
+      "Растения",
+      "Цветоводство"
+    ],
     "imageUrl": [
       "https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=500&q=80",
       "https://images.unsplash.com/photo-1545241047-6083a3684587?w=500&q=80",
@@ -150,7 +187,8 @@
     ],
     "authorId": "9",
     "createdAt": "2026-06-30T13:12:00Z",
-    "likesCount": 12
+    "likesCount": 12,
+    "learningType": "teach"
   },
   {
     "id": "skill_010",
@@ -158,7 +196,10 @@
     "description": "Научу монтировать динамичные REELS, Shorts и полноценные видео для YouTube. Переходы, цветокоррекция, музыка.",
     "categoryId": "2",
     "subcategoryId": "203",
-    "tags": ["Видеомонтаж", "Reels"],
+    "tags": [
+      "Видеомонтаж",
+      "Reels"
+    ],
     "imageUrl": [
       "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=500&q=80",
       "https://images.unsplash.com/photo-1622737133809-d95047b9e673?w=500&q=80",
@@ -167,7 +208,8 @@
     ],
     "authorId": "10",
     "createdAt": "2026-07-07T18:20:00Z",
-    "likesCount": 38
+    "likesCount": 38,
+    "learningType": "learn"
   },
   {
     "id": "skill_011",
@@ -175,7 +217,10 @@
     "description": "Поставим правильное произношение тонов, разберем базовые иероглифы и научимся простым бытовым диалогам.",
     "categoryId": "3",
     "subcategoryId": "305",
-    "tags": ["Китайский", "Иероглифы"],
+    "tags": [
+      "Китайский",
+      "Иероглифы"
+    ],
     "imageUrl": [
       "https://images.unsplash.com/photo-1525184990524-cf5017215e4f?w=500&q=80",
       "https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=500&q=80",
@@ -183,7 +228,8 @@
     ],
     "authorId": "11",
     "createdAt": "2026-07-08T09:00:00Z",
-    "likesCount": 22
+    "likesCount": 22,
+    "learningType": "teach"
   },
   {
     "id": "skill_012",
@@ -191,7 +237,10 @@
     "description": "Покажу, как создавать электронные треки, сводить биты и работать с виртуальными синтезаторами с нуля.",
     "categoryId": "2",
     "subcategoryId": "204",
-    "tags": ["Создание музыки", "Сведение"],
+    "tags": [
+      "Создание музыки",
+      "Сведение"
+    ],
     "imageUrl": [
       "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=500&q=80",
       "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500&q=80",
@@ -200,7 +249,8 @@
     ],
     "authorId": "12",
     "createdAt": "2026-07-09T15:30:00Z",
-    "likesCount": 31
+    "likesCount": 31,
+    "learningType": "learn"
   },
   {
     "id": "skill_013",
@@ -208,7 +258,10 @@
     "description": "Освоим техники быстрого чтения. Научимся запоминать до 80% прочитанного материала с первого раза.",
     "categoryId": "4",
     "subcategoryId": "404",
-    "tags": ["Скорочтение", "Память"],
+    "tags": [
+      "Скорочтение",
+      "Память"
+    ],
     "imageUrl": [
       "https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?w=500&q=80",
       "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=500&q=80",
@@ -217,7 +270,8 @@
     ],
     "authorId": "13",
     "createdAt": "2026-07-05T12:00:00Z",
-    "likesCount": 15
+    "likesCount": 15,
+    "learningType": "teach"
   },
   {
     "id": "skill_014",
@@ -225,7 +279,10 @@
     "description": "Расскажу, как зарегистрировать бизнес, составить юнит-экономику и найти первых инвесторов.",
     "categoryId": "1",
     "subcategoryId": "108",
-    "tags": ["Бизнес", "Стартап"],
+    "tags": [
+      "Бизнес",
+      "Стартап"
+    ],
     "imageUrl": [
       "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=500&q=80",
       "https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=500&q=80",
@@ -234,7 +291,8 @@
     ],
     "authorId": "14",
     "createdAt": "2026-07-10T11:00:00Z",
-    "likesCount": 44
+    "likesCount": 44,
+    "learningType": "learn"
   },
   {
     "id": "skill_015",
@@ -242,7 +300,10 @@
     "description": "Через рисунок, лепку и коллажи будем исследовать внутреннее состояние и снимать тревожность.",
     "categoryId": "2",
     "subcategoryId": "207",
-    "tags": ["Арт-терапия", "Ментальное здоровье"],
+    "tags": [
+      "Арт-терапия",
+      "Ментальное здоровье"
+    ],
     "imageUrl": [
       "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=500&q=80",
       "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=500&q=80",
@@ -251,7 +312,8 @@
     ],
     "authorId": "15",
     "createdAt": "2026-07-11T13:00:00Z",
-    "likesCount": 50
+    "likesCount": 50,
+    "learningType": "teach"
   },
   {
     "id": "skill_016",
@@ -259,13 +321,17 @@
     "description": "Составлю индивидуальную программу тренировок без дорогого инвентаря. Работаем над силой и выносливостью.",
     "categoryId": "6",
     "subcategoryId": "605",
-    "tags": ["Фитнес", "Тренировки"],
+    "tags": [
+      "Фитнес",
+      "Тренировки"
+    ],
     "imageUrl": [
       "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=500&q=80"
     ],
     "authorId": "16",
     "createdAt": "2026-07-04T08:30:00Z",
-    "likesCount": 26
+    "likesCount": 26,
+    "learningType": "learn"
   },
   {
     "id": "skill_017",
@@ -273,7 +339,10 @@
     "description": "Научу вести семейный бюджет, закрывать долги, копить на крупные покупки и инвестировать.",
     "categoryId": "5",
     "subcategoryId": "502",
-    "tags": ["Финансы", "Бюджет"],
+    "tags": [
+      "Финансы",
+      "Бюджет"
+    ],
     "imageUrl": [
       "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=500&q=80",
       "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=500&q=80",
@@ -282,7 +351,8 @@
     ],
     "authorId": "17",
     "createdAt": "2026-07-02T16:00:00Z",
-    "likesCount": 39
+    "likesCount": 39,
+    "learningType": "teach"
   },
   {
     "id": "skill_018",
@@ -290,7 +360,10 @@
     "description": "Поделюсь практическим опытом ведения IT-проектов от идеи до релиза. Настройка процессов в Jira.",
     "categoryId": "1",
     "subcategoryId": "107",
-    "tags": ["Управление проектами", "Jira"],
+    "tags": [
+      "Управление проектами",
+      "Jira"
+    ],
     "imageUrl": [
       "https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=500&q=80",
       "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500&q=80",
@@ -299,7 +372,8 @@
     ],
     "authorId": "18",
     "createdAt": "2026-07-08T10:00:00Z",
-    "likesCount": 17
+    "likesCount": 17,
+    "learningType": "learn"
   },
   {
     "id": "skill_019",
@@ -307,7 +381,10 @@
     "description": "Практикующий переводчик. Поставлю красивый акцент, научу понимать испанский сленг.",
     "categoryId": "3",
     "subcategoryId": "303",
-    "tags": ["Испанский", "Espanol"],
+    "tags": [
+      "Испанский",
+      "Espanol"
+    ],
     "imageUrl": [
       "https://images.unsplash.com/photo-1512418490979-92798cec1380?w=500&q=80",
       "https://images.unsplash.com/photo-1543783207-ec64e4d95325?w=500&q=80",
@@ -316,7 +393,8 @@
     ],
     "authorId": "19",
     "createdAt": "2026-07-03T11:00:00Z",
-    "likesCount": 28
+    "likesCount": 28,
+    "learningType": "teach"
   },
   {
     "id": "skill_020",
@@ -324,7 +402,10 @@
     "description": "Научу работать со студийным светом, выстраивать композицию кадра и делать живые портреты.",
     "categoryId": "2",
     "subcategoryId": "202",
-    "tags": ["Фотография", "Портрет"],
+    "tags": [
+      "Фотография",
+      "Портрет"
+    ],
     "imageUrl": [
       "https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=500&q=80",
       "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500&q=80",
@@ -333,7 +414,8 @@
     ],
     "authorId": "20",
     "createdAt": "2026-07-05T17:00:00Z",
-    "likesCount": 36
+    "likesCount": 36,
+    "learningType": "learn"
   },
   {
     "id": "skill_021",
@@ -341,7 +423,10 @@
     "description": "Помогу спозиционировать себя на рынке, оформить соцсети и начать привлекать клиентов.",
     "categoryId": "1",
     "subcategoryId": "104",
-    "tags": ["Личный бренд", "Продвижение"],
+    "tags": [
+      "Личный бренд",
+      "Продвижение"
+    ],
     "imageUrl": [
       "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&q=80",
       "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&q=80",
@@ -350,7 +435,8 @@
     ],
     "authorId": "21",
     "createdAt": "2026-07-09T09:00:00Z",
-    "likesCount": 41
+    "likesCount": 41,
+    "learningType": "teach"
   },
   {
     "id": "skill_022",
@@ -358,7 +444,10 @@
     "description": "Погрузимся в японский язык через аниме, мангу и культуру. Базовая грамматика простыми словами.",
     "categoryId": "3",
     "subcategoryId": "306",
-    "tags": ["Японский", "Аниме"],
+    "tags": [
+      "Японский",
+      "Аниме"
+    ],
     "imageUrl": [
       "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?w=500&q=80",
       "https://images.unsplash.com/photo-1542051841857-f90071e7989?w=500&q=80",
@@ -367,7 +456,8 @@
     ],
     "authorId": "22",
     "createdAt": "2026-07-12T14:00:00Z",
-    "likesCount": 27
+    "likesCount": 27,
+    "learningType": "learn"
   },
   {
     "id": "skill_023",
@@ -375,7 +465,10 @@
     "description": "Практический разбор структуры экзаменов, стратегии написания эссе, аудирования на максимальный балл.",
     "categoryId": "3",
     "subcategoryId": "307",
-    "tags": ["IELTS", "TOEFL"],
+    "tags": [
+      "IELTS",
+      "TOEFL"
+    ],
     "imageUrl": [
       "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=500&q=80",
       "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=500&q=80",
@@ -384,7 +477,8 @@
     ],
     "authorId": "23",
     "createdAt": "2026-07-06T11:00:00Z",
-    "likesCount": 52
+    "likesCount": 52,
+    "learningType": "teach"
   },
   {
     "id": "skill_024",
@@ -392,7 +486,10 @@
     "description": "Помогу побороть страх белого листа, писать живые вовлекающие истории и сильные тексты.",
     "categoryId": "2",
     "subcategoryId": "206",
-    "tags": ["Копирайтинг", "Писательство"],
+    "tags": [
+      "Копирайтинг",
+      "Писательство"
+    ],
     "imageUrl": [
       "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=500&q=80",
       "https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?w=500&q=80",
@@ -401,7 +498,8 @@
     ],
     "authorId": "24",
     "createdAt": "2026-07-04T15:00:00Z",
-    "likesCount": 16
+    "likesCount": 16,
+    "learningType": "learn"
   },
   {
     "id": "skill_025",
@@ -409,7 +507,10 @@
     "description": "Понятная грамматика, ассоциативное запоминание слов. Сделаем немецкий язык интересным.",
     "categoryId": "3",
     "subcategoryId": "304",
-    "tags": ["Немецкий", "Deutsch"],
+    "tags": [
+      "Немецкий",
+      "Deutsch"
+    ],
     "imageUrl": [
       "https://images.unsplash.com/photo-1527891751199-7225231a68dd?w=500&q=80",
       "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=500&q=80",
@@ -418,7 +519,8 @@
     ],
     "authorId": "25",
     "createdAt": "2026-07-02T13:00:00Z",
-    "likesCount": 21
+    "likesCount": 21,
+    "learningType": "teach"
   },
   {
     "id": "skill_026",
@@ -426,7 +528,10 @@
     "description": "Помогу сформулировать истинные цели, составить пошаговый план по их достижению.",
     "categoryId": "4",
     "subcategoryId": "406",
-    "tags": ["Коучинг", "Цели"],
+    "tags": [
+      "Коучинг",
+      "Цели"
+    ],
     "imageUrl": [
       "https://images.unsplash.com/photo-1521791136368-1a46827d3ad4?w=500&q=80",
       "https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&q=80",
@@ -435,7 +540,8 @@
     ],
     "authorId": "26",
     "createdAt": "2026-07-11T10:00:00Z",
-    "likesCount": 45
+    "likesCount": 45,
+    "learningType": "learn"
   },
   {
     "id": "skill_027",
@@ -443,7 +549,10 @@
     "description": "Поделюсь методикой внедрения здоровых и продуктивных привычек без стресса.",
     "categoryId": "4",
     "subcategoryId": "401",
-    "tags": ["Развитие", "Привычки"],
+    "tags": [
+      "Развитие",
+      "Привычки"
+    ],
     "imageUrl": [
       "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=500&q=80",
       "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=500&q=80",
@@ -452,7 +561,8 @@
     ],
     "authorId": "27",
     "createdAt": "2026-07-09T17:00:00Z",
-    "likesCount": 30
+    "likesCount": 30,
+    "learningType": "teach"
   },
   {
     "id": "skill_028",
@@ -460,7 +570,10 @@
     "description": "Научу работать с возражениями, выстраивать воронки продаж и договариваться о выгодных условиях.",
     "categoryId": "1",
     "subcategoryId": "103",
-    "tags": ["Продажи", "Переговоры"],
+    "tags": [
+      "Продажи",
+      "Переговоры"
+    ],
     "imageUrl": [
       "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&q=80",
       "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=500&q=80",
@@ -468,7 +581,8 @@
     ],
     "authorId": "28",
     "createdAt": "2026-07-08T15:00:00Z",
-    "likesCount": 13
+    "likesCount": 13,
+    "learningType": "learn"
   },
   {
     "id": "skill_029",
@@ -476,7 +590,10 @@
     "description": "Покажу, как делать настоящую итальянскую пасту ручной работы с соусами песто и карбонара.",
     "categoryId": "5",
     "subcategoryId": "503",
-    "tags": ["Паста", "Кулинария"],
+    "tags": [
+      "Паста",
+      "Кулинария"
+    ],
     "imageUrl": [
       "https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=500&q=80",
       "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=500&q=80",
@@ -485,7 +602,8 @@
     ],
     "authorId": "29",
     "createdAt": "2026-07-06T18:00:00Z",
-    "likesCount": 37
+    "likesCount": 37,
+    "learningType": "teach"
   },
   {
     "id": "skill_030",
@@ -493,7 +611,10 @@
     "description": "Игры на раскрепощение, снятие телесных зажимов, развитие эмоционального интеллекта.",
     "categoryId": "2",
     "subcategoryId": "205",
-    "tags": ["Актерское", "Импровизация"],
+    "tags": [
+      "Актерское",
+      "Импровизация"
+    ],
     "imageUrl": [
       "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=500&q=80",
       "https://images.unsplash.com/photo-1513151233558-d860c5398176?w=500&q=80",
@@ -502,7 +623,8 @@
     ],
     "authorId": "30",
     "createdAt": "2026-07-11T16:00:00Z",
-    "likesCount": 48
+    "likesCount": 48,
+    "learningType": "learn"
   },
   {
     "id": "skill_031",
@@ -510,7 +632,10 @@
     "description": "Мягкие медитативные техники рисования, которые помогают выразить эмоции на бумаге без правил.",
     "categoryId": "2",
     "subcategoryId": "207",
-    "tags": ["Арт-терапия", "Рисование"],
+    "tags": [
+      "Арт-терапия",
+      "Рисование"
+    ],
     "imageUrl": [
       "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=500&q=80",
       "https://images.unsplash.com/photo-1501472312651-726afe119ff1?w=500&q=80",
@@ -519,7 +644,8 @@
     ],
     "authorId": "31",
     "createdAt": "2026-07-07T12:00:00Z",
-    "likesCount": 22
+    "likesCount": 22,
+    "learningType": "teach"
   },
   {
     "id": "skill_032",
@@ -527,7 +653,10 @@
     "description": "Помогу оформить резюме, собрать портфолио на GitHub/Behance и отрепетировать каверзные вопросы HR.",
     "categoryId": "1",
     "subcategoryId": "105",
-    "tags": ["Резюме", "Собеседование"],
+    "tags": [
+      "Резюме",
+      "Собеседование"
+    ],
     "imageUrl": [
       "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=500&q=80",
       "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=500&q=80",
@@ -536,7 +665,8 @@
     ],
     "authorId": "32",
     "createdAt": "2026-07-10T09:00:00Z",
-    "likesCount": 34
+    "likesCount": 34,
+    "learningType": "learn"
   },
   {
     "id": "skill_033",
@@ -544,7 +674,10 @@
     "description": "Научу правильному произношению, разберем грамматику и научимся говорить о себе и своих увлечениях.",
     "categoryId": "3",
     "subcategoryId": "302",
-    "tags": ["Французский", "Francais"],
+    "tags": [
+      "Французский",
+      "Francais"
+    ],
     "imageUrl": [
       "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=500&q=80",
       "https://images.unsplash.com/photo-1499856126354-539446754a4a?w=500&q=80",
@@ -553,7 +686,8 @@
     ],
     "authorId": "33",
     "createdAt": "2026-07-05T14:00:00Z",
-    "likesCount": 40
+    "likesCount": 40,
+    "learningType": "teach"
   },
   {
     "id": "skill_034",
@@ -561,7 +695,10 @@
     "description": "Покажу, как дать вторую жизнь старым стульям и комодам: покраска, замена обивки и мелкий ремонт.",
     "categoryId": "2",
     "subcategoryId": "208",
-    "tags": ["DIY", "Реставрация"],
+    "tags": [
+      "DIY",
+      "Реставрация"
+    ],
     "imageUrl": [
       "https://images.unsplash.com/photo-1581850518616-bcb8077a2336?w=500&q=80",
       "https://images.unsplash.com/photo-1537084642907-629340c7e5a4?w=500&q=80",
@@ -570,7 +707,8 @@
     ],
     "authorId": "34",
     "createdAt": "2026-07-12T11:00:00Z",
-    "likesCount": 25
+    "likesCount": 25,
+    "learningType": "learn"
   },
   {
     "id": "skill_035",
@@ -578,13 +716,17 @@
     "description": "Дипломированный психолог. Практики по борьбе с тревожностью, синдромом самозванца и эмоциональным истощением.",
     "categoryId": "6",
     "subcategoryId": "603",
-    "tags": ["Психология", "Ментальное здоровье"],
+    "tags": [
+      "Психология",
+      "Ментальное здоровье"
+    ],
     "imageUrl": [
       "https://images.unsplash.com/photo-1516062423079-7ca13cdc7f5a?w=500&q=80"
     ],
     "authorId": "35",
     "createdAt": "2026-07-08T16:00:00Z",
-    "likesCount": 49
+    "likesCount": 49,
+    "learningType": "teach"
   },
   {
     "id": "skill_036",
@@ -592,7 +734,10 @@
     "description": "Помогу экспертам структурировать свои знания, составить учебную программу и выстроить логику уроков.",
     "categoryId": "4",
     "subcategoryId": "405",
-    "tags": ["Методология", "Обучение"],
+    "tags": [
+      "Методология",
+      "Обучение"
+    ],
     "imageUrl": [
       "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=500&q=80",
       "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=500&q=80",
@@ -601,7 +746,8 @@
     ],
     "authorId": "36",
     "createdAt": "2026-07-03T10:00:00Z",
-    "likesCount": 19
+    "likesCount": 19,
+    "learningType": "learn"
   },
   {
     "id": "skill_037",
@@ -609,7 +755,10 @@
     "description": "Разберем, как составить сбалансированный рацион без голодовок, жестких диет и срывов. Научимся разбираться в КБЖУ.",
     "categoryId": "6",
     "subcategoryId": "602",
-    "tags": ["Нутрициология", "Питание"],
+    "tags": [
+      "Нутрициология",
+      "Питание"
+    ],
     "imageUrl": [
       "https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=500&q=80",
       "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=500&q=80",
@@ -618,7 +767,8 @@
     ],
     "authorId": "37",
     "createdAt": "2026-07-13T09:00:00Z",
-    "likesCount": 31
+    "likesCount": 31,
+    "learningType": "teach"
   },
   {
     "id": "skill_038",
@@ -626,7 +776,10 @@
     "description": "Помогу настроить гигиену сна, разработать вечерние ритуалы расслабления и наладить циркадные ритмы.",
     "categoryId": "6",
     "subcategoryId": "606",
-    "tags": ["Сон", "Восстановление"],
+    "tags": [
+      "Сон",
+      "Восстановление"
+    ],
     "imageUrl": [
       "https://images.unsplash.com/photo-1511295742364-5a79af67a629?w=500&q=80",
       "https://images.unsplash.com/photo-1512438248247-f0f2a5a8b7f0?w=500&q=80",
@@ -634,7 +787,8 @@
     ],
     "authorId": "38",
     "createdAt": "2026-07-09T22:00:00Z",
-    "likesCount": 43
+    "likesCount": 43,
+    "learningType": "learn"
   },
   {
     "id": "skill_039",
@@ -642,7 +796,10 @@
     "description": "Помогу избавиться от лишних вещей, организовать удобную систему хранения по методике КонМари.",
     "categoryId": "5",
     "subcategoryId": "501",
-    "tags": ["Расхламление", "Уют"],
+    "tags": [
+      "Расхламление",
+      "Уют"
+    ],
     "imageUrl": [
       "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=500&q=80",
       "https://images.unsplash.com/photo-1520699049698-acd2fccb8cc8?w=500&q=80",
@@ -651,7 +808,8 @@
     ],
     "authorId": "39",
     "createdAt": "2026-07-10T12:00:00Z",
-    "likesCount": 29
+    "likesCount": 29,
+    "learningType": "teach"
   },
   {
     "id": "skill_040",
@@ -659,7 +817,10 @@
     "description": "Научу вас учиться быстрее и эффективнее. Разберем методики интервального повторения и технику Фейнмана.",
     "categoryId": "4",
     "subcategoryId": "403",
-    "tags": ["Когнитивистика", "Обучение"],
+    "tags": [
+      "Когнитивистика",
+      "Обучение"
+    ],
     "imageUrl": [
       "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=500&q=80",
       "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=500&q=80",
@@ -668,6 +829,7 @@
     ],
     "authorId": "40",
     "createdAt": "2026-07-14T10:00:00Z",
-    "likesCount": 35
+    "likesCount": 35,
+    "learningType": "learn"
   }
 ]
