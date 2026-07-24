@@ -1,0 +1,35 @@
+.card {
+  padding: var(--space-lg);
+  width: 324px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-2xl);
+  font-weight: 500;
+  letter-spacing: -1.1%;
+}
+
+.resetButton {
+  display: flex;
+  gap: var(--space-2xs);
+  color: var(--button-pressed);
+  align-items: center;
+}
+
+.resetIcon {
+  width: 24px;
+  height: 24px;
+}

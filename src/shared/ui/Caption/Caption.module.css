@@ -1,0 +1,15 @@
+.caption {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: 16px;
+  letter-spacing: 0.02em;
+}
+
+.colorPrimary {
+  color: var(--text-primary);
+}
+
+.colorCaption {
+  color: var(--text-caption);
+}

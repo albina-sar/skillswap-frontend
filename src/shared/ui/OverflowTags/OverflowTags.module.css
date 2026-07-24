@@ -1,0 +1,24 @@
+.tagsWrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.tags {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.measure {
+  position: absolute;
+  visibility: hidden;
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.wrap {
+  overflow: visible;
+  flex-wrap: wrap;
+}
