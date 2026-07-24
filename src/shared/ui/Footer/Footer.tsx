@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Logo } from '@/shared/ui/Logo'
 import { Popover } from '@/shared/ui/Popover'
 import { CategoryList } from '@/shared/ui/CategoryList'
@@ -5,9 +6,14 @@ import { CATEGORIES_DATA } from '@/shared/lib/constants'
 import styles from './Footer.module.css'
 
 export function Footer() {
-  const handleCategoryClick = () => {}
+  const [isSkillsOpen, setIsSkillsOpen] = useState(false)
+  const handleCategoryClick = () => {
+    setIsSkillsOpen(false)
+  }
 
-  const handleSubcategoryClick = () => {}
+  const handleSubcategoryClick = () => {
+    setIsSkillsOpen(false)
+  }
 
   return (
     <footer className={styles.footer}>
@@ -31,6 +37,9 @@ export function Footer() {
             }
             placement="top-start"
             size="large"
+            isOpen={isSkillsOpen}
+            onOpenChange={setIsSkillsOpen}
+            anchorToContainer
           >
             <CategoryList
               categories={CATEGORIES_DATA}
