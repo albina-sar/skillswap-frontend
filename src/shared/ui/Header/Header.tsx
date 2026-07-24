@@ -30,10 +30,6 @@ export const Header = ({ isAuth, user, onSearch, categories, notify }: HeaderPro
         onSearch(debouncedQuery);
     }, [debouncedQuery, onSearch]);
 
-    const onBellClick = () => {
-        setIsNotifyOpen((prev) => !prev)
-    }
-
     return (
         <section className={styles.headerContainer}>
             <NavLink to={ROUTES.HOME} className={styles.logoLink}><Logo /></NavLink>
@@ -50,6 +46,7 @@ export const Header = ({ isAuth, user, onSearch, categories, notify }: HeaderPro
                             isOpen={isSkillsOpen}
                             onOpenChange={setIsSkillsOpen}
                             size='large'
+                            anchorToContainer={true}
                         >
                             {categories}
                         </Popover>
@@ -63,9 +60,11 @@ export const Header = ({ isAuth, user, onSearch, categories, notify }: HeaderPro
                     <div className={styles.authTrue}>
                         <div className={styles.quickActions}>
                             <Popover
-                                trigger={<NotificationButton hasNotifications={false} onClick={onBellClick} />}
+                                trigger={<NotificationButton hasNotifications={false} />}
                                 isOpen={isNotifyOpen}
+                                onOpenChange={setIsNotifyOpen}
                                 placement='bottom-end'
+                                anchorToContainer={true}
                             >
                                 {notify}
                             </Popover>
