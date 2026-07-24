@@ -1,0 +1,147 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+.label {
+  color: var(--text-primary);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+}
+
+.selectWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 48px;
+  min-height: 48px;
+  padding: var(--space-sm) var(--space-md);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: var(--font-size-base);
+  text-align: left;
+  background: var(--input-bg);
+  border: 1px solid var(--text-caption);
+  border-radius: var(--radius-lg);
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.control:focus-within {
+  border-color: var(--text-link);
+  box-shadow: 0 0 0 3px rgb(80 136 38 / 15%);
+}
+
+.controlOpen {
+  position: relative;
+  z-index: 21;
+  border-bottom-color: var(--disabled);
+  border-radius: var(--space-sm);
+}
+
+.searchInput {
+  min-width: 0;
+  width: 100%;
+  color: var(--text-primary);
+  font: inherit;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  caret-color: var(--text-link);
+}
+
+.searchInput::placeholder {
+  color: var(--text-caption);
+}
+
+.iconButton {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin-left: var(--space-md);
+}
+
+.iconButton img {
+  width: 24px;
+  height: 24px;
+}
+
+.placeholder {
+  color: var(--text-caption);
+}
+
+.options {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% - 10px);
+  left: 0;
+  width: 100%;
+  max-height: 130px;
+  padding-top: 10px;
+  overflow-y: auto;
+  list-style: none;
+  background: var(--input-bg);
+  border: 1px solid var(--text-caption);
+  border-top: 0;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  scrollbar-color: #e4e8df transparent;
+  scrollbar-width: thin;
+}
+
+.options::-webkit-scrollbar {
+  width: 4px;
+}
+
+.options::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+  appearance: none;
+  background: transparent;
+}
+
+.options::-webkit-scrollbar-track {
+  margin: 8px 0;
+  background: transparent;
+}
+
+.options::-webkit-scrollbar-thumb {
+  background-color: #e4e8df;
+  border-radius: 2px;
+}
+
+.option {
+  width: 100%;
+  min-height: 40px;
+  padding: 8px var(--space-lg);
+  color: var(--text-primary);
+  line-height: 24px;
+  text-align: left;
+}
+
+.option:hover,
+.option:focus-visible,
+.optionSelected {
+  background: var(--button-hover);
+  outline: none;
+}
+
+.emptyOption {
+  min-height: 40px;
+  padding: 8px var(--space-md);
+  color: var(--text-caption);
+  line-height: 24px;
+}

@@ -2,6 +2,7 @@ import { forwardRef } from 'react';
 import styles from './Calendar.module.css';
 
 interface CustomInputProps {
+    id?: string;
     value?: string;
     onClick?: () => void;
     onChange?: React.ChangeEventHandler<HTMLInputElement>;
@@ -9,10 +10,11 @@ interface CustomInputProps {
 }
 
 export const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
-    ({ value, onClick, onChange, placeholder }, ref) => (
+    ({ id, value, onClick, onChange, placeholder }, ref) => (
         <div className={styles.inputWrapper}>
             <input
                 ref={ref}
+                id={id}
                 className={styles.calendarInput}
                 value={value}
                 onChange={onChange}

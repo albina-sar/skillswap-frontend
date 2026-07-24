@@ -1,5 +1,5 @@
 import styles from './UserMenu.module.css'
-import LogoutIcon from '@/shared/assets/icons/logout.svg?react'
+import LogoutIcon from '@/shared/assets/icons/Logout.svg?react'
 
 export const UserMenu = () => {
   return (

@@ -3,13 +3,11 @@
   border: none;
   padding: 0;
   cursor: pointer;
-  color: var(--text-caption);
+  color: var(--text-primary);
   transition: color 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
 }
 
 .button:hover {
