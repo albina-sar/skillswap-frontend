@@ -25,10 +25,6 @@
   margin: 0;
 }
 
-.seeAllButton {
-  border: none !important;
-}
-
 .content {
   margin-top: var(--space-sm);
   display: flex;

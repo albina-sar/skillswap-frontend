@@ -16,13 +16,7 @@ export const Section: React.FC<SectionProps> = ({
       <div className={styles.header}>
         <h2 className={styles.title}>{title}</h2>
         {showAllButton && (
-          <Button
-            variant="outline"
-            onClick={onSeeAll}
-            className={styles.seeAllButton}
-            image={<ArrowIcon />}
-            imagePosition="right"
-          >
+          <Button variant="white" onClick={onSeeAll} image={<ArrowIcon />} imagePosition="right">
             Смотреть все
           </Button>
         )}
