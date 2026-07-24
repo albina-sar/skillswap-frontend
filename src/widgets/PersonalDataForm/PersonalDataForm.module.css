@@ -1,0 +1,99 @@
+.form {
+  display: grid;
+  grid-template-columns: 460px 244px;
+  justify-content: space-between;
+  gap: 196px;
+  width: 100%;
+  max-width: 1020px;
+  padding: 60px;
+  color: var(--text-primary);
+  background: var(--card-bg);
+  border-radius: 24px;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.fields label {
+  font-size: var(--font-size-base);
+}
+
+.fields img {
+  width: 24px;
+  height: 24px;
+}
+
+.fields input[type='date']::-webkit-calendar-picker-indicator {
+  width: 24px;
+  height: 24px;
+}
+
+.fields input:not([role='combobox'], [type='file']) {
+  height: 48px;
+}
+
+.fields input:not([role='combobox'], [type='file']),
+.fields textarea {
+  border: 1px solid var(--text-caption);
+  border-radius: var(--radius-lg);
+}
+
+.passwordButton {
+  align-self: flex-start;
+  margin-top: -4px;
+  color: var(--text-link);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+}
+
+.calendarField {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.submitButton {
+  margin-top: var(--space-md);
+}
+
+.aboutField {
+  position: relative;
+}
+
+.aboutField textarea {
+  padding-right: var(--space-3xl);
+}
+
+.aboutEditIcon {
+  position: absolute;
+  right: var(--space-md);
+  bottom: 49px;
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+}
+
+.avatarControl {
+  align-self: start;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.avatarControl input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

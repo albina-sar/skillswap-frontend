@@ -1,4 +1,4 @@
-import {  useState } from 'react';
+import {  useEffect, useState } from 'react';
 import DataPicker from 'react-datepicker';
 import { registerLocale, setDefaultLocale } from "react-datepicker";
 import { ru } from "date-fns/locale/ru";
@@ -15,11 +15,17 @@ import { CalendarProps } from './types';
 registerLocale("ru", ru);
 setDefaultLocale("ru");
 
-export const Calendar = ({ onSubmit }: CalendarProps) => {
+export const Calendar = ({ id, value = null, onSubmit }: CalendarProps) => {
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-    const [visibleDate, setVisibleDate] = useState<Date | null>(null);
-    const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
+    const [selectedDate, setSelectedDate] = useState<Date | null>(value);
+    const [visibleDate, setVisibleDate] = useState<Date | null>(value);
+    const [currentMonth, setCurrentMonth] = useState((value ?? new Date()).getMonth());
+
+    useEffect(() => {
+        setSelectedDate(value);
+        setVisibleDate(value);
+        if (value) setCurrentMonth(value.getMonth());
+    }, [value]);
     
     const handleChange = (date: Date | null) => {
         setVisibleDate(date);
@@ -40,6 +46,7 @@ export const Calendar = ({ onSubmit }: CalendarProps) => {
 
     return (
         <DataPicker
+            id={id}
             open={isOpen}
             onInputClick={() => setIsOpen(true)}
             dateFormat="dd.MM.yyyy"
