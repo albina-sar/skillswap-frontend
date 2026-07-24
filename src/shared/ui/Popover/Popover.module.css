@@ -3,6 +3,10 @@
   display: inline-block;
 }
 
+.containerAnchored {
+  display: inline-block;
+}
+
 .trigger {
   background: none;
   border: none;
@@ -63,6 +67,16 @@
   right: 0;
 }
 
+.containerAnchored .placement-bottom-start,
+.containerAnchored .placement-top-start {
+  left: 36px;
+}
+
+.containerAnchored .placement-bottom-end,
+.containerAnchored .placement-top-end {
+  right: 36px;
+}
+
 /* Маленький попап: 260×152 (для меню пользователя) */
 .small {
   width: 260px;
@@ -81,7 +95,7 @@
 /* Большой попап: 1136×1040 (для категорий) */
 .large {
   width: 1040px;
-  min-height: 1136px;
+  max-height: min(1136px, 80vh);
   padding: 60px;
   overflow-y: auto;
 }

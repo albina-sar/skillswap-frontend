@@ -16,4 +16,5 @@ export interface PopoverProps {
   placement?: PopoverPlacement
   className?: string
   size?: PopoverSize
+  anchorToContainer?: boolean
 }

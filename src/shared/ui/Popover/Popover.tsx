@@ -10,6 +10,7 @@ export const Popover = ({
   placement = 'bottom-start',
   className = '',
   size = 'medium',
+  anchorToContainer = false,
 }: PopoverProps) => {
   const [uncontrolledIsOpen, setUncontrolledIsOpen] = useState(false)
   const isOpen = controlledIsOpen !== undefined ? controlledIsOpen : uncontrolledIsOpen
@@ -89,7 +90,10 @@ export const Popover = ({
     .join(' ')
 
   return (
-    <div className={styles.container} ref={containerRef}>
+    <div
+      className={anchorToContainer ? styles.containerAnchored : styles.container}
+      ref={containerRef}
+    >
       {triggerWithClick}
 
       {isOpen && (
