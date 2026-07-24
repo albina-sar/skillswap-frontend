@@ -1,0 +1,16 @@
+.layout {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.header {
+  width: 100%;
+  padding-block: var(--space-md);
+  background-color: var(--background-secondary);
+}
+
+.main {
+  width: 100%;
+  flex: 1;
+}
