@@ -30,6 +30,24 @@ export function SkillCard({ skill, isFavorite, onFavoriteClick }: SkillCardProps
   return (
     <>
       <Card className={styles.card}>
+        <div className={styles.actionsRow}>
+          <div className={styles.actions}>
+            <LikeButton
+              isLiked={isFavorite}
+              likeCount={skill.likesCount}
+              onToggle={onFavoriteClick}
+            />
+
+            <button type="button" className={styles.iconButton} aria-label="Поделиться">
+              <img src={shareIcon} alt="" />
+            </button>
+
+            <button type="button" className={styles.iconButton} aria-label="Дополнительное меню">
+              <img src={moreIcon} alt="" />
+            </button>
+          </div>
+        </div>
+
         <div className={styles.content}>
           <div className={styles.info}>
             <div className={styles.top}>
@@ -46,26 +64,6 @@ export function SkillCard({ skill, isFavorite, onFavoriteClick }: SkillCardProps
                       </>
                     )}
                   </p>
-                </div>
-
-                <div className={styles.actions}>
-                  <LikeButton
-                    isLiked={isFavorite}
-                    likeCount={skill.likesCount}
-                    onToggle={onFavoriteClick}
-                  />
-
-                  <button type="button" className={styles.iconButton} aria-label="Поделиться">
-                    <img src={shareIcon} alt="" />
-                  </button>
-
-                  <button
-                    type="button"
-                    className={styles.iconButton}
-                    aria-label="Дополнительное меню"
-                  >
-                    <img src={moreIcon} alt="" />
-                  </button>
                 </div>
               </div>
 
