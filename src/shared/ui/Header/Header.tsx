@@ -13,8 +13,9 @@ import { FavoriteButton } from "../favorite-button";
 import { NotificationButton } from "../notification-button";
 import { Button } from "../button/button";
 import { ProfileUIComponent } from "../profile/profile";
+import { Popover } from '../Popover';
 
-export const Header = ({ isAuth, user, onSearch }: HeaderProps) => {
+export const Header = ({ isAuth, user, onSearch, categories, notify }: HeaderProps) => {
     const navigate = useNavigate();
     const [query, setQuery] = useState<string>('');
     const [isSkillsOpen, setIsSkillsOpen] = useState<boolean>(false);
@@ -29,10 +30,6 @@ export const Header = ({ isAuth, user, onSearch }: HeaderProps) => {
         onSearch(debouncedQuery);
     }, [debouncedQuery, onSearch]);
 
-    const onSkillsClick = () => {
-        setIsSkillsOpen((prev) => !prev);
-    };
-
     const onBellClick = () => {
         setIsNotifyOpen((prev) => !prev)
     }
@@ -43,10 +40,19 @@ export const Header = ({ isAuth, user, onSearch }: HeaderProps) => {
             <nav>
                 <ul className={styles.navigation}>
                     <li><button className={styles.navButton}>О проекте</button></li>
-                    <li><button className={styles.navButton} onClick={onSkillsClick}>
-                        Все навыки
-                        <img src='src/shared/assets/icons/ChevronDown.svg' alt='Стрелка вниз' width={24} height={24}/>
-                        </button>
+                    <li><Popover
+                            trigger={
+                                <button className={styles.navButton}>
+                                Все навыки
+                                <img src='src/shared/assets/icons/ChevronDown.svg' alt='Стрелка вниз' width={24} height={24} />
+                                </button>
+                            }
+                            isOpen={isSkillsOpen}
+                            onOpenChange={setIsSkillsOpen}
+                            size='large'
+                        >
+                            {categories}
+                        </Popover>
                     </li>
                 </ul>
             </nav>
@@ -56,7 +62,14 @@ export const Header = ({ isAuth, user, onSearch }: HeaderProps) => {
                 {isAuth ? 
                     <div className={styles.authTrue}>
                         <div className={styles.quickActions}>
-                            <NotificationButton hasNotifications={false} onClick={onBellClick} />
+                            <Popover
+                                trigger={<NotificationButton hasNotifications={false} onClick={onBellClick} />}
+                                isOpen={isNotifyOpen}
+                                placement='bottom-end'
+                            >
+                                {notify}
+                            </Popover>
+                            
                             <FavoriteButton onClick={() => navigate(ROUTES.FAVORITES)} />
                         </div>
                         <ProfileUIComponent image={user.photo} name={user.name} />
@@ -68,11 +81,6 @@ export const Header = ({ isAuth, user, onSearch }: HeaderProps) => {
                     </div>
                 }
             </div>
-            {/* Тут будет код для открытия выпадающего окна с перечнем навыков
-            {isSkillsOpen && ...} */}
-
-            {/* Тут будет код для открытия выпадающего окна с уведомлениями
-            {isNotifyOpen && ...} */}
         </section>
     )
 }
