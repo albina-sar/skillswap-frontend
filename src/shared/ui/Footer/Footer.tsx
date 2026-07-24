@@ -1,7 +1,14 @@
 import { Logo } from '@/shared/ui/Logo'
+import { Popover } from '@/shared/ui/Popover'
+import { CategoryList } from '@/shared/ui/CategoryList'
+import { CATEGORIES_DATA } from '@/shared/lib/constants'
 import styles from './Footer.module.css'
 
 export function Footer() {
+  const handleCategoryClick = () => {}
+
+  const handleSubcategoryClick = () => {}
+
   return (
     <footer className={styles.footer}>
       <div className={styles.inner}>
@@ -16,9 +23,21 @@ export function Footer() {
             О проекте
           </button>
 
-          <button className={styles.link} type="button">
-            Все навыки
-          </button>
+          <Popover
+            trigger={
+              <button className={styles.link} type="button">
+                Все навыки
+              </button>
+            }
+            placement="top-start"
+            size="large"
+          >
+            <CategoryList
+              categories={CATEGORIES_DATA}
+              onCategoryClick={handleCategoryClick}
+              onSubcategoryClick={handleSubcategoryClick}
+            />
+          </Popover>
 
           <button className={styles.link} type="button">
             Контакты
