@@ -6,13 +6,13 @@
   height: 100%;
 }
 
-.header {
+.sectionHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.headerTitle {
+.sectionTitle {
   font-family: Jost, -apple-system, sans-serif;
   font-weight: 500;
   font-size: 24px;
@@ -22,7 +22,7 @@
   margin: 0;
 }
 
-.readAllButton {
+.linkButton {
   font-family: Roboto, -apple-system, sans-serif;
   font-weight: 500;
   font-size: 16px;
@@ -36,54 +36,14 @@
   transition: opacity 0.2s ease;
 }
 
-.readAllButton:hover {
+.linkButton:hover {
   opacity: 0.7;
 }
 
-.newSection {
+.notificationList {
   display: flex;
   flex-direction: column;
   gap: 32px;
-}
-
-.viewedSection {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-}
-
-.viewedHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.viewedTitle {
-  font-family: Jost, -apple-system, sans-serif;
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 28px;
-  letter-spacing: -0.011em;
-  color: var(--text-primary, #2D3328);
-  margin: 0;
-}
-
-.clearButton {
-  font-family: Roboto, -apple-system, sans-serif;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 24px;
-  letter-spacing: 0.02em;
-  color: #508826;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  transition: opacity 0.2s ease;
-}
-
-.clearButton:hover {
-  opacity: 0.7;
 }
 
 .card {
@@ -118,53 +78,31 @@
   gap: 12px;
 }
 
-.cardTitle {
+/* Базовые стили для текста в карточке */
+.cardText {
   font-family: Roboto, -apple-system, sans-serif;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
   letter-spacing: 0.02em;
+}
+
+.cardTitle {
   color: var(--text-primary, #2D3328);
 }
 
 .cardDate {
-  font-family: Roboto, -apple-system, sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  letter-spacing: 0.02em;
   color: var(--text-caption, #69735D);
   white-space: nowrap;
 }
 
 .cardDescription {
-  font-family: Roboto, -apple-system, sans-serif;
-  font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  letter-spacing: 0.02em;
   color: var(--text-caption, #69735D);
   margin: 0;
 }
 
 .actionButton {
-  width: 114px;
-  height: 48px;
-  padding: 12px 24px;
-  background: #ABD27A;
-  border: none;
-  border-radius: 12px;
-  font-family: Roboto, -apple-system, sans-serif;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 24px;
-  letter-spacing: 0.02em;
-  color: var(--text-primary, #2D3328);
-  cursor: pointer;
-  transition: background 0.2s ease;
-  margin-top: 4px;
-}
-
-.actionButton:hover {
-  background: #9BC26A;
+  align-self: flex-start;
 }

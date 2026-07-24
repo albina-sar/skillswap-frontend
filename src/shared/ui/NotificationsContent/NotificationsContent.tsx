@@ -1,24 +1,7 @@
+import { Button } from '@/shared/ui/button/button'
 import styles from './NotificationsContent.module.css'
+import type { NotificationsContentProps, NotificationItem } from './types'
 import LampIcon from '@/shared/assets/icons/VectorLamp.svg'
-
-interface NotificationItem {
-  id: string
-  senderName: string
-  title: string
-  description: string
-  date: string
-  type: 'new' | 'viewed'
-}
-
-interface NotificationsContentProps {
-  notifications: {
-    new: NotificationItem[]
-    viewed: NotificationItem[]
-  }
-  onAction?: (id: string) => void
-  onReadAll?: () => void
-  onClear?: () => void
-}
 
 export const NotificationsContent = ({
   notifications,
@@ -26,39 +9,45 @@ export const NotificationsContent = ({
   onReadAll,
   onClear,
 }: NotificationsContentProps) => {
+  // Фильтруем уведомления по isRead
+  const newNotifications = notifications.filter((n) => !n.isRead)
+  const viewedNotifications = notifications.filter((n) => n.isRead)
+
   return (
     <div className={styles.container}>
       {/* Заголовок: Новые уведомления */}
-      <div className={styles.header}>
-        <h2 className={styles.headerTitle}>Новые уведомления</h2>
-        <button className={styles.readAllButton} onClick={onReadAll}>
+      <div className={styles.sectionHeader}>
+        <h2 className={styles.sectionTitle}>Новые уведомления</h2>
+        <button className={styles.linkButton} onClick={onReadAll}>
           Прочитать все
         </button>
       </div>
 
       {/* Список новых уведомлений */}
-      <div className={styles.newSection}>
-        {notifications.new.map((item) => (
-          <NotificationCard
-            key={item.id}
-            item={item}
-            onAction={onAction}
-          />
-        ))}
-      </div>
+      {newNotifications.length > 0 && (
+        <div className={styles.notificationList}>
+          {newNotifications.map((item) => (
+            <NotificationCard
+              key={item.id}
+              item={item}
+              onAction={onAction}
+            />
+          ))}
+        </div>
+      )}
 
       {/* Просмотренные */}
-      {notifications.viewed.length > 0 && (
-        <div className={styles.viewedSection}>
-          <div className={styles.viewedHeader}>
-            <h3 className={styles.viewedTitle}>Просмотренные</h3>
-            <button className={styles.clearButton} onClick={onClear}>
+      {viewedNotifications.length > 0 && (
+        <>
+          <div className={styles.sectionHeader}>
+            <h3 className={styles.sectionTitle}>Просмотренные</h3>
+            <button className={styles.linkButton} onClick={onClear}>
               Очистить
             </button>
           </div>
 
-          <div className={styles.viewedList}>
-            {notifications.viewed.map((item) => (
+          <div className={styles.notificationList}>
+            {viewedNotifications.map((item) => (
               <NotificationCard
                 key={item.id}
                 item={item}
@@ -67,7 +56,7 @@ export const NotificationsContent = ({
               />
             ))}
           </div>
-        </div>
+        </>
       )}
     </div>
   )
@@ -93,13 +82,17 @@ const NotificationCard = ({ item, onAction, isViewed = false }: NotificationCard
             <span className={styles.cardDate}>{item.date}</span>
           </div>
           <p className={styles.cardDescription}>{item.description}</p>
-          {!isViewed && (
-            <button className={styles.actionButton} onClick={() => onAction?.(item.id)}>
-              Перейти
-            </button>
-          )}
         </div>
       </div>
+      {!isViewed && (
+        <Button
+          variant="primary"
+          className={styles.actionButton}
+          onClick={() => onAction?.(item.id)}
+        >
+          Перейти
+        </Button>
+      )}
     </div>
   )
 }
