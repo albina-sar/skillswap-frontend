@@ -1,0 +1,170 @@
+.form {
+  width: 436px;
+}
+
+.form label {
+  font-size: var(--font-size-base);
+}
+
+.socialButtons {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  margin: var(--space-xl) 0;
+}
+
+.divider::before,
+.divider::after {
+  height: 1px;
+  flex: 1;
+  background: var(--disabled);
+  content: '';
+}
+
+.field {
+  position: relative;
+}
+
+.passwordField {
+  margin-top: var(--space-md);
+}
+
+.label {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--text-primary);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+}
+
+.errorSlot {
+  margin-top: 4px;
+  color: var(--error);
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.field:not(:has([role='alert'])) .errorSlot:not(.successMessage) {
+  color: var(--text-primary);
+}
+
+.field .successMessage {
+  color: var(--text-primary);
+}
+
+.inputError input,
+.calendarError input,
+.comboboxError button {
+  border-color: var(--error);
+}
+
+.singleButton {
+  margin-top: 20px;
+}
+
+.avatarUpload {
+  display: block;
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 16px;
+  cursor: pointer;
+}
+
+.avatarUpload input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+.twoColumns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+}
+
+.checkboxSelect {
+  position: relative;
+}
+
+.selectControl {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 48px;
+  padding: var(--space-sm) var(--space-md);
+  overflow: hidden;
+  color: var(--text-primary);
+  font-size: var(--font-size-base);
+  text-align: left;
+  background: var(--input-bg);
+  border: 1px solid var(--text-caption);
+  border-radius: var(--radius-lg);
+}
+
+.selectControl span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.invalidControl {
+  border-color: var(--error);
+}
+
+.placeholder {
+  color: var(--text-caption);
+}
+
+.chevron {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  margin-left: var(--space-md);
+  transition: transform 0.2s;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.checkboxOptions {
+  position: absolute;
+  z-index: 30;
+  top: calc(100% + 4px);
+  left: 0;
+  width: 100%;
+  padding: var(--space-xs) var(--space-md);
+  list-style: none;
+  background: var(--input-bg);
+  border: 1px solid var(--text-caption);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.checkboxOptions li {
+  min-height: 40px;
+  padding: var(--space-xs) 0;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  margin-top: 12px;
+}
+
+.imageUpload {
+  width: 100%;
+}
+
+.imageUpload + * {
+  margin-top: 0;
+}

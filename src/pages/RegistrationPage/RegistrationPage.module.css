@@ -1,0 +1,70 @@
+.page {
+  min-height: 100vh;
+  padding: 40px 36px;
+  background: var(--background-main);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.closeButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 147px;
+  height: 48px;
+  padding: var(--space-sm) var(--space-xl);
+  gap: var(--space-xs);
+  color: var(--text-primary);
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+  background: var(--input-bg);
+  border-radius: var(--radius-lg);
+}
+
+.closeButton:hover {
+  background: var(--button-hover);
+}
+
+.closeButton img {
+  width: 24px;
+  height: 24px;
+}
+
+.progress {
+  display: flex;
+  justify-content: center;
+  margin-top: -1px;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 1136px;
+  margin: 32px auto 0;
+  gap: 24px;
+}
+
+.formCard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 692px;
+  padding: 50px 60px;
+}
+
+.content .welcomeCard {
+  align-self: stretch;
+  height: auto;
+  min-height: 692px;
+  max-width: 100%;
+}
+
+.success {
+  color: var(--text-primary);
+  font-size: var(--font-size-xl);
+  text-align: center;
+}
