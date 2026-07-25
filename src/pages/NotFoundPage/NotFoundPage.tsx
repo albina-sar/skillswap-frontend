@@ -42,8 +42,6 @@ export const NotFoundPage: React.FC<NotFoundPageProps> = ({ errorCode }) => {
 
   return (
     <div className={styles.page}>
-      <header className={styles.header}>Header</header>
-
       <main className={styles.main}>
         <div className={styles.content}>
           <div className={styles.illustration}>
@@ -63,8 +61,6 @@ export const NotFoundPage: React.FC<NotFoundPageProps> = ({ errorCode }) => {
           </div>
         </div>
       </main>
-
-      <footer className={styles.footer}>Footer</footer>
     </div>
   )
 }
