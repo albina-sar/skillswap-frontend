@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import { Button } from '@/shared/ui/button/button'
 import styles from './NotificationsContent.module.css'
 import type { NotificationsContentProps, NotificationItem } from './types'
@@ -76,12 +77,12 @@ const NotificationCard = ({ item, onAction, isViewed = false }: NotificationCard
         <img src={LampIcon} alt="" className={styles.cardIcon} width={40} height={40} />
         <div className={styles.cardTextWrapper}>
           <div className={styles.cardHeader}>
-            <span className={styles.cardTitle}>
+            <span className={clsx(styles.cardText, styles.cardTitle)}>
               {item.senderName} {item.title}
             </span>
-            <span className={styles.cardDate}>{item.date}</span>
+            <span className={clsx(styles.cardText, styles.cardDate)}>{item.date}</span>
           </div>
-          <p className={styles.cardDescription}>{item.description}</p>
+          <p className={clsx(styles.cardText, styles.cardDescription)}>{item.description}</p>
         </div>
       </div>
       {!isViewed && (

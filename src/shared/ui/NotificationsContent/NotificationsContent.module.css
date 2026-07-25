@@ -99,7 +99,7 @@
 .cardDescription {
   font-size: 12px;
   line-height: 16px;
-  color: var(--text-caption, #69735D);
+  color: var(--text-primary, #2D3328);
   margin: 0;
 }
 
