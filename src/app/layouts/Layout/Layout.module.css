@@ -7,7 +7,7 @@
 .header {
   width: 100%;
   padding-block: var(--space-md);
-  background-color: var(--background-secondary);
+  background-color: var(--background-main);
 }
 
 .main {
