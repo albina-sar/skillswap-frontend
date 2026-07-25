@@ -6,6 +6,8 @@ import { LikeButton } from '../likeButton'
 import { ImageGalleryUI } from '@/shared/ui/imageGallery/imageGallery'
 import { ModalExchangeSuggestion } from '@/shared/ui/ModalExchangeSuggestion'
 import { CATEGORIES_DATA } from '@/shared/lib/constants'
+import { getAuthUser } from '@/features/auth/model/authUtils'
+import { useSwapRequest } from '@/features/requests'
 
 import type { SkillCardProps } from './types'
 
@@ -16,6 +18,12 @@ import moreIcon from '@/shared/assets/icons/more-square.svg'
 
 export function SkillCard({ skill, isFavorite, onFavoriteClick }: SkillCardProps) {
   const [isModalOpened, setIsModalOpened] = useState(false)
+  const currentUserId = getAuthUser()?.id ?? 'current-user'
+  const { isProposed, proposeExchange } = useSwapRequest({
+    skillId: skill.id,
+    fromUserId: currentUserId,
+    toUserId: skill.authorId,
+  })
 
   const category = useMemo(
     () => CATEGORIES_DATA.find((item) => item.id === skill.categoryId),
@@ -73,10 +81,14 @@ export function SkillCard({ skill, isFavorite, onFavoriteClick }: SkillCardProps
             <Button
               variant="primary"
               size="large"
-              onClick={() => setIsModalOpened(true)}
+              disabled={isProposed}
+              onClick={() => {
+                proposeExchange()
+                setIsModalOpened(true)
+              }}
               className={styles.exchangeButton}
             >
-              Предложить обмен
+              {isProposed ? 'Обмен предложен' : 'Предложить обмен'}
             </Button>
           </div>
 
