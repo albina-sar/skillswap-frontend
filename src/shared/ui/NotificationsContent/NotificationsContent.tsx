@@ -25,7 +25,7 @@ export const NotificationsContent = ({
       </div>
 
       {/* Список новых уведомлений */}
-      {newNotifications.length > 0 && (
+      {newNotifications.length > 0 ? (
         <div className={styles.notificationList}>
           {newNotifications.map((item) => (
             <NotificationCard
@@ -35,29 +35,31 @@ export const NotificationsContent = ({
             />
           ))}
         </div>
+      ) : (
+        <p className={styles.emptyState}>Новых уведомлений нет</p>
       )}
 
       {/* Просмотренные */}
-      {viewedNotifications.length > 0 && (
-        <>
-          <div className={styles.sectionHeader}>
-            <h3 className={styles.sectionTitle}>Просмотренные</h3>
-            <button className={styles.linkButton} onClick={onClear}>
-              Очистить
-            </button>
-          </div>
+      <div className={styles.sectionHeader}>
+        <h3 className={styles.sectionTitle}>Просмотренные</h3>
+        <button className={styles.linkButton} onClick={onClear}>
+          Очистить
+        </button>
+      </div>
 
-          <div className={styles.notificationList}>
-            {viewedNotifications.map((item) => (
-              <NotificationCard
-                key={item.id}
-                item={item}
-                onAction={onAction}
-                isViewed
-              />
-            ))}
-          </div>
-        </>
+      {viewedNotifications.length > 0 ? (
+        <div className={styles.notificationList}>
+          {viewedNotifications.map((item) => (
+            <NotificationCard
+              key={item.id}
+              item={item}
+              onAction={onAction}
+              isViewed
+            />
+          ))}
+        </div>
+      ) : (
+        <p className={styles.emptyState}>Просмотренных уведомлений нет</p>
       )}
     </div>
   )
