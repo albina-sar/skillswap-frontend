@@ -7,6 +7,7 @@ interface CreateRequestParams {
   skillId: string
   fromUserId: string
   toUserId: string
+  senderName: string
   recipientName?: string
 }
 
@@ -40,14 +41,16 @@ function addNotification(notification: Notification): void {
 function makeNotification(
   request: SwapRequest,
   userId: string,
-  text: string,
+  title: string,
+  description: string,
   createdAt: string,
 ): Notification {
   return {
     id: createId('notification'),
     userId,
     requestId: request.id,
-    text,
+    title,
+    description,
     isRead: false,
     createdAt,
   }
@@ -64,7 +67,13 @@ export function hasRequestForSkill(skillId: string, fromUserId: string): boolean
 }
 
 export function createSwapRequest(
-  { skillId, fromUserId, toUserId, recipientName = 'Пользователь' }: CreateRequestParams,
+  {
+    skillId,
+    fromUserId,
+    toUserId,
+    senderName,
+    recipientName = 'Пользователь',
+  }: CreateRequestParams,
   random: () => number = Math.random,
 ): SwapRequest {
   const requests = getSwapRequests()
@@ -87,7 +96,13 @@ export function createSwapRequest(
 
   saveRequests([...requests, pendingRequest])
   addNotification(
-    makeNotification(pendingRequest, toUserId, 'Вам предложили обмен навыками', createdAt),
+    makeNotification(
+      pendingRequest,
+      toUserId,
+      `${senderName} предлагает вам обмен`,
+      'Примите обмен, чтобы обсудить детали',
+      createdAt,
+    ),
   )
 
   const status: RequestStatus = random() < 0.5 ? 'accepted' : 'rejected'
@@ -102,6 +117,9 @@ export function createSwapRequest(
       status === 'accepted'
         ? `${recipientName} принял ваш обмен`
         : `${recipientName} отклонил ваш обмен`,
+      status === 'accepted'
+        ? 'Перейдите в профиль, чтобы обсудить детали'
+        : 'Вы можете предложить обмен другому пользователю',
       updatedAt,
     ),
   )

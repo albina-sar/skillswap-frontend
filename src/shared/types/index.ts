@@ -43,7 +43,8 @@ export interface Notification {
   id: string
   userId: string
   requestId: string
-  text: string
+  title: string
+  description: string
   isRead: boolean
   createdAt: string
 }

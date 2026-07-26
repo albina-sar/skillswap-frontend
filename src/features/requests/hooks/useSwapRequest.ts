@@ -10,6 +10,7 @@ interface UseSwapRequestParams {
   skillId: string
   fromUserId: string
   toUserId: string
+  senderName: string
   recipientName?: string
 }
 

@@ -1,11 +1,13 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 
+import { fetchUserById } from '@/api/users'
 import { Card } from '@/shared/ui/Card/Card'
 import { Button } from '@/shared/ui/button/button'
 import { LikeButton } from '../likeButton'
 import { ImageGalleryUI } from '@/shared/ui/imageGallery/imageGallery'
 import { ModalExchangeSuggestion } from '@/shared/ui/ModalExchangeSuggestion'
-import { CATEGORIES_DATA } from '@/shared/lib/constants'
+import { CATEGORIES_DATA, ROUTES } from '@/shared/lib/constants'
 import { getAuthUser } from '@/features/auth/model/authUtils'
 import { useSwapRequest } from '@/features/requests'
 
@@ -17,13 +19,36 @@ import shareIcon from '@/shared/assets/icons/share.svg'
 import moreIcon from '@/shared/assets/icons/more-square.svg'
 
 export function SkillCard({ skill, isFavorite, onFavoriteClick }: SkillCardProps) {
+  const navigate = useNavigate()
+  const location = useLocation()
   const [isModalOpened, setIsModalOpened] = useState(false)
-  const currentUserId = getAuthUser()?.id ?? 'current-user'
+  const [recipientName, setRecipientName] = useState('Пользователь')
+  const [isRecipientLoading, setIsRecipientLoading] = useState(true)
+  const authUser = getAuthUser()
   const { isProposed, proposeExchange } = useSwapRequest({
     skillId: skill.id,
-    fromUserId: currentUserId,
+    fromUserId: authUser?.id ?? '',
     toUserId: skill.authorId,
+    senderName: authUser?.name ?? 'Пользователь',
+    recipientName,
   })
+
+  useEffect(() => {
+    let isActive = true
+
+    void fetchUserById(skill.authorId)
+      .then((user) => {
+        if (isActive && user) setRecipientName(user.name)
+      })
+      .catch(() => undefined)
+      .finally(() => {
+        if (isActive) setIsRecipientLoading(false)
+      })
+
+    return () => {
+      isActive = false
+    }
+  }, [skill.authorId])
 
   const category = useMemo(
     () => CATEGORIES_DATA.find((item) => item.id === skill.categoryId),
@@ -81,8 +106,15 @@ export function SkillCard({ skill, isFavorite, onFavoriteClick }: SkillCardProps
             <Button
               variant="primary"
               size="large"
-              disabled={isProposed}
+              disabled={isProposed || isRecipientLoading}
               onClick={() => {
+                if (!authUser) {
+                  navigate(ROUTES.LOGIN, {
+                    state: { from: `${location.pathname}${location.search}` },
+                  })
+                  return
+                }
+
                 proposeExchange()
                 setIsModalOpened(true)
               }}
