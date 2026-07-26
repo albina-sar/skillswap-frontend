@@ -1,7 +1,8 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { AuthUser } from '@/shared/types';
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { AuthUser } from './types';
 import { getAuthUser, saveAuthUser, clearAuthUser } from '@/features/auth/model/authUtils';
 import type { RootState } from '@/store';
+import { loginWithCredentials } from '@/features/account/model/accountUtils';
 
 interface IAuthState {
     isAuth: boolean;
@@ -44,7 +45,7 @@ export const saveUser = createAsyncThunk<AuthUser, AuthUser, {rejectValue: strin
         }
         return userData;
     }
-)
+);
 
 export const clearUser = createAsyncThunk<void, void, { rejectValue: string }>(
     'auth/clearUser',
@@ -56,6 +57,19 @@ export const clearUser = createAsyncThunk<void, void, { rejectValue: string }>(
         }
     }
 );
+
+export const loginUser = createAsyncThunk<
+  AuthUser,
+  { email: string; password: string },
+  { rejectValue: string }
+>('auth/loginUser', ({ email, password }, { rejectWithValue }) => {
+  try {
+    const account = loginWithCredentials(email, password)
+    return saveAuthUser({ id: account.id, name: account.name, email: account.email })
+  } catch (loginError) {
+    return rejectWithValue(loginError instanceof Error ? loginError.message : 'Ошибка входа')
+  }
+});
 
 export const authSlice = createSlice({
     name: 'auth',
@@ -81,23 +95,6 @@ export const authSlice = createSlice({
                 state.error = action.payload ?? 'Неизвестная ошибка';
             })
 
-            .addCase(saveUser.pending, (state) => {
-                state.isLoading = true;
-                state.error = null;
-            })
-            .addCase(saveUser.fulfilled, (state, action) => {
-                state.isLoading = false;
-                state.isAuth = true;
-                state.isAuthChecked = true;
-                state.userData = action.payload;
-            })
-            .addCase(saveUser.rejected, (state, action) => {
-                state.isLoading = false;
-                state.isAuth = false;
-                state.isAuthChecked = true;
-                state.error = action.payload ?? 'Неизвестная ошибка';
-            })
-
             .addCase(clearUser.pending, (state) => {
                 state.isLoading = true;
                 state.error = null;
@@ -112,8 +109,41 @@ export const authSlice = createSlice({
                 state.isLoading = false;
                 state.error = action.payload ?? 'Неизвестная ошибка';
             })
+
+            // saveUser и loginUser ведут себя одинаково при pending/fulfilled/rejected, поэтому можно объединить
+            .addMatcher(
+                (action) =>
+                    action.type === saveUser.pending.type ||
+                    action.type === loginUser.pending.type,
+                (state) => {
+                    state.isLoading = true;
+                    state.error = null;
+                }
+            )
+            .addMatcher(
+                (action): action is PayloadAction<AuthUser> =>
+                    action.type === saveUser.fulfilled.type ||
+                    action.type === loginUser.fulfilled.type,
+                (state, action) => {
+                    state.isLoading = false;
+                    state.isAuth = true;
+                    state.isAuthChecked = true;
+                    state.userData = action.payload;
+                }
+            )
+            .addMatcher(
+                (action): action is PayloadAction<string | undefined> =>
+                    action.type === saveUser.rejected.type ||
+                    action.type === loginUser.rejected.type,
+                (state, action) => {
+                    state.isLoading = false;
+                    state.isAuth = false;
+                    state.isAuthChecked = true;
+                    state.error = action.payload ?? 'Неизвестная ошибка';
+                }
+            )
     }
-})
+});
 
 export const selectIsAuth = (state: RootState) => state.auth.isAuth;
 export const selectIsAuthChecked = (state: RootState) => state.auth.isAuthChecked;
