@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import type { UserAccount } from './types';
+import type { UserAccount, Profile } from './types';
 import {
   saveAccount,
   getProfile,
@@ -7,8 +7,6 @@ import {
   changePassword as changePasswordUtil,
 } from '@/features/account/model/accountUtils';
 import type { RootState } from '@/store';
-
-type Profile = Omit<UserAccount, 'password'>;
 
 interface IAccountState {
   profile: Profile | null

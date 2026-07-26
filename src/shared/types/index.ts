@@ -52,6 +52,8 @@ export interface UserAccount extends User {
   password: string
 }
 
+export type Profile = Omit<UserAccount, 'password'>
+
 // ─── City ────────────────────────────────────────────────
 export type City = {
   id: string
