@@ -2,7 +2,7 @@ import { Card } from '@/shared/ui/Card'
 import { AvatarUI } from '@/shared/ui/avatar'
 import { Button } from '../button/button'
 import { Tag } from '@/shared/ui/Tag'
-import { LikeButton } from '@/shared/ui/likeButton'
+import { SkillLikeButton } from '@/features/like'
 import type { Skill, Subcategory, User } from '@/shared/types'
 import { OverflowTags } from '@/shared/ui/OverflowTags'
 
@@ -13,9 +13,6 @@ interface UserCardProps {
   teachSkill: Skill
   learnSkills: Subcategory[]
   variant?: 'catalog' | 'skill'
-  likesCount?: number
-  isLiked?: boolean
-  onLikeToggle?: () => void
   onDetailsClick?: () => void
 }
 
@@ -70,9 +67,6 @@ export function UserCard({
   teachSkill,
   learnSkills,
   variant = 'catalog',
-  likesCount = 0,
-  isLiked = false,
-  onLikeToggle = () => {},
   onDetailsClick,
 }: UserCardProps) {
   const age = getAge(user.dateOfBirth)
@@ -96,7 +90,7 @@ export function UserCard({
 
         {variant === 'catalog' && (
           <div className={styles.like}>
-            <LikeButton isLiked={isLiked} likeCount={likesCount} onToggle={onLikeToggle} />
+            <SkillLikeButton skillId={teachSkill.id} baseLikeCount={teachSkill.likesCount} />
           </div>
         )}
       </header>
