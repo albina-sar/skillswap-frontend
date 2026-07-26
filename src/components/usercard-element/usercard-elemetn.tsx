@@ -1,18 +1,17 @@
-import { loadSkills, selectSkills } from "@/entities/skill/model/skillsSlice";
-import { fetchUsersThunk, selectUsers } from "@/entities/user/model/usersSlice";
+import { selectSkills } from "@/entities/skill/model/skillsSlice";
+import { selectUsers } from "@/entities/user/model/usersSlice";
 import { CATEGORIES_DATA } from "@/shared/lib/constants";
 import { Skill, Subcategory, User } from "@/shared/types";
 import { UserCard } from "@/shared/ui/UserCard";
-import { AppDispatch } from "@/store";
-import { FC, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { FC } from "react";
+import { useSelector } from "react-redux";
 
 interface UserCardElementProps {
   authorid: string;
 }
 
 export const UserCardElement: FC<UserCardElementProps> = ({authorid}) => {
-  const dispatch: AppDispatch = useDispatch();
+
   const skills = useSelector(selectSkills) as Skill[];
   const users = useSelector(selectUsers) as User[];
 
