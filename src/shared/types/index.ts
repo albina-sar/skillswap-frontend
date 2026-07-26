@@ -46,6 +46,12 @@ export interface AuthUser {
   token: string
 }
 
+// ─── Account ─────────────────────────────────────────────
+export interface UserAccount extends User {
+  email: string
+  password: string
+}
+
 // ─── City ────────────────────────────────────────────────
 export type City = {
   id: string
