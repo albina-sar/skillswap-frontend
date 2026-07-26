@@ -9,12 +9,14 @@ export const Section: React.FC<SectionProps> = ({
   title,
   showAllButton = false,
   onSeeAll,
+  titleClassName,
+  className,
   children,
 }) => {
   return (
-    <section className={clsx(styles.section)}>
+    <section className={clsx(styles.section, className)}>
       <div className={styles.header}>
-        <h2 className={styles.title}>{title}</h2>
+        <h2 className={clsx(styles.title, titleClassName)}>{title}</h2>
         {showAllButton && (
           <Button variant="white" onClick={onSeeAll} image={<ArrowIcon />} imagePosition="right">
             Смотреть все
