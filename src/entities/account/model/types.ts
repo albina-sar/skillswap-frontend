@@ -1,0 +1,1 @@
+export type { UserAccount } from '@/shared/types'
