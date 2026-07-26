@@ -4,17 +4,6 @@
   flex-direction: column;
 }
 
-.header {
-  height: 60px;
-  background: var(--background-secondary);
-  border-bottom: 1px solid var(--text-disabled);
-  display: flex;
-  align-items: center;
-  padding: 0 var(--space-lg);
-  color: var(--text-primary);
-  flex-shrink: 0;
-}
-
 .main {
   flex: 1;
   display: flex;
@@ -60,15 +49,4 @@
   button {
     inline-size: 218px;
   }
-}
-
-.footer {
-  height: 60px;
-  background: var(--background-secondary);
-  border-top: 1px solid var(--text-disabled);
-  display: flex;
-  align-items: center;
-  padding: 0 var(--space-lg);
-  color: var(--text-primary);
-  flex-shrink: 0;
 }

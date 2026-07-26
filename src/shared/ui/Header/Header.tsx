@@ -15,7 +15,7 @@ import { Button } from "../button/button";
 import { ProfileUIComponent } from "../profile/profile";
 import { Popover } from '../Popover';
 
-export const Header = ({ isAuth, user, onSearch, categories, notify }: HeaderProps) => {
+export const Header = ({ isAuth, user, onSearch, categories, notify, hasNotifications = false }: HeaderProps) => {
     const navigate = useNavigate();
     const [query, setQuery] = useState<string>('');
     const [isSkillsOpen, setIsSkillsOpen] = useState<boolean>(false);
@@ -60,7 +60,7 @@ export const Header = ({ isAuth, user, onSearch, categories, notify }: HeaderPro
                     <div className={styles.authTrue}>
                         <div className={styles.quickActions}>
                             <Popover
-                                trigger={<NotificationButton hasNotifications={false} />}
+                                trigger={<NotificationButton hasNotifications={hasNotifications} />}
                                 isOpen={isNotifyOpen}
                                 onOpenChange={setIsNotifyOpen}
                                 placement='bottom-end'

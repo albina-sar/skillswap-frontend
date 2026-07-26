@@ -1,0 +1,117 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 100%;
+  height: 100%;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sectionTitle {
+  font-family: Jost, -apple-system, sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
+  letter-spacing: -0.011em;
+  color: var(--text-primary, #2D3328);
+  margin: 0;
+}
+
+.linkButton {
+  font-family: Roboto, -apple-system, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.02em;
+  color: #508826;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: opacity 0.2s ease;
+}
+
+.linkButton:hover {
+  opacity: 0.7;
+}
+
+.notificationList {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cardContent {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.cardIcon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+}
+
+.cardTextWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Базовые стили для текста в карточке */
+.cardText {
+  font-family: Roboto, -apple-system, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.02em;
+}
+
+.cardTitle {
+  color: var(--text-primary, #2D3328);
+}
+
+.cardDate {
+  color: var(--text-caption, #69735D);
+  white-space: nowrap;
+}
+
+.cardDescription {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-primary, #2D3328);
+  margin: 0;
+}
+
+.emptyState {
+  font-family: Roboto, -apple-system, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.02em;
+  color: var(--text-caption, #69735D);
+  margin: 0;
+}
+
+.actionButton {
+  align-self: flex-start;
+}
