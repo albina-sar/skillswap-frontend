@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
-import { fetchSkillById, fetchSkills } from '@/api/skills'
+import { fetchSkillById } from '@/api/skills'
 import { fetchUsers } from '@/api/users'
 
 import { CATEGORIES_DATA } from '@/shared/lib/constants'
@@ -27,7 +27,6 @@ export default function SkillPage() {
 
   const [skill, setSkill] = useState<Skill | null>(null)
   const [users, setUsers] = useState<User[]>([])
-  const [skills, setSkills] = useState<Skill[]>([])
 
   useEffect(() => {
     if (!id) return
@@ -35,16 +34,11 @@ export default function SkillPage() {
     const skillId = id
 
     async function loadData() {
-      const [currentSkill, allSkills, allUsers] = await Promise.all([
-        fetchSkillById(skillId),
-        fetchSkills(),
-        fetchUsers(),
-      ])
+      const [currentSkill, allUsers] = await Promise.all([fetchSkillById(skillId), fetchUsers()])
 
       if (!currentSkill) return
 
       setSkill(currentSkill)
-      setSkills(allSkills)
       setUsers(allUsers)
     }
 
@@ -62,14 +56,6 @@ export default function SkillPage() {
 
     return getLearnSkills(currentUser)
   }, [currentUser])
-
-  const similarSkills = useMemo(() => {
-    if (!skill) return []
-
-    return skills.filter(
-      (item) => item.id !== skill.id && item.subcategoryId === skill.subcategoryId,
-    )
-  }, [skill, skills])
 
   if (!skill || !currentUser) {
     return <p>Загрузка...</p>
@@ -94,22 +80,7 @@ export default function SkillPage() {
           className={styles.section}
           titleClassName={styles.sectionTitle}
         >
-          <div className={styles.similarSkills}>
-            {similarSkills.map((similarSkill) => {
-              const similarUser = users.find((user) => user.id === similarSkill.authorId)
-
-              if (!similarUser) return null
-
-              return (
-                <UserCard
-                  key={similarSkill.id}
-                  user={similarUser}
-                  teachSkill={similarSkill}
-                  learnSkills={getLearnSkills(similarUser)}
-                />
-              )
-            })}
-          </div>
+          <div className={styles.similarSkills} />
         </Section>
       </div>
     </main>
