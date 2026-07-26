@@ -14,10 +14,19 @@ import {
 } from '../../features/filters/model/filterGroups'
 import { Card } from '../../shared/ui/Card'
 import { CATEGORIES_DATA, MOCK_CITIES } from '../../shared/lib/constants'
+import type { Subcategory } from '../../shared/types'
 import styles from './CatalogPage.module.css'
 
 const categoriesMap = new Map(CATEGORIES_DATA.map((cat) => [cat.id, cat]))
 const citiesMap = new Map(MOCK_CITIES.map((city) => [city.id, city.name]))
+
+// Создаём мапу всех подкатегорий
+const allSubcategoriesMap = new Map<string, Subcategory & { categoryId: string }>()
+CATEGORIES_DATA.forEach((category) => {
+  category.subcategories.forEach((subcat) => {
+    allSubcategoriesMap.set(subcat.id, { ...subcat, categoryId: category.id })
+  })
+})
 
 export default function CatalogPage() {
   const dispatch = useAppDispatch()
@@ -52,15 +61,27 @@ export default function CatalogPage() {
 
       // Фильтр по категориям/подкатегориям
       if (Array.isArray(filters.skills) && filters.skills.length > 0) {
-        const hasMatchingCategory =
-          filters.skills.includes(skill.categoryId) || filters.skills.includes(skill.subcategoryId)
-        if (!hasMatchingCategory) return false
+        const selectedCategoryIds = filters.skills
+
+        // Проверяем categoryId и subcategoryId навыка
+        const skillMatchesCategory =
+          selectedCategoryIds.includes(skill.categoryId) ||
+          selectedCategoryIds.includes(skill.subcategoryId)
+
+        // Проверяем wantsToLearn пользователя (это массив ID подкатегорий)
+        const userWantsToLearnMatches = author?.wantsToLearn?.some(
+          (
+            subcatId: string,
+          ) => selectedCategoryIds.includes(subcatId),
+        )
+
+        // Показываем навык, если совпадает ИЛИ категория навыка, ИЛИ wantsToLearn автора
+        if (!skillMatchesCategory && !userWantsToLearnMatches) return false
       }
 
       // Фильтр по полу автора
       const normalizedGender =
         author?.gender === 'мужской' ? 'male' : author?.gender === 'женский' ? 'female' : 'any'
-
       if (filters.gender !== 'any' && normalizedGender !== filters.gender) return false
 
       // Фильтр по городу (сравниваем названия городов)
@@ -103,13 +124,27 @@ export default function CatalogPage() {
             filteredSkills.map((skill) => {
               const author = usersMap.get(skill.authorId)
               const category = categoriesMap.get(skill.categoryId)
+              const subcategory = allSubcategoriesMap.get(skill.subcategoryId)
               const skillLearningType = (skill as any).learningType ?? 'any'
+
+              // Собираем информацию о подкатегориях, которые пользователь хочет изучить
+              const wantsToLearnDetails = author?.wantsToLearn
+                ?.map((subcatId: string) => allSubcategoriesMap.get(subcatId))
+                .filter(Boolean) as (Subcategory & { categoryId: string })[] | undefined
 
               return (
                 <Card key={skill.id} className={styles.skillCard}>
                   <h3>{skill.title}</h3>
                   <p>Тип: {skillLearningType === 'learn' ? 'Хочу научиться' : 'Могу научить'}</p>
                   <p>Категория: {category?.name || skill.categoryId}</p>
+                  <p>Подкатегория: {subcategory?.name || skill.subcategoryId}</p>
+
+                  {wantsToLearnDetails && wantsToLearnDetails.length > 0 && (
+                    <p>
+                      Хочет изучить: {wantsToLearnDetails.map((subcat) => subcat.name).join(', ')}
+                    </p>
+                  )}
+
                   <p>
                     Автор:{' '}
                     {author?.gender === 'male'
