@@ -36,9 +36,9 @@ export const getUserData = createAsyncThunk<AuthUser, void, { rejectValue: strin
   }
 );
 
-export const saveUser = createAsyncThunk<AuthUser, AuthUser, {rejectValue: string }>(
+export const saveUser = createAsyncThunk<AuthUser, Omit<AuthUser, 'token'>, {rejectValue: string }>(
     'auth/saveUser',
-    async ({id, name, email }: AuthUser, { rejectWithValue }) => {
+    async ({id, name, email }, { rejectWithValue }) => {
         const userData = await saveAuthUser({id, name, email});
         if (!userData) {
             return rejectWithValue('Ошибка сохранения данных пользователя');
