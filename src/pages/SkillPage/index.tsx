@@ -66,7 +66,9 @@ export default function SkillPage() {
   const similarSkills = useMemo(() => {
     if (!skill) return []
 
-    return skills.filter((item) => item.id !== skill.id).slice(0, 4)
+    return skills.filter(
+      (item) => item.id !== skill.id && item.subcategoryId === skill.subcategoryId,
+    )
   }, [skill, skills])
 
   if (!skill || !currentUser) {
