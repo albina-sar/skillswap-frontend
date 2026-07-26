@@ -8,9 +8,10 @@ import { useSelector } from "react-redux";
 
 interface UserCardElementProps {
   authorid: string;
+  variant?: 'catalog' | 'skill';
 }
 
-export const UserCardElement: FC<UserCardElementProps> = ({authorid}) => {
+export const UserCardElement: FC<UserCardElementProps> = ({authorid, variant}) => {
 
   const skills = useSelector(selectSkills) as Skill[];
   const users = useSelector(selectUsers) as User[];
@@ -44,6 +45,6 @@ export const UserCardElement: FC<UserCardElementProps> = ({authorid}) => {
   }
 
   return (
-    <UserCard user={getedUser} teachSkill={getTeachSkill} learnSkills={getLearnSkills} onDetailsClick={handleclick} />
+    <UserCard user={getedUser} teachSkill={getTeachSkill} learnSkills={getLearnSkills} onDetailsClick={handleclick} variant={variant} />
   )
 }
