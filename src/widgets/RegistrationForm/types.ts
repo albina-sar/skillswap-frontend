@@ -1,21 +1,23 @@
+import type { AuthUser, Skill, User } from '@/shared/types'
+
 export type RegistrationStep = 1 | 2 | 3
 
-export interface RegistrationFormValues {
-  email: string
+type RegistrationProfileFields = Pick<User, 'name' | 'dateOfBirth' | 'gender' | 'city'>
+type RegistrationAuthFields = Pick<AuthUser, 'email'> & {
   password: string
-  name: string
-  dateOfBirth: string
-  gender: string
-  city: string
-  learningCategoryIds: string[]
-  learningSubcategoryIds: string[]
-  skillTitle: string
-  teachingCategoryIds: string[]
-  teachingSubcategoryIds: string[]
-  skillDescription: string
-  avatar?: File
-  skillImages: File[]
 }
+
+export type RegistrationFormValues = RegistrationProfileFields &
+  RegistrationAuthFields & {
+    learningCategoryIds: Skill['categoryId'][]
+    learningSubcategoryIds: User['wantsToLearn']
+    skillTitle: Skill['title']
+    teachingCategoryIds: Skill['categoryId'][]
+    teachingSubcategoryIds: Skill['subcategoryId'][]
+    skillDescription: Skill['description']
+    avatar?: File
+    skillImages: File[]
+  }
 
 export interface RegistrationFormProps {
   initialStep?: RegistrationStep

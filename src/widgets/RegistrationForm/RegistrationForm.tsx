@@ -33,8 +33,13 @@ const INITIAL_VALUES: RegistrationFormValues = {
 }
 
 const categoryOptions = CATEGORIES_DATA.map(({ id, name }) => ({ value: id, label: name }))
-const cityOptions = MOCK_CITIES.map(({ id, name }) => ({ value: id, label: name }))
+const cityOptions = MOCK_CITIES.map(({ name }) => ({ value: name, label: name }))
 const genderOptions = GENDER_OPTIONS.map(({ value, label }) => ({ value, label }))
+
+const getCategoryIdsBySubcategoryIds = (subcategoryIds: string[]) =>
+  CATEGORIES_DATA.filter(({ subcategories }) =>
+    subcategories.some(({ id }) => subcategoryIds.includes(id)),
+  ).map(({ id }) => id)
 
 const toIsoDate = (date: Date) => {
   const offset = date.getTimezoneOffset()
@@ -86,6 +91,18 @@ export function RegistrationForm({
       ),
     [values.teachingCategoryIds],
   )
+
+  const learningCategoryOptions = useMemo(() => {
+    if (!values.learningSubcategoryIds.length) return categoryOptions
+    const parentIds = getCategoryIdsBySubcategoryIds(values.learningSubcategoryIds)
+    return categoryOptions.filter(({ value }) => parentIds.includes(value))
+  }, [values.learningSubcategoryIds])
+
+  const teachingCategoryOptions = useMemo(() => {
+    if (!values.teachingSubcategoryIds.length) return categoryOptions
+    const parentIds = getCategoryIdsBySubcategoryIds(values.teachingSubcategoryIds)
+    return categoryOptions.filter(({ value }) => parentIds.includes(value))
+  }, [values.teachingSubcategoryIds])
 
   const updateValue = <Key extends keyof RegistrationFormValues>(
     key: Key,
@@ -167,6 +184,20 @@ export function RegistrationForm({
       'teachingSubcategoryIds',
       values.teachingSubcategoryIds.filter((id) => allowedSubcategoryIds.includes(id)),
     )
+  }
+
+  const handleLearningSubcategories = (subcategoryIds: string[]) => {
+    updateValue('learningSubcategoryIds', subcategoryIds)
+    if (subcategoryIds.length) {
+      updateValue('learningCategoryIds', getCategoryIdsBySubcategoryIds(subcategoryIds))
+    }
+  }
+
+  const handleTeachingSubcategories = (subcategoryIds: string[]) => {
+    updateValue('teachingSubcategoryIds', subcategoryIds)
+    if (subcategoryIds.length) {
+      updateValue('teachingCategoryIds', getCategoryIdsBySubcategoryIds(subcategoryIds))
+    }
   }
 
   return (
@@ -312,7 +343,7 @@ export function RegistrationForm({
           <CheckboxSelect
             label="Категория навыка, которому хотите научиться"
             placeholder="Выберите категорию"
-            options={categoryOptions}
+            options={learningCategoryOptions}
             values={values.learningCategoryIds}
             name="learning-categories"
             error={errors.learningCategoryIds}
@@ -325,7 +356,7 @@ export function RegistrationForm({
             values={values.learningSubcategoryIds}
             name="learning-subcategories"
             error={errors.learningSubcategoryIds}
-            onChange={(selected) => updateValue('learningSubcategoryIds', selected)}
+            onChange={handleLearningSubcategories}
           />
 
           <div className={styles.actions}>
@@ -358,7 +389,7 @@ export function RegistrationForm({
           <CheckboxSelect
             label="Категория навыка"
             placeholder="Выберите категорию навыка"
-            options={categoryOptions}
+            options={teachingCategoryOptions}
             values={values.teachingCategoryIds}
             name="teaching-categories"
             error={errors.teachingCategoryIds}
@@ -371,7 +402,7 @@ export function RegistrationForm({
             values={values.teachingSubcategoryIds}
             name="teaching-subcategories"
             error={errors.teachingSubcategoryIds}
-            onChange={(selected) => updateValue('teachingSubcategoryIds', selected)}
+            onChange={handleTeachingSubcategories}
           />
 
           <div className={styles.field}>
