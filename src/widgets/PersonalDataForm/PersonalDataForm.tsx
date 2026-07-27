@@ -7,7 +7,8 @@ import { Combobox } from '@/shared/ui/Combobox'
 import { Calendar } from '@/shared/ui/Calendar'
 import EditIcon from '@/shared/assets/icons/Edit.svg'
 import styles from './PersonalDataForm.module.css'
-import type { PersonalDataFormProps, PersonalDataFormValues } from './types'
+import type { PersonalDataFormProps} from './types'
+import type { Profile } from '@/shared/types'
 
 const cityOptions = [
   { value: '', label: 'Не указан' },
@@ -30,7 +31,7 @@ export function PersonalDataForm({
   onSubmit,
   onChangePassword,
 }: PersonalDataFormProps) {
-  const [values, setValues] = useState(initialValues)
+  const [values, setValues] = useState<Profile>(initialValues)
   const [photoPreview, setPhotoPreview] = useState(initialValues.photo)
   const photoUrlRef = useRef<string | null>(null)
 
@@ -50,14 +51,14 @@ export function PersonalDataForm({
     () =>
       Object.keys(values).some(
         (key) =>
-          values[key as keyof PersonalDataFormValues] !==
-          initialValues[key as keyof PersonalDataFormValues],
+          values[key as keyof Profile] !==
+          initialValues[key as keyof Profile],
       ),
     [initialValues, values],
   )
   const birthDate = useMemo(() => parseDate(values.dateOfBirth), [values.dateOfBirth])
 
-  const updateField = (field: keyof PersonalDataFormValues) => (value: string) => {
+  const updateField = (field: keyof Profile) => (value: string) => {
     setValues((current) => ({ ...current, [field]: value }))
   }
 

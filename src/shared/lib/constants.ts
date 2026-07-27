@@ -12,6 +12,8 @@ export const ROUTES = {
 
 export const LOCAL_STORAGE_KEYS = {
   AUTH_USER: 'skillswap_auth_user',
+  ACCOUNT: 'skillswap_account',
+  CREATED_SKILLS: 'skillswap_created_skills',
   FAVORITES: 'skillswap_favorites',
   REQUESTS: 'skillswap_requests',
   THEME: 'skillswap_theme',
