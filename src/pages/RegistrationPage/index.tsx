@@ -1,14 +1,20 @@
-import { useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useRef, useState } from 'react'
+import { generatePath, Link, useNavigate, useParams } from 'react-router-dom'
 import CloseIcon from '@/shared/assets/icons/CrossBlack.svg'
 import BoardImage from '@/shared/assets/images/board.svg'
 import LampImage from '@/shared/assets/images/lamp.svg'
 import UserInfoImage from '@/shared/assets/images/userInfo.svg'
+import { registerAccount, updateAccountProfile } from '@/entities/account/model/accountSlice'
+import { saveUser } from '@/entities/auth/model/authSlice'
+import { createSkill } from '@/entities/skill/model/skillsSlice'
+import { fileToDataUrl, generateId } from '@/shared/lib/helpers'
 import { ROUTES } from '@/shared/lib/constants'
+import type { Skill, User, UserAccount } from '@/shared/types'
 import { Card } from '@/shared/ui/Card'
 import { HintCard } from '@/shared/ui/HintCard'
 import { Logo } from '@/shared/ui/Logo'
 import { StepProgress } from '@/shared/ui/StepProgress'
+import { useAppDispatch } from '@/store/hooks'
 import {
   RegistrationForm,
   type RegistrationFormValues,
@@ -48,22 +54,63 @@ const hints = {
 export default function RegistrationPage() {
   const { step } = useParams()
   const navigate = useNavigate()
+  const dispatch = useAppDispatch()
   const initialStep = getInitialStep(step)
   const [currentStep, setCurrentStep] = useState<RegistrationStep>(initialStep)
-  const [isComplete, setIsComplete] = useState(false)
   const currentHint = hints[currentStep]
+  // Хранит только что созданные навык+автора между onComplete (конец шага 3) и
+  // закрытием финальной модалки — чтобы было куда перейти по кнопке "Готово"
+  const createdSkillRef = useRef<{ skill: Skill; author: User } | null>(null)
 
-  const handleComplete = (values: RegistrationFormValues) => {
-    localStorage.setItem(
-      'user',
-      JSON.stringify({
-        ...values,
-        id: crypto.randomUUID(),
-        avatar: undefined,
-        skillImages: [],
-      }),
-    )
-    setIsComplete(true)
+  const handleComplete = async (values: RegistrationFormValues) => {
+    try {
+      const id = generateId()
+
+      const account: UserAccount = {
+        id,
+        name: values.name,
+        city: values.city,
+        gender: values.gender,
+        dateOfBirth: values.dateOfBirth,
+        photo: values.avatar ? await fileToDataUrl(values.avatar) : '',
+        about: '',
+        skills: [],
+        wantsToLearn: values.wantsToLearn,
+        email: values.email,
+        password: values.password,
+      }
+
+      const profile = await dispatch(registerAccount(account)).unwrap()
+      await dispatch(saveUser({ id: profile.id, name: profile.name, email: profile.email })).unwrap()
+
+      const skillImageUrls = await Promise.all(values.skillImages.map(fileToDataUrl))
+      const skill = await dispatch(
+        createSkill({
+          title: values.title,
+          description: values.description,
+          categoryId: values.categoryId,
+          subcategoryId: values.subcategoryId,
+          tags: [],
+          imageUrl: skillImageUrls,
+          authorId: profile.id,
+        }),
+      ).unwrap()
+
+      const author = await dispatch(
+        updateAccountProfile({ id: profile.id, updates: { skills: [skill.id] } }),
+      ).unwrap()
+
+      createdSkillRef.current = { skill, author }
+    } catch {
+      // TODO: показать пользователю ошибку регистрации
+    }
+  }
+
+  const handleSuccessModalClose = () => {
+    if (!createdSkillRef.current) return
+
+    const { skill, author } = createdSkillRef.current
+    navigate(generatePath(ROUTES.SKILL, { id: skill.id }), { state: { skill, author } })
   }
 
   return (
@@ -90,15 +137,12 @@ export default function RegistrationPage() {
 
       <div className={styles.content}>
         <Card className={styles.formCard}>
-          {isComplete ? (
-            <p className={styles.success}>Регистрация завершена</p>
-          ) : (
-            <RegistrationForm
-              initialStep={initialStep}
-              onStepChange={setCurrentStep}
-              onComplete={handleComplete}
-            />
-          )}
+          <RegistrationForm
+            initialStep={initialStep}
+            onStepChange={setCurrentStep}
+            onComplete={handleComplete}
+            onSuccessModalClose={handleSuccessModalClose}
+          />
         </Card>
 
         <HintCard
