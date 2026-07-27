@@ -1,0 +1,28 @@
+.page {
+  min-height: 100vh;
+  background-color: var(--background-main);
+  color: var(--text-primary);
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 324px 1fr;
+  gap: 24px;
+  padding: 48px 36px 60px;
+}
+
+.sidebar {
+  width: 324px;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 324px);
+  gap: 24px;
+}
