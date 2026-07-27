@@ -4,7 +4,7 @@
   gap: var(--space-lg);
   position: relative;
   width: 324px;
-  min-height: 368px;
+  height: 368px;
   padding: var(--space-lg);
   box-sizing: border-box;
 }
