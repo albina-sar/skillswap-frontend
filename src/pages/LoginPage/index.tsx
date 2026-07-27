@@ -132,7 +132,7 @@ export default function LoginPage() {
               <Controller
                 name="email"
                 control={control}
-                render={({ field }) => (
+                render={({ field: { ref: _ref, ...field } }) => (
                   <Input
                     {...field}
                     label="Email"
@@ -141,10 +141,11 @@ export default function LoginPage() {
                   />
                 )}
               />
+              
               <Controller
                 name="password"
                 control={control}
-                render={({ field }) => (
+                render={({ field: { ref: _ref, ...field } }) => (
                   <Input
                     {...field}
                     variant="password"

@@ -17,7 +17,7 @@ export function ModalSuccessSuggestion (props: Props) {
           <h2 className={styles.title}>Ваше предложение создано</h2>
           <p className={styles.textParagraph}>Теперь вы можете предложить обмен</p>
         </div>
-        <Button variant="primary" size="large" onClick={props.onCloseModal}>Готово</Button>
+        <Button type="button" variant="primary" size="large" onClick={props.onCloseModal}>Готово</Button>
       </Modal>
     </div>
   );

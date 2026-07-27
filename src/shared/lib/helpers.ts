@@ -19,3 +19,14 @@ export function truncate(str: string, maxLength: number): string {
 export function generateId(): string {
   return crypto.randomUUID()
 }
+
+/** Конвертирует File в base64 data URL — в отличие от URL.createObjectURL,
+ * переживает перезагрузку страницы, поэтому подходит для хранения в localStorage */
+export function fileToDataUrl(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.onload = () => resolve(reader.result as string)
+    reader.onerror = () => reject(reader.error)
+    reader.readAsDataURL(file)
+  })
+}
