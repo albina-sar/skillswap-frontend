@@ -93,6 +93,7 @@ export default function RegistrationPage() {
           tags: [],
           imageUrl: skillImageUrls,
           authorId: profile.id,
+          learningType: 'teach',
         }),
       ).unwrap()
 
