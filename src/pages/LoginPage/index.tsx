@@ -172,7 +172,7 @@ export default function LoginPage() {
               {isSubmitting ? 'Вход...' : 'Войти'}
             </Button>
 
-            <Link className={styles.registerLink} to={ROUTES.REGISTER}>
+            <Link className={styles.registerLink} to={ROUTES.REGISTER} state={location.state}>
               Зарегистрироваться
             </Link>
           </form>
