@@ -3,8 +3,9 @@ import { selectUsers } from "@/entities/user/model/usersSlice";
 import { CATEGORIES_DATA } from "@/shared/lib/constants";
 import { Skill, Subcategory, User } from "@/shared/types";
 import { UserCard } from "@/shared/ui/UserCard";
+import { useAppSelector } from "@/store/hooks";
 import { FC } from "react";
-import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 interface UserCardElementProps {
   authorid: string;
@@ -13,8 +14,9 @@ interface UserCardElementProps {
 
 export const UserCardElement: FC<UserCardElementProps> = ({authorid, variant}) => {
 
-  const skills = useSelector(selectSkills) as Skill[];
-  const users = useSelector(selectUsers) as User[];
+  const skills = useAppSelector(selectSkills) as Skill[];
+  const users = useAppSelector(selectUsers) as User[];
+  const navigate = useNavigate()
 
   if (users.length === 0 || skills.length === 0) {
     return <div>Загрузка...</div>;
@@ -40,11 +42,11 @@ export const UserCardElement: FC<UserCardElementProps> = ({authorid, variant}) =
 
   console.log("getLearnSkills", getLearnSkills);
 
-  const handleclick = () => {
-    console.log("заглушка для клика по карточке");
-  }
+  // const handleclick = () => {
+  //   console.log("заглушка для клика по карточке");
+  // }
 
   return (
-    <UserCard user={getedUser} teachSkill={getTeachSkill} learnSkills={getLearnSkills} onDetailsClick={handleclick} variant={variant} />
+    <UserCard user={getedUser} teachSkill={getTeachSkill} learnSkills={getLearnSkills} onDetailsClick={() => navigate(`/skill/${getTeachSkill.id}`)} variant={variant} />
   )
 }
