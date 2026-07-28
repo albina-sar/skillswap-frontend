@@ -43,8 +43,8 @@ function shuffleArray<T>(array: T[]): T[] {
 export default function CatalogPage() {
   const [isPopularExpanded, setIsPopularExpanded] = useState(false)
   const [isNewExpanded, setIsNewExpanded] = useState(false)
-  // Стейт для изменения количества рекомендованных карточек. При скролле сеттер меняет значение с шагом "3"
-  const [visibleRecommendedCount, setVisibleRecommendedCount] = useState(3)
+  // Стейт для изменения количества рекомендованных карточек. При скролле сеттер меняет значение с шагом "3". Раскомментировать для задачки с бесконечным скроллом
+  // const [visibleRecommendedCount, setVisibleRecommendedCount] = useState(3)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
@@ -110,6 +110,7 @@ export default function CatalogPage() {
     () => shuffleArray(cardItems),
     [cardItems]
   )
+  const visibleRecommendedCount = 3;
   const recommendedCards = shuffledRecommendedCards.slice(0, visibleRecommendedCount)
 
 
