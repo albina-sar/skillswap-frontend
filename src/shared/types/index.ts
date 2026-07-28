@@ -38,6 +38,17 @@ export interface SwapRequest {
   updatedAt: string
 }
 
+// ─── Notification ───────────────────────────────────────
+export interface Notification {
+  id: string
+  userId: string
+  requestId: string
+  title: string
+  description: string
+  isRead: boolean
+  createdAt: string
+}
+
 // ─── Auth ────────────────────────────────────────────────
 export interface AuthUser {
   id: string
