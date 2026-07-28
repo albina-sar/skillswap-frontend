@@ -10,7 +10,7 @@
 .sliderWrapper {
   position: relative;
   overflow: visible;
-  width:100%;
+  width: 100%;
 }
 
 .embla {
@@ -47,12 +47,23 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: opacity 0.2s, visibility 0.2s, background-color 0.2s;
+  transition:
+    opacity 0.2s,
+    visibility 0.2s,
+    background-color 0.2s;
 }
 
-.btnArrow:hover { background-color: #e5e5e5; }
-.btnPrev { left: -20px; }
-.btnNext { right: -20px; }
+.btnArrow:hover {
+  background-color: #e5e5e5;
+}
+
+.btnPrev {
+  left: -20px;
+}
+
+.btnNext {
+  right: -20px;
+}
 
 .btnDisabled {
   opacity: 0;
