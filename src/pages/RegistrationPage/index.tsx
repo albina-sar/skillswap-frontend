@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { generatePath, Link, useNavigate, useParams } from 'react-router-dom'
+import { generatePath, Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import CloseIcon from '@/shared/assets/icons/CrossBlack.svg'
 import BoardImage from '@/shared/assets/images/board.svg'
 import LampImage from '@/shared/assets/images/lamp.svg'
@@ -51,15 +51,20 @@ const hints = {
   { image: string; imageAlt: string; title: string; description: string }
 >
 
+interface RegistrationLocationState {
+  from?: string
+}
+
 export default function RegistrationPage() {
   const { step } = useParams()
   const navigate = useNavigate()
+  const location = useLocation()
+  const from = (location.state as RegistrationLocationState | null)?.from
   const dispatch = useAppDispatch()
   const initialStep = getInitialStep(step)
   const [currentStep, setCurrentStep] = useState<RegistrationStep>(initialStep)
   const currentHint = hints[currentStep]
-  // Хранит только что созданные навык+автора между onComplete (конец шага 3) и
-  // закрытием финальной модалки — чтобы было куда перейти по кнопке "Готово"
+
   const createdSkillRef = useRef<{ skill: Skill; author: User } | null>(null)
 
   const handleComplete = async (values: RegistrationFormValues) => {
@@ -108,6 +113,11 @@ export default function RegistrationPage() {
   }
 
   const handleSuccessModalClose = () => {
+    if (from) {
+      navigate(from, { replace: true })
+      return
+    }
+
     if (!createdSkillRef.current) return
 
     const { skill, author } = createdSkillRef.current
