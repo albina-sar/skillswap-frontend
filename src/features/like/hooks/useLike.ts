@@ -3,7 +3,7 @@ import { useLocalStorage } from '../../../shared/hooks/useLocalStorage'
 const LIKED_SKILLS_STORAGE_KEY = 'likedSkills'
 
 export function useLike(skillId: string, baseLikeCount: number) {
-  // Используем готовый хук команды для работы с localStorage
+  // Используем общий хук для работы с localStorage
   const [likedSkills, setLikedSkills] = useLocalStorage<string[]>(LIKED_SKILLS_STORAGE_KEY, [])
 
   // Проверяем, есть ли текущий скилл в списке лайкнутых
@@ -11,13 +11,17 @@ export function useLike(skillId: string, baseLikeCount: number) {
 
   // Функция переключения лайка
   const toggleLike = () => {
+    // Вычисляем новый список на основе текущего состояния
+    let newLikedSkills: string[]
     if (isLiked) {
-      // Если уже лайкнут - убираем из массива
-      setLikedSkills(likedSkills.filter((id) => id !== skillId))
+      // Убираем ID из массива
+      newLikedSkills = likedSkills.filter((id) => id !== skillId)
     } else {
-      // Если не лайкнут - добавляем в массив
-      setLikedSkills([...likedSkills, skillId])
+      // Добавляем ID в массив
+      newLikedSkills = [...likedSkills, skillId]
     }
+    // Сохраняем в localStorage через общий хук
+    setLikedSkills(newLikedSkills)
   }
 
   // Считаем общее количество: из стора + наш локальный лайк

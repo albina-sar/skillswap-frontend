@@ -4,8 +4,9 @@ import { useAppSelector } from '@/store/hooks'
 import { selectSkills } from '@/entities/skill/model/skillsSlice'
 import { useLocalStorage } from '@/shared/hooks/useLocalStorage'
 import { UserCard } from '@/shared/ui/UserCard'
-import { ROUTES } from '@/shared/lib/constants'
-import { Skill } from '@/shared/types'
+import { Button } from '@/shared/ui/button/button'
+import { ROUTES, CATEGORIES_DATA } from '@/shared/lib/constants'
+import { Skill, Subcategory } from '@/shared/types'
 import { User } from '@/shared/types'
 import styles from './FavoritesPage.module.css'
 
@@ -18,32 +19,44 @@ export default function FavoritesPage() {
   const [favoriteSkills, setFavoriteSkills] = useState<Skill[]>([])
   const [users, setUsers] = useState<User[]>([])
 
-
   useEffect(() => {
-
     import('@/api/users').then(({ fetchUsers }) => {
       fetchUsers().then(setUsers)
     })
   }, [])
 
-  // Обновляем список избранных навыков при изменении allSkills или likedSkillsIds
   useEffect(() => {
     const favorites = allSkills.filter((skill) => likedSkillsIds.includes(skill.id))
     setFavoriteSkills(favorites)
   }, [allSkills, likedSkillsIds])
 
-  // Если избранных навыков нет — показываем пустое состояние
+  // Функция для преобразования wantsToLearn в Subcategory[]
+  const getLearnSkills = (wantsToLearn: string[]): Subcategory[] => {
+    const result: Subcategory[] = []
+    for (const id of wantsToLearn) {
+      for (const category of CATEGORIES_DATA) {
+        const found = category.subcategories.find((sub) => sub.id === id)
+        if (found) {
+          result.push(found)
+          break
+        }
+      }
+    }
+    return result
+  }
+
   if (favoriteSkills.length === 0) {
     return (
       <div className={styles.emptyState}>
         <h2 className={styles.emptyTitle}>У вас пока нет избранных навыков</h2>
         <p className={styles.emptyText}>Добавьте навыки в избранное, чтобы они появились здесь</p>
-        <button
-          className={styles.backButton}
+        <Button
+          variant="primary"
+          size="large"
           onClick={() => navigate(ROUTES.HOME)}
         >
           Вернуться в каталог
-        </button>
+        </Button>
       </div>
     )
   }
@@ -57,16 +70,10 @@ export default function FavoritesPage() {
 
       <div className={styles.grid}>
         {favoriteSkills.map((skill) => {
-          // Находим автора навыка
           const author = users.find((user) => user.id === skill.authorId)
-
           if (!author) return null
 
-          // Формируем навыки, которые автор хочет изучить (для карточки)
-          const learnSkills = author.wantsToLearn.map((id) => ({
-            id,
-            name: id, // Заглушка
-          }))
+          const learnSkills = getLearnSkills(author.wantsToLearn)
 
           return (
             <UserCard

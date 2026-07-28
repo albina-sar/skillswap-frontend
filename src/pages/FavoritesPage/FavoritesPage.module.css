@@ -65,23 +65,6 @@
   margin: 0 0 24px;
 }
 
-.backButton {
-  padding: 12px 32px;
-  background: #508826;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-family: Roboto, -apple-system, sans-serif;
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.backButton:hover {
-  background: #3f6f1e;
-}
-
 /* Адаптив */
 @media (width <= 768px) {
   .page {
