@@ -1,12 +1,14 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Outlet } from 'react-router-dom'
-import { getAuthUser } from '@/features/auth/model/authUtils'
+import { getAccountProfile, selectAccountProfile } from '@/entities/account/model/accountSlice'
+import { getUserData, selectIsAuth, selectUserData } from '@/entities/auth/model/authSlice'
 import { CATEGORIES_DATA } from '@/shared/lib/constants'
 import type { User } from '@/shared/types'
 import { CategoryList } from '@/shared/ui/CategoryList'
 import { Footer } from '@/shared/ui/Footer'
 import { Header } from '@/shared/ui/Header'
 import { NotificationsContent } from '@/shared/ui/NotificationsContent'
+import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import styles from './Layout.module.css'
 
 // TODO: заменить на реальные данные из слайса уведомлений
@@ -46,14 +48,26 @@ const handleCategoryClick = () => {}
 const handleSubcategoryClick = () => {}
 
 export function Layout() {
-  const authUser = getAuthUser()
-  const user = authUser
-    ? {
-        ...GUEST_USER,
-        id: authUser.id,
-        name: authUser.name,
-      }
-    : GUEST_USER
+  const dispatch = useAppDispatch()
+  const isAuth = useAppSelector(selectIsAuth)
+  const authUserData = useAppSelector(selectUserData)
+  const profile = useAppSelector(selectAccountProfile)
+  const authUserId = isAuth ? authUserData.id : undefined
+
+  useEffect(() => {
+    dispatch(getUserData())
+  }, [dispatch])
+
+  useEffect(() => {
+    if (authUserId) dispatch(getAccountProfile(authUserId))
+  }, [authUserId, dispatch])
+
+  const user =
+    profile && profile.id === authUserId
+      ? profile
+      : isAuth
+        ? { ...GUEST_USER, id: authUserData.id, name: authUserData.name }
+        : GUEST_USER
 
   // TODO: весь блок ниже — временная заглушка на локальном useState.
   const [notifications, setNotifications] = useState(MOCK_NOTIFICATIONS)
@@ -71,7 +85,7 @@ export function Layout() {
     <div className={styles.layout}>
       <header className={styles.header}>
         <Header
-          isAuth={Boolean(authUser)}
+          isAuth={isAuth}
           user={user}
           onSearch={handleSearch}
           categories={
