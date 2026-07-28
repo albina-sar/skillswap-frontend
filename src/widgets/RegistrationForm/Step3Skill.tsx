@@ -8,6 +8,8 @@ import { ModalSuccessSuggestion } from '@/shared/ui/ModalSuccessSuggestion'
 import { categoryOptions, getSubcategoryOptions } from './registrationOptions'
 import type { Step3SkillProps } from './types'
 import styles from './RegistrationForm.module.css'
+import { SuggestionPreview } from '@/shared/ui/SuggestionPreview'
+import { CATEGORIES_DATA } from '@/shared/lib/constants'
 
 export function Step3Skill({
   title,
@@ -17,6 +19,7 @@ export function Step3Skill({
   errors,
   isCompleteModalOpen,
   isSuccessModalOpen,
+  skillImages,
   onChangeTitle,
   onChangeCategory,
   onChangeSubcategory,
@@ -31,6 +34,16 @@ export function Step3Skill({
     () => getSubcategoryOptions(categoryId ? [categoryId] : []),
     [categoryId],
   )
+  const selectedCategory = CATEGORIES_DATA.find((category) => category.id === categoryId)
+
+const selectedSubcategory = selectedCategory?.subcategories.find(
+  (subcategory) => subcategory.id === subcategoryId,
+)
+
+const previewImages = useMemo(
+  () => skillImages.map((file) => URL.createObjectURL(file)),
+  [skillImages],
+)
 
   return (
     <>
@@ -101,12 +114,16 @@ export function Step3Skill({
       </div>
 
       <Modal isOpen={isCompleteModalOpen} onClose={onCloseCompleteModal}>
-        {/* TODO: содержимое модалки ещё не готово — заменить на финальный дизайн */}
-        <p>Регистрация завершена</p>
-        <Button type="button" variant="primary" size="large" onClick={onOpenSuccessModal}>
-          Готово
-        </Button>
-      </Modal>
+  <SuggestionPreview
+    title={title}
+    categoryName={selectedCategory?.name ?? ''}
+    subcategoryName={selectedSubcategory?.name ?? ''}
+    description={description}
+    images={previewImages}
+    onEdit={onCloseCompleteModal}
+    onDone={onOpenSuccessModal}
+  />
+</Modal>
 
       <ModalSuccessSuggestion isModalOpened={isSuccessModalOpen} onCloseModal={onCloseSuccessModal} />
     </>
