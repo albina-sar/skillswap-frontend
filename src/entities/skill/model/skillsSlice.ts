@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { fetchSkills } from '@/api/skills'
+import { getCreatedSkills, saveCreatedSkill } from '@/features/skills/model/skillsUtils'
 import type { RootState } from '@/store'
 import type { Skill } from './types'
 
@@ -15,7 +16,23 @@ const initialState: SkillsState = {
   error: null,
 }
 
-export const loadSkills = createAsyncThunk('skills/load', fetchSkills)
+export const loadSkills = createAsyncThunk('skills/load', async () => {
+  const baseSkills = await fetchSkills();
+  const createdSkills = getCreatedSkills();
+  return [...baseSkills, ...createdSkills]
+})
+
+export const createSkill = createAsyncThunk<
+  Skill,
+  Omit<Skill, 'id' | 'createdAt' | 'likesCount'>,
+  { rejectValue: string }
+>('skills/create', (skill, { rejectWithValue }) => {
+  try {
+    return saveCreatedSkill(skill);
+  } catch {
+    return rejectWithValue('Не удалось создать навык');
+  }
+})
 
 const skillsSlice = createSlice({
   name: 'skills',
@@ -35,12 +52,17 @@ const skillsSlice = createSlice({
         state.loading = false
         state.error = action.error.message ?? 'Не удалось загрузить навыки'
       })
+      .addCase(createSkill.fulfilled, (state, action) => {
+        state.items.push(action.payload)
+      })
+      .addCase(createSkill.rejected, (state, action) => {
+        state.error = action.payload ?? 'Не удалось создать навык'
+      })
   },
 })
 
 export default skillsSlice.reducer
 
-// Данные читаются через селекторы из слайса, а не прямым обращением к state
 export const selectSkills = (state: RootState) => state.skills.items
 export const selectSkillsLoading = (state: RootState) => state.skills.loading
 export const selectSkillsError = (state: RootState) => state.skills.error

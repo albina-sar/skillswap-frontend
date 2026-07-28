@@ -1,54 +1,118 @@
-import { FilterSection } from '../../shared/ui/filter-section/filter-section'
-import { filterGroups } from '../../features/filters/model/filterGroups'
-import { Card } from '../../shared/ui/Card'
-import { useCatalogFilters } from './hooks/useCatalogFilters'
-import { categoriesMap, allSubcategoriesMap } from './lib/maps'
+import { useEffect, useMemo } from 'react'
+import { useNavigate } from 'react-router-dom'
+
+import { fetchUsersThunk } from '@/entities/user/model/usersSlice'
+import { loadSkills, selectSkills } from '@/entities/skill/model/skillsSlice'
+import { filterGroups } from '@/features/filters/model/filterGroups'
+import { useAppDispatch, useAppSelector } from '@/store/hooks'
+import { CATEGORIES_DATA } from '@/shared/lib/constants'
+import type { Skill, Subcategory, User } from '@/shared/types'
+import { FilterSection } from '@/shared/ui/filter-section'
+import { Section } from '@/shared/ui/Section'
+import { UserCard } from '@/shared/ui/UserCard'
+
 import styles from './CatalogPage.module.css'
 
-export default function CatalogPage() {
-  const { filteredSkills, loading, handleFiltersChange } = useCatalogFilters()
+const getSubcategoriesByIds = (ids: string[]): Subcategory[] => {
+  const subcategories = CATEGORIES_DATA.flatMap((category) => category.subcategories)
 
-  if (loading) {
-    return (
-      <main className={styles.container}>
-        <h1 className={styles.title}>Загрузка...</h1>
-      </main>
-    )
-  }
+  return ids
+    .map((id) => subcategories.find((subcategory) => subcategory.id === id))
+    .filter((subcategory): subcategory is Subcategory => Boolean(subcategory))
+}
+
+const getUserTeachSkill = (user: User, skills: Skill[]) =>
+  skills.find((skill) => skill.id === user.skills[0])
+
+export default function CatalogPage() {
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+
+  const users = useAppSelector((state) => state.users.users)
+  const skills = useAppSelector(selectSkills)
+
+  useEffect(() => {
+    dispatch(fetchUsersThunk())
+    dispatch(loadSkills())
+  }, [dispatch])
+
+  const cardItems = useMemo(
+    () =>
+      users
+        .map((user) => {
+          const teachSkill = getUserTeachSkill(user, skills)
+
+          if (!teachSkill) {
+            return null
+          }
+
+          return {
+            user,
+            teachSkill,
+            learnSkills: getSubcategoriesByIds(user.wantsToLearn),
+          }
+        })
+        .filter((item): item is NonNullable<typeof item> => Boolean(item)),
+    [users, skills],
+  )
+
+  const popularCards = cardItems.slice(0, 3)
+  const newCards = cardItems.slice(3, 6)
+  const recommendedCards = cardItems.slice(6, 9)
+
 
   return (
-    <main className={styles.container}>
-      <h1 className={styles.title}>Каталог навыков</h1>
-
-      <div className={styles.layout}>
-        <aside className={styles.filtersSidebar}>
-          <FilterSection groups={filterGroups} onFiltersChange={handleFiltersChange} />
+    <div className={styles.page}>
+      <div className={styles.content}>
+        <aside className={styles.sidebar}>
+          <FilterSection groups={filterGroups} onFiltersChange={() => {}} />
         </aside>
 
-        <section className={styles.skillsList}>
-          {filteredSkills.length === 0 ? (
-            <div className={styles.emptyState}>
-              <p>По вашим фильтрам ничего не найдено.</p>
-              <p>Попробуйте сбросить фильтры или изменить параметры поиска.</p>
+        <main className={styles.main}>
+          <Section title="Популярное" showAllButton onSeeAll={() => {}}>
+            <div className={styles.cardsGrid}>
+              {popularCards.map(({ user, teachSkill, learnSkills }) => (
+                <UserCard
+                  key={user.id}
+                  user={user}
+                  teachSkill={teachSkill}
+                  learnSkills={learnSkills}
+                  onDetailsClick={() => navigate(`/skill/${teachSkill.id}`)}
+                />
+              ))}
             </div>
-          ) : (
-            filteredSkills.map((skill) => {
-              const category = categoriesMap.get(skill.categoryId)
-              const subcategory = allSubcategoriesMap.get(skill.subcategoryId)
-              const skillLearningType = (skill as any).learningType ?? 'any'
+          </Section>
 
-              return (
-                <Card key={skill.id} className={styles.skillCard}>
-                  <h3>{skill.title}</h3>
-                  <p>Тип: {skillLearningType === 'learn' ? 'Хочу научиться' : 'Могу научить'}</p>
-                  <p>Категория: {category?.name || skill.categoryId}</p>
-                  <p>Подкатегория: {subcategory?.name || skill.subcategoryId}</p>
-                </Card>
-              )
-            })
-          )}
-        </section>
+          <Section title="Новое" showAllButton onSeeAll={() => {}}>
+            <div className={styles.cardsGrid}>
+              {newCards.map(({ user, teachSkill, learnSkills }) => (
+                <UserCard
+                  key={user.id}
+                  user={user}
+                  teachSkill={teachSkill}
+                  learnSkills={learnSkills}
+                  onDetailsClick={() => navigate(`/skill/${teachSkill.id}`)}
+                />
+              ))}
+            </div>
+          </Section>
+
+          <Section title="Рекомендуем">
+            <div className={styles.cardsGrid}>
+              {recommendedCards.map(({ user, teachSkill, learnSkills }) => (
+                <UserCard
+                  key={user.id}
+                  user={user}
+                  teachSkill={teachSkill}
+                  learnSkills={learnSkills}
+                  onDetailsClick={() => navigate(`/skill/${teachSkill.id}`)}
+                />
+              ))}
+            </div>
+          </Section>
+        </main>
       </div>
-    </main>
+    </div>
+
   )
 }

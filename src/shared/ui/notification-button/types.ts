@@ -1,6 +1,6 @@
 export interface NotificationButtonProps {
   hasNotifications?: boolean
-  onClick: () => void
+  onClick?: () => void
   disabled?: boolean
   className?: string
 }

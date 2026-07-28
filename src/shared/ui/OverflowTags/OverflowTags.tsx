@@ -1,14 +1,14 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 
-import type { Skill } from '@/shared/types'
+import type { Subcategory } from '@/shared/types'
 import { Tag } from '@/shared/ui/Tag'
 
 import styles from './OverflowTags.module.css'
 
 interface OverflowTagsProps {
-  skills: Skill[]
+  skills: Subcategory[]
   enableOverflow?: boolean
-  getBackgroundColor?: (skill: Skill) => string
+  getBackgroundColor?: (subcategory: Subcategory) => string
 }
 
 export function OverflowTags({
@@ -70,7 +70,7 @@ export function OverflowTags({
           {skills.map((skill) => (
             <Tag
               key={skill.id}
-              label={skill.title}
+              label={skill.name}
               backgroundColor={getBackgroundColor ? getBackgroundColor(skill) : 'var(--tag-new)'}
               textColor="var(--text-primary)"
             />
@@ -82,7 +82,7 @@ export function OverflowTags({
         {visibleSkills.map((skill) => (
           <Tag
             key={skill.id}
-            label={skill.title}
+            label={skill.name}
             backgroundColor={getBackgroundColor ? getBackgroundColor(skill) : 'var(--tag-new)'}
             textColor="var(--text-primary)"
           />
