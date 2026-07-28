@@ -180,6 +180,7 @@ export function RegistrationForm({
           isSuccessModalOpen={isSuccessModalOpen}
           onChangeTitle={(value) => updateValue('title', value)}
           onChangeCategory={handleTeachingCategory}
+          skillImages={values.skillImages}
           onChangeSubcategory={handleTeachingSubcategory}
           onChangeDescription={(value) => updateValue('description', value)}
           onChangeImages={(files) => updateValue('skillImages', files)}
