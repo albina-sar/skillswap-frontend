@@ -3,6 +3,7 @@ import { fetchUsers } from '../../../api/users';
 import { User } from '@/shared/types';
 import type { RootState } from '@/store'
 
+
 interface UsersState {
   users: User[];
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
@@ -43,6 +44,11 @@ const usersSlice = createSlice({
   },
 });
 
-export const selectUsers = (state: RootState) => state.users.users;
 
 export default usersSlice.reducer;
+export const selectUsers = (state: RootState) => state.users.users;
+export const selectUsersStatus = (state: RootState) => state.users.status;
+export const selectUsersError = (state: RootState) => state.users.error;
+
+export default usersSlice.reducer;
+

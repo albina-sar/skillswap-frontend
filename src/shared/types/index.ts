@@ -10,6 +10,7 @@ export interface Skill {
   authorId: string
   createdAt: string
   likesCount: number
+  learningType: 'learn' | 'teach' | 'any'
 }
 
 // ─── User ────────────────────────────────────────────────
