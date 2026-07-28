@@ -1,31 +1,22 @@
+import { useAppDispatch, useAppSelector } from '@/store/hooks'
+import { selectAccountProfile, updateAccountProfile } from '@/entities/account/model/accountSlice'
 import { ProfileSidebar } from '@/shared/ui/ProfileSidebar'
 import { PersonalDataForm } from '@/widgets/PersonalDataForm'
-import type { PersonalDataFormValues } from '@/widgets/PersonalDataForm'
+import { Body } from '@/shared/ui/Body'
+import type { Profile } from '@/shared/types'
 import styles from './ProfilePage.module.css'
 
-// ВРЕМЕННЫЙ мок данных профиля. Реальные придут из авторизации (ветка feature/auth),
-// когда она будет смержена в develop. Тип вынесен в аннотацию — при переходе на Profile
-// TypeScript подсветит все места, которые нужно поправить.
-const mockProfile: PersonalDataFormValues = {
-  email: 'Mariia@gmail.com',
-  name: 'Мария',
-  dateOfBirth: '1995-10-28',
-  gender: 'female',
-  city: 'Москва',
-  about:
-    'Люблю учиться новому, особенно если это можно делать за чаем и в пижаме. Всегда готова пообщаться и обменяться чем-то интересным!',
-  photo: '',
-}
-
 export default function ProfilePage() {
-  const handleSubmit = (values: PersonalDataFormValues) => {
-    // TODO: сохранение профиля появится вместе с auth
-    console.log('Профиль сохранён:', values)
+  const dispatch = useAppDispatch()
+  const profile = useAppSelector(selectAccountProfile)
+
+  const handleSubmit = (values: Profile) => {
+    const { id, ...updates } = values
+    dispatch(updateAccountProfile({ id, updates }))
   }
 
   const handleChangePassword = () => {
-    // TODO: смена пароля появится вместе с auth
-    console.log('Смена пароля')
+    // TODO: Реализовать смену пароля, логика changePassword уже есть
   }
 
   return (
@@ -34,11 +25,15 @@ export default function ProfilePage() {
         <ProfileSidebar />
       </aside>
       <section className={styles.content}>
-        <PersonalDataForm
-          initialValues={mockProfile}
-          onSubmit={handleSubmit}
-          onChangePassword={handleChangePassword}
-        />
+        {profile ? (
+          <PersonalDataForm
+            initialValues={profile}
+            onSubmit={handleSubmit}
+            onChangePassword={handleChangePassword}
+          />
+        ) : (
+          <Body>Авторизуйтесь для отображения личных данных</Body>
+        )}
       </section>
     </div>
   )
