@@ -1,7 +1,12 @@
-import { type FormEvent, useState } from 'react'
+import { Controller, useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { saveAuthUser } from '@/features/auth/model/authUtils'
+import { useState } from 'react'
+import { useAppDispatch as useDispatch } from '@/store/hooks'
+import { loginUser, saveUser } from '@/entities/auth/model/authSlice'
 import { ROUTES } from '@/shared/lib/constants'
+import { generateId } from '@/shared/lib/helpers'
 import AppleIcon from '@/shared/assets/icons/Apple.svg'
 import CloseIcon from '@/shared/assets/icons/CrossBlack.svg'
 import GoogleIcon from '@/shared/assets/icons/Google.svg'
@@ -13,89 +18,66 @@ import { Input } from '@/shared/ui/Input'
 import { Logo } from '@/shared/ui/Logo'
 import styles from './LoginPage.module.css'
 
-type LoginLocationState = {
+type LoginLocationState = { 
   from?: string
 }
 
-type RegisteredUser = {
-  id: string
-  name: string
-  email: string
-  password: string
+interface LoginFormValues {
+  email: string;
+  password: string;
 }
 
-function loginWithCredentials(email: string, password: string) {
-  const rawUser = localStorage.getItem('user')
+const loginSchema = yup.object({
+  email: yup.string().required().email(),
+  password: yup.string().required().min(8),
+});
 
-  if (!rawUser) {
-    throw new Error('Email или пароль введён неверно. Пожалуйста проверьте правильность введённых данных')
-  }
-
-  let registeredUser: RegisteredUser
-
-  try {
-    registeredUser = JSON.parse(rawUser) as RegisteredUser
-  } catch {
-    throw new Error('Не удалось прочитать данные пользователя')
-  }
-
-  if (registeredUser.email !== email || registeredUser.password !== password) {
-    throw new Error('Email или пароль введены неверно')
-  }
-
-  saveAuthUser({
-    id: registeredUser.id,
-    name: registeredUser.name,
-    email: registeredUser.email,
-  })
-}
+// Единое сообщение об ошибке
+const GENERAL_ERROR_MESSAGE =
+  'Email или пароль введён неверно. Пожалуйста проверьте правильность введённых данных';
 
 export default function LoginPage() {
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
+  const [generalError, setGeneralError] = useState('')
 
   const destination = (location.state as LoginLocationState | null)?.from ?? ROUTES.HOME
 
-  const finishLogin = (loginEmail: string) => {
+  const {
+    control,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = useForm<LoginFormValues>({
+    resolver: yupResolver(loginSchema),
+    mode: 'onSubmit',
+    defaultValues: { email: '', password: '' },
+  })
+
+  const finishLogin = async (loginEmail: string) => {
     const userName = loginEmail.split('@')[0] || 'Пользователь'
-
-    saveAuthUser({
-      id: crypto.randomUUID(),
-      name: userName,
-      email: loginEmail,
-    })
-    navigate(destination, { replace: true })
-  }
-
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    setError('')
-    setIsLoading(true)
-
     try {
-      await Promise.resolve()
-      loginWithCredentials(email, password)
-      navigate(destination, { replace: true })
-    } catch (loginError) {
-      setError(loginError instanceof Error ? loginError.message : 'Ошибка входа')
-    } finally {
-      setIsLoading(false)
+      await dispatch(saveUser({ id: generateId(), name: userName, email: loginEmail })).unwrap();
+      navigate(destination, { replace: true });
+    } catch {
+      setGeneralError(GENERAL_ERROR_MESSAGE);
     }
-  }
+  };
 
-  const handleEmailChange = (value: string) => {
-    setEmail(value)
-    setError('')
-  }
+  const onSubmit = async (values: LoginFormValues) => {
+    setGeneralError('');
+    try {
+      await dispatch(loginUser(values)).unwrap();
+      navigate(destination, { replace: true });
+    } catch {
+      setGeneralError(GENERAL_ERROR_MESSAGE);
+    }
+  };
 
-  const handlePasswordChange = (value: string) => {
-    setPassword(value)
-    setError('')
-  }
+  // Ошибка валидации: показываем общее сообщение
+  const onError = () => {
+    setGeneralError(GENERAL_ERROR_MESSAGE);
+  };
 
   return (
     <main className={styles.page}>
@@ -103,7 +85,6 @@ export default function LoginPage() {
         <Link to={ROUTES.HOME} aria-label="Перейти на главную страницу">
           <Logo />
         </Link>
-
         <button
           className={styles.closeButton}
           type="button"
@@ -119,7 +100,7 @@ export default function LoginPage() {
 
       <div className={styles.content}>
         <Card className={styles.formCard}>
-          <form className={styles.form} onSubmit={handleSubmit}>
+          <form className={styles.form} onSubmit={handleSubmit(onSubmit, onError)}>
             <div className={styles.socialButtons}>
               <Button
                 type="button"
@@ -147,37 +128,51 @@ export default function LoginPage() {
               <span>или</span>
             </div>
 
-            <div className={`${styles.fields} ${error ? styles.fieldsWithError : ''}`}>
-              <Input
-                value={email}
-                onChange={handleEmailChange}
-                label="Email"
-                placeholder="Введите email"
+            <div className={`${styles.fields} ${generalError ? styles.fieldsWithError : ''}`}>
+              <Controller
                 name="email"
-                required
+                control={control}
+                render={({ field: { ref: _ref, ...field } }) => (
+                  <Input
+                    {...field}
+                    label="Email"
+                    placeholder="Введите email"
+                    name="email"
+                  />
+                )}
               />
-              <Input
-                variant="password"
-                value={password}
-                onChange={handlePasswordChange}
-                label="Пароль"
-                placeholder="Введите ваш пароль"
+              
+              <Controller
                 name="password"
-                required
+                control={control}
+                render={({ field: { ref: _ref, ...field } }) => (
+                  <Input
+                    {...field}
+                    variant="password"
+                    label="Пароль"
+                    placeholder="Введите ваш пароль"
+                    name="password"
+                  />
+                )}
               />
             </div>
 
-            {error && (
+            {generalError && (
               <p className={styles.errorMessage} role="alert">
-                {error}
+                {generalError}
               </p>
             )}
 
-            <Button className={styles.submitButton} type="submit" size="large" disabled={isLoading}>
-              {isLoading ? 'Вход...' : 'Войти'}
+            <Button
+              className={styles.submitButton}
+              type="submit"
+              size="large"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? 'Вход...' : 'Войти'}
             </Button>
 
-            <Link className={styles.registerLink} to={ROUTES.REGISTER}>
+            <Link className={styles.registerLink} to={ROUTES.REGISTER} state={location.state}>
               Зарегистрироваться
             </Link>
           </form>

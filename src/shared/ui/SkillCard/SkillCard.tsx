@@ -1,20 +1,70 @@
-import { SkillLikeButton } from '@/features/like'
-import { Card } from '@/shared/ui/Card'
+import { useEffect, useMemo, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
+
+import { fetchUserById } from '@/api/users'
+import { getAuthUser } from '@/features/auth/model/authUtils'
+import { useSwapRequest } from '@/features/requests'
+import { CATEGORIES_DATA, ROUTES } from '@/shared/lib/constants'
 import { Button } from '@/shared/ui/button/button'
-import styles from './SkillCard.module.css'
+import { Card } from '@/shared/ui/Card/Card'
+import { LikeButton } from '../likeButton'
+
 import type { SkillCardProps } from './types'
 
-export const SkillCard = ({ skill }: SkillCardProps) => {
-  // Находим категорию и подкатегорию для отображения
-  const categoryName = skill.categoryId // TODO: заменить на реальное название
-  const subcategoryName = skill.subcategoryId // TODO: заменить на реальное название
+import styles from './SkillCard.module.css'
+
+export function SkillCard({ skill, isFavorite, onFavoriteClick }: SkillCardProps) {
+  const navigate = useNavigate()
+  const location = useLocation()
+  const [isModalOpened, setIsModalOpened] = useState(false)
+  const [recipientName, setRecipientName] = useState('Пользователь')
+  const [isRecipientLoading, setIsRecipientLoading] = useState(true)
+  const authUser = getAuthUser()
+  const { isProposed, proposeExchange } = useSwapRequest({
+    skillId: skill.id,
+    fromUserId: authUser?.id ?? '',
+    toUserId: skill.authorId,
+    senderName: authUser?.name ?? 'Пользователь',
+    recipientName,
+  })
+
+  useEffect(() => {
+    let isActive = true
+
+    void fetchUserById(skill.authorId)
+      .then((user) => {
+        if (isActive && user) setRecipientName(user.name)
+      })
+      .catch(() => undefined)
+      .finally(() => {
+        if (isActive) setIsRecipientLoading(false)
+      })
+
+    return () => {
+      isActive = false
+    }
+  }, [skill.authorId])
+
+  const category = useMemo(
+    () => CATEGORIES_DATA.find((item) => item.id === skill.categoryId),
+    [skill.categoryId],
+  )
+
+  const subcategory = useMemo(
+    () => category?.subcategories.find((item) => item.id === skill.subcategoryId),
+    [category, skill.subcategoryId],
+  )
 
   return (
     <Card className={styles.card}>
       {/* Верхняя часть: лайк */}
       <div className={styles.actionsRow}>
         <div className={styles.actions}>
-          <SkillLikeButton skillId={skill.id} baseLikeCount={skill.likesCount} />
+          <LikeButton
+            skillId={skill.id}
+            isFavorite={isFavorite}
+            onFavoriteClick={onFavoriteClick}
+          />
         </div>
       </div>
 
@@ -25,13 +75,31 @@ export const SkillCard = ({ skill }: SkillCardProps) => {
             <div className={styles.header}>
               <h2 className={styles.title}>{skill.title}</h2>
               <p className={styles.category}>
-                {categoryName}
+                {category?.name}
                 <span className={styles.separator}>/</span>
-                {subcategoryName}
+                {subcategory?.name}
               </p>
             </div>
 
-            <p className={styles.description}>{skill.description}</p>
+            <Button
+              variant="primary"
+              size="large"
+              disabled={isProposed || isRecipientLoading}
+              onClick={() => {
+                if (!authUser) {
+                  navigate(ROUTES.LOGIN, {
+                    state: { from: `${location.pathname}${location.search}` },
+                  })
+                  return
+                }
+
+                proposeExchange()
+                setIsModalOpened(true)
+              }}
+              className={styles.exchangeButton}
+            >
+              {isProposed ? 'Обмен предложен' : 'Предложить обмен'}
+            </Button>
           </div>
 
           <Button variant="primary" size="large" className={styles.exchangeButton}>
