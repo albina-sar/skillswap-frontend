@@ -50,11 +50,7 @@ export default function FavoritesPage() {
       <div className={styles.emptyState}>
         <h2 className={styles.emptyTitle}>У вас пока нет избранных навыков</h2>
         <p className={styles.emptyText}>Добавьте навыки в избранное, чтобы они появились здесь</p>
-        <Button
-          variant="primary"
-          size="large"
-          onClick={() => navigate(ROUTES.HOME)}
-        >
+        <Button variant="primary" onClick={() => navigate(ROUTES.HOME)}>
           Вернуться в каталог
         </Button>
       </div>
