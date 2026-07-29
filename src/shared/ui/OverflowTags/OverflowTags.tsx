@@ -16,7 +16,7 @@ export function OverflowTags({
   enableOverflow = true,
   getBackgroundColor,
 }: OverflowTagsProps) {
-  const containerRef = useRef<HTMLDivElement>(null)
+  const measureRef = useRef<HTMLDivElement>(null)
 
   const [visibleCount, setVisibleCount] = useState(skills.length)
 
@@ -26,55 +26,58 @@ export function OverflowTags({
       return
     }
 
-    const container = containerRef.current
+    const container = measureRef.current
 
     if (!container) return
 
-    const items = Array.from(container.children) as HTMLElement[]
+    const children = Array.from(container.children) as HTMLElement[]
 
-    const containerWidth = container.clientWidth
+    const tags = children.slice(0, skills.length)
+    const overflow = children[skills.length]
+
+    const width = container.clientWidth
     const gap = 8
 
-    let usedWidth = 0
-    let count = 0
+    let count = skills.length
 
-    const hiddenTagWidth = 45
+    for (let i = skills.length; i >= 0; i--) {
+      const currentTags = tags.slice(0, i)
 
-    for (const item of items) {
-      const itemWidth = item.offsetWidth
+      const tagsWidth = currentTags.reduce((sum, tag) => sum + tag.offsetWidth, 0)
 
-      const nextWidth = usedWidth + itemWidth + (count > 0 ? gap : 0)
+      const gaps = currentTags.length > 0 ? gap * (currentTags.length - 1) : 0
 
-      const needHiddenTag = skills.length - (count + 1) > 0
+      const hidden = skills.length - i
 
-      const totalWidth = needHiddenTag ? nextWidth + gap + hiddenTagWidth : nextWidth
+      const overflowWidth = hidden > 0 ? gap + overflow.offsetWidth : 0
 
-      if (totalWidth > containerWidth) {
+      if (tagsWidth + gaps + overflowWidth <= width) {
+        count = i
         break
       }
-
-      usedWidth = nextWidth
-      count++
     }
 
-    setVisibleCount(Math.max(count, 1))
+    setVisibleCount(count)
   }, [skills, enableOverflow])
 
   const visibleSkills = enableOverflow ? skills.slice(0, visibleCount) : skills
-  const hiddenCount = enableOverflow ? skills.length - visibleCount : 0
+
+  const hiddenCount = skills.length - visibleCount
 
   return (
-    <div className={`${styles.tagsWrapper} ${!enableOverflow ? styles.wrap : ''}`}>
+    <div className={styles.wrapper}>
       {enableOverflow && (
-        <div ref={containerRef} className={styles.measure} aria-hidden="true">
+        <div ref={measureRef} className={styles.measure}>
           {skills.map((skill) => (
             <Tag
               key={skill.id}
               label={skill.name}
-              backgroundColor={getBackgroundColor ? getBackgroundColor(skill) : 'var(--tag-new)'}
+              backgroundColor={getBackgroundColor?.(skill) ?? 'var(--tag-new)'}
               textColor="var(--text-primary)"
             />
           ))}
+
+          <Tag label="+99" backgroundColor="var(--tag-new)" textColor="var(--text-primary)" />
         </div>
       )}
 
@@ -83,7 +86,7 @@ export function OverflowTags({
           <Tag
             key={skill.id}
             label={skill.name}
-            backgroundColor={getBackgroundColor ? getBackgroundColor(skill) : 'var(--tag-new)'}
+            backgroundColor={getBackgroundColor?.(skill) ?? 'var(--tag-new)'}
             textColor="var(--text-primary)"
           />
         ))}

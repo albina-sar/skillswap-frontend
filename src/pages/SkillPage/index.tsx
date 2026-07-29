@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 
 import { fetchSkillById } from '@/api/skills'
 import { fetchUsers } from '@/api/users'
@@ -12,6 +12,7 @@ import { SkillCard } from '@/shared/ui/SkillCard'
 import { UserCard } from '@/shared/ui/UserCard'
 
 import styles from './SkillPage.module.css'
+import { SimilarOffers } from '@/components/similar-offers/similar-offers'
 
 const getLearnSkills = (user: User): Subcategory[] =>
   user.wantsToLearn
@@ -22,14 +23,25 @@ const getLearnSkills = (user: User): Subcategory[] =>
     )
     .filter(Boolean) as Subcategory[]
 
+// Только что созданный навык (например, сразу после регистрации) может прийти
+// напрямую через state роутера — тогда не нужно повторно идти в API за ним
+interface SkillPageLocationState {
+  skill?: Skill
+  author?: User
+}
+
 export default function SkillPage() {
   const { id } = useParams()
+  const location = useLocation()
+  const preloaded = location.state as SkillPageLocationState | null
+  const preloadedSkillId = preloaded?.skill?.id
 
-  const [skill, setSkill] = useState<Skill | null>(null)
-  const [users, setUsers] = useState<User[]>([])
+  const [skill, setSkill] = useState<Skill | null>(preloaded?.skill ?? null)
+  const [users, setUsers] = useState<User[]>(preloaded?.author ? [preloaded.author] : [])
 
   useEffect(() => {
     if (!id) return
+    if (preloadedSkillId === id) return
 
     const skillId = id
 
@@ -43,7 +55,7 @@ export default function SkillPage() {
     }
 
     loadData()
-  }, [id])
+  }, [id, preloadedSkillId])
 
   const currentUser = useMemo(() => {
     if (!skill) return null
@@ -72,7 +84,8 @@ export default function SkillPage() {
             variant="skill"
           />
 
-          <SkillCard skill={skill} isFavorite={false} onFavoriteClick={() => {}} />
+          {/* Убрала isFavorite и onFavoriteClick */}
+          <SkillCard skill={skill} />
         </div>
 
         <Section
@@ -80,7 +93,7 @@ export default function SkillPage() {
           className={styles.section}
           titleClassName={styles.sectionTitle}
         >
-          <div className={styles.similarSkills} />
+          <SimilarOffers />
         </Section>
       </div>
     </main>

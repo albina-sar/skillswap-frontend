@@ -1,7 +1,10 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, useEffect } from 'react'
 import { ROUTES } from '@/shared/lib/constants'
 import { Layout } from '@/app/layouts/Layout'
+import { useAppDispatch } from '@/store/hooks'
+import { fetchUsersThunk } from '@/entities/user/model/usersSlice'
+import { loadSkills } from '@/entities/skill/model/skillsSlice'
 
 // Lazy-загрузка страниц — каждая страница грузится только при переходе на неё
 const CatalogPage = lazy(() => import('@/pages/CatalogPage'))
@@ -10,15 +13,25 @@ const ProfilePage = lazy(() => import('@/pages/ProfilePage'))
 const FavoritesPage = lazy(() => import('@/pages/FavoritesPage'))
 const CreateSkillPage = lazy(() => import('@/pages/CreateSkillPage'))
 const LoginPage = lazy(() => import('@/pages/LoginPage'))
+const RegistrationPage = lazy(() => import('@/pages/RegistrationPage'))
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'))
 
 export function AppRouter() {
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+      dispatch(fetchUsersThunk())
+      dispatch(loadSkills())
+    }, [dispatch])
+
   return (
     <BrowserRouter>
       <Suspense fallback={<div>Загрузка...</div>}>
         <Routes>
           <Route path={ROUTES.LOGIN} element={<LoginPage />} />
-          <Route path={ROUTES.REGISTER} element={<LoginPage />} />
+          <Route path={ROUTES.REGISTER} element={<RegistrationPage />} />
+          <Route path={`${ROUTES.REGISTER}/step/:step`} element={<RegistrationPage />} />
 
           <Route element={<Layout />}>
             <Route path={ROUTES.HOME} element={<CatalogPage />} />

@@ -3,8 +3,10 @@ import { useNavigate, NavLink } from 'react-router-dom';
 import styles from './Header.module.css';
 import { HeaderProps } from "./types";
 import clsx from 'clsx';
+import { clearUser } from '@/entities/auth/model/authSlice';
 import { ROUTES } from '@/shared/lib/constants';
 import { useDebounce } from '@/shared/hooks/useDebounce';
+import { useAppDispatch } from '@/store/hooks';
 
 import { Logo } from '../Logo'
 import { Input } from "../Input";
@@ -17,6 +19,7 @@ import { Popover } from '../Popover';
 
 export const Header = ({ isAuth, user, onSearch, categories, notify, hasNotifications = false }: HeaderProps) => {
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
     const [query, setQuery] = useState<string>('');
     const [isSkillsOpen, setIsSkillsOpen] = useState<boolean>(false);
     const [isNotifyOpen, setIsNotifyOpen] = useState<boolean>(false);
@@ -24,6 +27,11 @@ export const Header = ({ isAuth, user, onSearch, categories, notify, hasNotifica
 
     const onQueryChange = (value: string) => {
         setQuery(value);
+    }
+
+    const handleLogout = () => {
+        dispatch(clearUser());
+        navigate(ROUTES.HOME);
     }
 
     useEffect(() => {
@@ -71,7 +79,7 @@ export const Header = ({ isAuth, user, onSearch, categories, notify, hasNotifica
                             
                             <FavoriteButton onClick={() => navigate(ROUTES.FAVORITES)} />
                         </div>
-                        <ProfileUIComponent image={user.photo} name={user.name} />
+                        <ProfileUIComponent image={user.photo} name={user.name} onLogout={handleLogout} />
                     </div>
                     :
                     <div className={styles.authFalse}>

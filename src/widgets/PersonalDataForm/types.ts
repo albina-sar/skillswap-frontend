@@ -1,15 +1,7 @@
-export interface PersonalDataFormValues {
-  email: string
-  name: string
-  dateOfBirth: string
-  gender: string
-  city: string
-  about: string
-  photo: string
-}
+import { Profile } from "@/shared/types"
 
 export interface PersonalDataFormProps {
-  initialValues: PersonalDataFormValues
-  onSubmit: (values: PersonalDataFormValues) => void
+  initialValues: Profile
+  onSubmit: (values: Profile) => void
   onChangePassword?: () => void
 }
