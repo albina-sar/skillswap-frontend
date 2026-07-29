@@ -48,17 +48,27 @@ const handleSearch = () => {}
 export function Layout() {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+
   const isAuth = useAppSelector(selectIsAuth)
   const authUserData = useAppSelector(selectUserData)
   const profile = useAppSelector(selectAccountProfile)
+
   const authUserId = isAuth ? authUserData.id : undefined
+
+  const [notifications, setNotifications] = useState(MOCK_NOTIFICATIONS)
+
+  // Управление меню навыков для Header и Footer
+  const [isHeaderSkillsOpen, setIsHeaderSkillsOpen] = useState(false)
+  const [isFooterSkillsOpen, setIsFooterSkillsOpen] = useState(false)
 
   useEffect(() => {
     dispatch(getUserData())
   }, [dispatch])
 
   useEffect(() => {
-    if (authUserId) dispatch(getAccountProfile(authUserId))
+    if (authUserId) {
+      dispatch(getAccountProfile(authUserId))
+    }
   }, [authUserId, dispatch])
 
   const user =
@@ -68,8 +78,6 @@ export function Layout() {
         ? { ...GUEST_USER, id: authUserData.id, name: authUserData.name }
         : GUEST_USER
 
-  // TODO: весь блок ниже — временная заглушка на локальном useState.
-  const [notifications, setNotifications] = useState(MOCK_NOTIFICATIONS)
   const hasNotifications = notifications.some((item) => !item.isRead)
 
   const handleReadAll = () => {
@@ -93,10 +101,16 @@ export function Layout() {
 
   const handleCategoryClick = (category: Category) => {
     navigateToCatalog(category.id)
+
+    setIsHeaderSkillsOpen(false)
+    setIsFooterSkillsOpen(false)
   }
 
   const handleSubcategoryClick = (subcategory: Subcategory) => {
     navigateToCatalog(subcategory.id)
+
+    setIsHeaderSkillsOpen(false)
+    setIsFooterSkillsOpen(false)
   }
 
   return (
@@ -106,6 +120,8 @@ export function Layout() {
           isAuth={isAuth}
           user={user}
           onSearch={handleSearch}
+          isSkillsOpen={isHeaderSkillsOpen}
+          onSkillsOpenChange={setIsHeaderSkillsOpen}
           categories={
             <CategoryList
               categories={CATEGORIES_DATA}
@@ -129,7 +145,17 @@ export function Layout() {
         <Outlet />
       </div>
 
-      <Footer />
+      <Footer
+        isSkillsOpen={isFooterSkillsOpen}
+        onSkillsOpenChange={setIsFooterSkillsOpen}
+        categories={
+          <CategoryList
+            categories={CATEGORIES_DATA}
+            onCategoryClick={handleCategoryClick}
+            onSubcategoryClick={handleSubcategoryClick}
+          />
+        }
+      />
     </div>
   )
 }
