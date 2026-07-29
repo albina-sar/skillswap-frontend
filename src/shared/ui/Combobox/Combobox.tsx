@@ -49,7 +49,7 @@ export function Combobox({
       </label>
 
       <div className={styles.selectWrapper}>
-        <div className={`${styles.control} ${styles.container} ${error ? styles.comboboxError : ''} ${isOpen ? styles.controlOpen : ''}`}>
+        <div className={`${styles.control} ${error ? styles.comboboxError : ''} ${isOpen ? styles.controlOpen : ''}`}>
           <input
             id={name}
             className={styles.searchInput}
