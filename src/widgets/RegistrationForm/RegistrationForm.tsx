@@ -5,6 +5,7 @@ import { Step2Profile } from './Step2Profile'
 import { Step3Skill } from './Step3Skill'
 import type { RegistrationFormProps, RegistrationFormValues, RegistrationStep } from './types'
 import styles from './RegistrationForm.module.css'
+import * as Yup from 'yup';
 
 const INITIAL_VALUES: RegistrationFormValues = {
   email: '',
@@ -20,6 +21,24 @@ const INITIAL_VALUES: RegistrationFormValues = {
   description: '',
   skillImages: [],
 }
+
+export const step3SkillSchema = Yup.object().shape({
+  title: Yup.string()
+    .min(3, 'Название должно быть не менее 3 символов')
+    .max(50, 'Название не должно превышать 50 символов')
+    .required('Обязательное поле'),
+  categoryId: Yup.string().required('Обязательное поле'),
+  subcategoryId: Yup.string().required('Обязательное поле'),
+  description: Yup.string().max(500, 'Описание не должно превышать 500 символов'),
+  skillImages: Yup.array()
+    .max(2, 'Можно выбрать не более 2 изображений')
+    .of(
+      Yup.object().shape({
+        size: Yup.number().max(2 * 1024 * 1024),
+        type: Yup.string().oneOf(['image/jpeg', 'image/png']),
+      })
+    ),
+});
 
 export function RegistrationForm({
   initialStep = 1,
@@ -56,6 +75,7 @@ export function RegistrationForm({
 
   const validateStep = () => {
     const nextErrors: Record<string, string> = {}
+    let dataToValidate: any = {};
 
     if (step === 1) {
       if (!/^\S+@\S+\.\S+$/.test(values.email)) nextErrors.email = 'Введите корректный email'
@@ -71,13 +91,30 @@ export function RegistrationForm({
     }
 
     if (step === 3) {
-      if (!values.title.trim()) nextErrors.title = 'Введите название навыка'
-      if (!values.categoryId) nextErrors.categoryId = 'Выберите категорию'
-      if (!values.subcategoryId) nextErrors.subcategoryId = 'Выберите подкатегорию'
-      if (!values.description.trim()) nextErrors.description = 'Добавьте описание'
+      dataToValidate = {
+        title: values.title,
+        categoryId: values.categoryId,
+        subcategoryId: values.subcategoryId,
+        description: values.description,
+        skillImages: values.skillImages,
+      };
+
+      try {
+        console.log('dataToValidate:', dataToValidate);
+        step3SkillSchema.validateSync(dataToValidate, { abortEarly: false });
+      } catch (err) {
+        if (err instanceof Yup.ValidationError && err.inner) {
+          err.inner.forEach((validationErr) => {
+            if (validationErr.path) {
+              nextErrors[validationErr.path] = validationErr.message;
+            }
+          });
+        }
+      }
     }
 
     setErrors(nextErrors)
+    console.log('Ошибки:', nextErrors);
     return Object.keys(nextErrors).length === 0
   }
 

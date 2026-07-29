@@ -48,26 +48,28 @@ export function Step3Skill({
         </p>
       </div>
 
-      <div className={`${styles.field} ${errors.categoryId ? styles.comboboxError : ''}`}>
+      <div className={styles.field}>
         <Combobox
           value={categoryId}
           options={categoryOptions}
           label="Категория навыка"
           name="teaching-category"
           onChange={onChangeCategory}
+          error={errors.categoryId}
         />
         <p className={styles.errorSlot} role={errors.categoryId ? 'alert' : undefined}>
           {errors.categoryId || ' '}
         </p>
       </div>
 
-      <div className={`${styles.field} ${errors.subcategoryId ? styles.comboboxError : ''}`}>
+      <div  className={styles.field}>
         <Combobox
           value={subcategoryId}
           options={teachingSubcategoryOptions}
           label="Подкатегория навыка"
           name="teaching-subcategory"
           onChange={onChangeSubcategory}
+          error={errors.subcategoryId}
         />
         <p className={styles.errorSlot} role={errors.subcategoryId ? 'alert' : undefined}>
           {errors.subcategoryId || ' '}
@@ -82,7 +84,7 @@ export function Step3Skill({
           label="Описание"
           placeholder="Коротко опишите, чему можете научить"
           name="registration-description"
-          className={errors.description ? styles.inputError : ''}
+          className={errors.description ? styles.inputError : ''} 
         />
         <p className={styles.errorSlot} role={errors.description ? 'alert' : undefined}>
           {errors.description || ' '}
@@ -103,7 +105,7 @@ export function Step3Skill({
       <Modal isOpen={isCompleteModalOpen} onClose={onCloseCompleteModal}>
         {/* TODO: содержимое модалки ещё не готово — заменить на финальный дизайн */}
         <p>Регистрация завершена</p>
-        <Button type="button" variant="primary" size="large" onClick={onOpenSuccessModal}>
+        <Button type="button" variant="primary" size="large" onClick={onOpenSuccessModal} disabled={Object.keys(errors).length > 0}>
           Готово
         </Button>
       </Modal>
