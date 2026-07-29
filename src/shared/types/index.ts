@@ -10,6 +10,7 @@ export interface Skill {
   authorId: string
   createdAt: string
   likesCount: number
+  learningType: 'learn' | 'teach' | 'any'
 }
 
 // ─── User ────────────────────────────────────────────────
@@ -38,6 +39,17 @@ export interface SwapRequest {
   updatedAt: string
 }
 
+// ─── Notification ───────────────────────────────────────
+export interface Notification {
+  id: string
+  userId: string
+  requestId: string
+  title: string
+  description: string
+  isRead: boolean
+  createdAt: string
+}
+
 // ─── Auth ────────────────────────────────────────────────
 export interface AuthUser {
   id: string
@@ -45,6 +57,14 @@ export interface AuthUser {
   email: string
   token: string
 }
+
+// ─── Account ─────────────────────────────────────────────
+export interface UserAccount extends User {
+  email: string
+  password: string
+}
+
+export type Profile = Omit<UserAccount, 'password'>
 
 // ─── City ────────────────────────────────────────────────
 export type City = {

@@ -6,7 +6,7 @@ import { UserMenu } from './UserMenu'
 import { ProfileUIProps } from './types'
 import styles from './profile.module.css'
 
-export const ProfileUIComponent: FC<ProfileUIProps> = ({ image, name }) => {
+export const ProfileUIComponent: FC<ProfileUIProps> = ({ image, name, onLogout }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const wrapperRef = useRef<HTMLDivElement>(null)
 
@@ -36,7 +36,7 @@ export const ProfileUIComponent: FC<ProfileUIProps> = ({ image, name }) => {
         <Avatar image={image} name={name} size="xs" />
       </button>
 
-      {isMenuOpen && <UserMenu />}
+      {isMenuOpen && <UserMenu onLogout={onLogout} />}
     </div>
   )
 }

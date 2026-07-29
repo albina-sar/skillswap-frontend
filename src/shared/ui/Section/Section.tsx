@@ -12,6 +12,7 @@ export const Section: React.FC<SectionProps> = ({
   titleClassName,
   className,
   children,
+  isExpanded
 }) => {
   return (
     <section className={clsx(styles.section, className)}>
@@ -19,7 +20,7 @@ export const Section: React.FC<SectionProps> = ({
         <h2 className={clsx(styles.title, titleClassName)}>{title}</h2>
         {showAllButton && (
           <Button variant="white" onClick={onSeeAll} image={<ArrowIcon />} imagePosition="right">
-            Смотреть все
+            {!isExpanded ? 'Смотреть все' : 'Свернуть'}
           </Button>
         )}
       </div>

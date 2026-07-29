@@ -6,4 +6,5 @@ export interface SectionProps {
   className?: string
   /* Дочерние элементы — карточки */
   children: React.ReactNode;
+  isExpanded?: boolean;
 }

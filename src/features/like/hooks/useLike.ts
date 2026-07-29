@@ -1,30 +1,25 @@
+import { useCallback, useMemo } from 'react'
 import { useLocalStorage } from '../../../shared/hooks/useLocalStorage'
 
 const LIKED_SKILLS_STORAGE_KEY = 'likedSkills'
 
 export function useLike(skillId: string, baseLikeCount: number) {
-  // Используем общий хук для работы с localStorage
   const [likedSkills, setLikedSkills] = useLocalStorage<string[]>(LIKED_SKILLS_STORAGE_KEY, [])
 
-  // Проверяем, есть ли текущий скилл в списке лайкнутых
-  const isLiked = likedSkills.includes(skillId)
+  // useMemo пересоздаёт Set только при изменении массива
+  const likedSkillsSet = useMemo(() => new Set(likedSkills), [likedSkills])
+  const isLiked = likedSkillsSet.has(skillId)
 
-  // Функция переключения лайка
-  const toggleLike = () => {
-    // Вычисляем новый список на основе текущего состояния
-    let newLikedSkills: string[]
-    if (isLiked) {
-      // Убираем ID из массива
-      newLikedSkills = likedSkills.filter((id) => id !== skillId)
-    } else {
-      // Добавляем ID в массив
-      newLikedSkills = [...likedSkills, skillId]
-    }
-    // Сохраняем в localStorage через общий хук
-    setLikedSkills(newLikedSkills)
-  }
+  // useCallback — функция не пересоздаётся при каждом рендере
+  const toggleLike = useCallback(() => {
+    setLikedSkills((prev) => {
+      if (prev.includes(skillId)) {
+        return prev.filter((id) => id !== skillId)
+      }
+      return [...prev, skillId]
+    })
+  }, [skillId, setLikedSkills])
 
-  // Считаем общее количество: из стора + наш локальный лайк
   const totalLikes = baseLikeCount + (isLiked ? 1 : 0)
 
   return {

@@ -1,0 +1,15 @@
+.page {
+  display: flex;
+  gap: var(--space-lg, 24px);
+  align-items: flex-start;
+  padding: var(--space-lg, 24px) 0;
+}
+
+.sidebar {
+  flex-shrink: 0;
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+}
