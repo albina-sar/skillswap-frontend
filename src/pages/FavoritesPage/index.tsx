@@ -1,6 +1,5 @@
 // TODO: реализовать страницу FavoritesPage
 
-
 export default function FavoritesPage() {
   return (
     <main>
