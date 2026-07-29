@@ -84,7 +84,8 @@ export default function SkillPage() {
             variant="skill"
           />
 
-          <SkillCard skill={skill} isFavorite={false} onFavoriteClick={() => {}} />
+          {/* Убрала isFavorite и onFavoriteClick */}
+          <SkillCard skill={skill} />
         </div>
 
         <Section

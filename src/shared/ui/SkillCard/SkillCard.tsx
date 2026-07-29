@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { fetchUserById } from '@/api/users'
 import { Card } from '@/shared/ui/Card/Card'
 import { Button } from '@/shared/ui/button/button'
-import { LikeButton } from '../likeButton'
+import { SkillLikeButton } from '@/features/like'
 import { ImageGalleryUI } from '@/shared/ui/imageGallery/imageGallery'
 import { ModalExchangeSuggestion } from '@/shared/ui/ModalExchangeSuggestion'
 import { CATEGORIES_DATA, ROUTES } from '@/shared/lib/constants'
@@ -15,10 +15,7 @@ import type { SkillCardProps } from './types'
 
 import styles from './SkillCard.module.css'
 
-import shareIcon from '@/shared/assets/icons/share.svg'
-import moreIcon from '@/shared/assets/icons/more-square.svg'
-
-export function SkillCard({ skill, isFavorite, onFavoriteClick }: SkillCardProps) {
+export function SkillCard({ skill }: SkillCardProps) {
   const navigate = useNavigate()
   const location = useLocation()
   const [isModalOpened, setIsModalOpened] = useState(false)
@@ -65,19 +62,7 @@ export function SkillCard({ skill, isFavorite, onFavoriteClick }: SkillCardProps
       <Card className={styles.card}>
         <div className={styles.actionsRow}>
           <div className={styles.actions}>
-            <LikeButton
-              isLiked={isFavorite}
-              likeCount={skill.likesCount}
-              onToggle={onFavoriteClick}
-            />
-
-            <button type="button" className={styles.iconButton} aria-label="Поделиться">
-              <img src={shareIcon} alt="" />
-            </button>
-
-            <button type="button" className={styles.iconButton} aria-label="Дополнительное меню">
-              <img src={moreIcon} alt="" />
-            </button>
+            <SkillLikeButton skillId={skill.id} baseLikeCount={skill.likesCount} />
           </div>
         </div>
 
