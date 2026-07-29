@@ -4,16 +4,16 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { fetchUserById } from '@/api/users'
 import { getAuthUser } from '@/features/auth/model/authUtils'
 import { useSwapRequest } from '@/features/requests'
+import { SkillLikeButton } from '@/features/like'
 import { CATEGORIES_DATA, ROUTES } from '@/shared/lib/constants'
 import { Button } from '@/shared/ui/button/button'
 import { Card } from '@/shared/ui/Card/Card'
-import { LikeButton } from '../likeButton'
 
 import type { SkillCardProps } from './types'
 
 import styles from './SkillCard.module.css'
 
-export function SkillCard({ skill, isFavorite, onFavoriteClick }: SkillCardProps) {
+export function SkillCard({ skill }: SkillCardProps) {
   const navigate = useNavigate()
   const location = useLocation()
   const [isModalOpened, setIsModalOpened] = useState(false)
@@ -60,11 +60,7 @@ export function SkillCard({ skill, isFavorite, onFavoriteClick }: SkillCardProps
       {/* Верхняя часть: лайк */}
       <div className={styles.actionsRow}>
         <div className={styles.actions}>
-          <LikeButton
-            skillId={skill.id}
-            isFavorite={isFavorite}
-            onFavoriteClick={onFavoriteClick}
-          />
+          <SkillLikeButton skillId={skill.id} baseLikeCount={skill.likesCount} />
         </div>
       </div>
 
@@ -101,15 +97,10 @@ export function SkillCard({ skill, isFavorite, onFavoriteClick }: SkillCardProps
               {isProposed ? 'Обмен предложен' : 'Предложить обмен'}
             </Button>
           </div>
-
-          <Button variant="primary" size="large" className={styles.exchangeButton}>
-            Предложить обмен
-          </Button>
         </div>
 
         {/* Галерея (заглушка) */}
         <div className={styles.gallery}>
-          {/* TODO: добавить галерею изображений */}
           <div
             style={{
               width: '100%',
