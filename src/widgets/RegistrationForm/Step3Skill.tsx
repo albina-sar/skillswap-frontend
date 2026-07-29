@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import { Button } from '@/shared/ui/button/button'
 import { Combobox } from '@/shared/ui/Combobox'
 import { ImageUpload } from '@/shared/ui/ImageUpload'
@@ -92,6 +92,9 @@ export function Step3Skill({
       </div>
 
       <ImageUpload className={styles.imageUpload} onChange={onChangeImages} accept="image/jpeg,image/png" />
+      <p className={styles.errorSlot} role={errors.description ? 'alert' : undefined}>
+          {errors.skillImages || ' '}
+      </p>
 
       <div className={styles.actions}>
         <Button type="button" variant="outline" size="large" onClick={onBack}>

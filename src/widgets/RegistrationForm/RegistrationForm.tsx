@@ -30,14 +30,18 @@ export const step3SkillSchema = Yup.object().shape({
   categoryId: Yup.string().required('Обязательное поле'),
   subcategoryId: Yup.string().required('Обязательное поле'),
   description: Yup.string().max(500, 'Описание не должно превышать 500 символов'),
-  skillImages: Yup.array()
-    .max(2, 'Можно выбрать не более 2 изображений')
+  skillImages: Yup.array().min(1, 'Добавьте хотя бы одно изображение')
     .of(
-      Yup.object().shape({
-        size: Yup.number().max(2 * 1024 * 1024),
-        type: Yup.string().oneOf(['image/jpeg', 'image/png']),
-      })
-    ),
+      Yup.mixed()
+        .test('fileSize', 'Файл должен быть не более 2 МБ', (file) => {
+          if (!file) return true;
+          return file.size <= 2 * 1024 * 1024; // 2 Мб
+        })
+        .test('fileType', 'Файл должен иметь формат JPEG или PNG', (file) => {
+          if (!file) return true;
+          return ['image/jpeg', 'image/jpg', 'image/png'].includes(file.type);
+        })
+    )
 });
 
 export function RegistrationForm({
@@ -96,17 +100,25 @@ export function RegistrationForm({
         categoryId: values.categoryId,
         subcategoryId: values.subcategoryId,
         description: values.description,
-        skillImages: values.skillImages,
+        skillImages: Array.isArray(values.skillImages) ? values.skillImages : [],
       };
 
       try {
-        console.log('dataToValidate:', dataToValidate);
         step3SkillSchema.validateSync(dataToValidate, { abortEarly: false });
       } catch (err) {
         if (err instanceof Yup.ValidationError && err.inner) {
           err.inner.forEach((validationErr) => {
-            if (validationErr.path) {
-              nextErrors[validationErr.path] = validationErr.message;
+            let path = validationErr.path;
+            if (path && path.startsWith('skillImages[')) {
+              path = 'skillImages';
+            }
+            if (path === 'skillImages') {
+              if (!nextErrors.skillImages) {
+                nextErrors.skillImages = 'd';
+              }
+              nextErrors.skillImages = validationErr.message;
+            } else if (path) {
+              nextErrors[path] = validationErr.message;
             }
           });
         }
