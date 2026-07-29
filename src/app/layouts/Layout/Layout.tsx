@@ -43,7 +43,6 @@ const GUEST_USER: User = {
   wantsToLearn: [],
 }
 
-const handleSearch = () => {}
 const handleCategoryClick = () => {}
 const handleSubcategoryClick = () => {}
 
@@ -87,7 +86,6 @@ export function Layout() {
         <Header
           isAuth={isAuth}
           user={user}
-          onSearch={handleSearch}
           categories={
             <CategoryList
               categories={CATEGORIES_DATA}
