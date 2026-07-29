@@ -24,6 +24,7 @@
 
 .slideImg {
   height:100%;
+  width:100%;
   border-radius: 12px;
   object-fit: cover;
 }
