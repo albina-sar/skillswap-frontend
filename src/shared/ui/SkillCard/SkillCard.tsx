@@ -2,12 +2,14 @@ import { useEffect, useMemo, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 import { fetchUserById } from '@/api/users'
+import { Card } from '@/shared/ui/Card/Card'
+import { Button } from '@/shared/ui/button/button'
+import { SkillLikeButton } from '@/features/like'
+import { ImageGalleryUI } from '@/shared/ui/imageGallery/imageGallery'
+import { ModalExchangeSuggestion } from '@/shared/ui/ModalExchangeSuggestion'
+import { CATEGORIES_DATA, ROUTES } from '@/shared/lib/constants'
 import { getAuthUser } from '@/features/auth/model/authUtils'
 import { useSwapRequest } from '@/features/requests'
-import { SkillLikeButton } from '@/features/like'
-import { CATEGORIES_DATA, ROUTES } from '@/shared/lib/constants'
-import { Button } from '@/shared/ui/button/button'
-import { Card } from '@/shared/ui/Card/Card'
 
 import type { SkillCardProps } from './types'
 
@@ -56,25 +58,34 @@ export function SkillCard({ skill }: SkillCardProps) {
   )
 
   return (
-    <Card className={styles.card}>
-      {/* Верхняя часть: лайк */}
-      <div className={styles.actionsRow}>
-        <div className={styles.actions}>
-          <SkillLikeButton skillId={skill.id} baseLikeCount={skill.likesCount} />
+    <>
+      <Card className={styles.card}>
+        <div className={styles.actionsRow}>
+          <div className={styles.actions}>
+            <SkillLikeButton skillId={skill.id} baseLikeCount={skill.likesCount} />
+          </div>
         </div>
-      </div>
 
-      {/* Основной контент */}
-      <div className={styles.content}>
-        <div className={styles.info}>
-          <div className={styles.top}>
-            <div className={styles.header}>
-              <h2 className={styles.title}>{skill.title}</h2>
-              <p className={styles.category}>
-                {category?.name}
-                <span className={styles.separator}>/</span>
-                {subcategory?.name}
-              </p>
+        <div className={styles.content}>
+          <div className={styles.info}>
+            <div className={styles.top}>
+              <div className={styles.header}>
+                <div>
+                  <h1 className={styles.title}>{skill.title}</h1>
+
+                  <p className={styles.category}>
+                    {category?.name}
+                    {subcategory && (
+                      <>
+                        <span className={styles.separator}> / </span>
+                        {subcategory.name}
+                      </>
+                    )}
+                  </p>
+                </div>
+              </div>
+
+              <p className={styles.description}>{skill.description}</p>
             </div>
 
             <Button
@@ -97,26 +108,17 @@ export function SkillCard({ skill }: SkillCardProps) {
               {isProposed ? 'Обмен предложен' : 'Предложить обмен'}
             </Button>
           </div>
-        </div>
 
-        {/* Галерея (заглушка) */}
-        <div className={styles.gallery}>
-          <div
-            style={{
-              width: '100%',
-              height: '100%',
-              background: '#f0f0f0',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              borderRadius: '8px',
-              color: '#999',
-            }}
-          >
-            📸 Изображения
+          <div className={styles.gallery}>
+            <ImageGalleryUI images={skill.imageUrl} />
           </div>
         </div>
-      </div>
-    </Card>
+      </Card>
+
+      <ModalExchangeSuggestion
+        isModalOpened={isModalOpened}
+        onCloseModal={() => setIsModalOpened(false)}
+      />
+    </>
   )
 }
