@@ -26,9 +26,16 @@ export function AppRouter() {
           <Route element={<Layout />}>
             <Route path={ROUTES.HOME} element={<CatalogPage />} />
             <Route path={ROUTES.SKILL} element={<SkillPage />} />
-            <Route path={ROUTES.FAVORITES} element={<FavoritesPage />} />
 
             {/* Защищённые маршруты */}
+            <Route
+              path={ROUTES.FAVORITES}
+              element={
+                <PrivateRoute>
+                  <FavoritesPage />
+                </PrivateRoute>
+              }
+            />
             <Route
               path={ROUTES.PROFILE}
               element={
