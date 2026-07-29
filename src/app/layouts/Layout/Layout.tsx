@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import { getAccountProfile, selectAccountProfile } from '@/entities/account/model/accountSlice'
 import { getUserData, selectIsAuth, selectUserData } from '@/entities/auth/model/authSlice'
 import { CATEGORIES_DATA } from '@/shared/lib/constants'
-import type { User } from '@/shared/types'
+import type { Category, Subcategory, User } from '@/shared/types'
 import { CategoryList } from '@/shared/ui/CategoryList'
 import { Footer } from '@/shared/ui/Footer'
 import { Header } from '@/shared/ui/Header'
@@ -44,11 +44,10 @@ const GUEST_USER: User = {
 }
 
 const handleSearch = () => {}
-const handleCategoryClick = () => {}
-const handleSubcategoryClick = () => {}
 
 export function Layout() {
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
   const isAuth = useAppSelector(selectIsAuth)
   const authUserData = useAppSelector(selectUserData)
   const profile = useAppSelector(selectAccountProfile)
@@ -79,6 +78,25 @@ export function Layout() {
 
   const handleClearNotifications = () => {
     setNotifications((prev) => prev.filter((item) => !item.isRead))
+  }
+
+  const navigateToCatalog = (skillId: string) => {
+    const params = new URLSearchParams({
+      skills: skillId,
+    })
+
+    navigate({
+      pathname: '/',
+      search: params.toString(),
+    })
+  }
+
+  const handleCategoryClick = (category: Category) => {
+    navigateToCatalog(category.id)
+  }
+
+  const handleSubcategoryClick = (subcategory: Subcategory) => {
+    navigateToCatalog(subcategory.id)
   }
 
   return (
