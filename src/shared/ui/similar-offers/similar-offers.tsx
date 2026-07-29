@@ -1,5 +1,4 @@
 import { FC, useCallback, useEffect, useRef, useState } from 'react'
-import { Heading } from '../Heading'
 import styles from './similar-offers.module.css'
 import { UserCardElement } from '@/components/usercard-element/usercard-elemetn'
 import useEmblaCarousel from 'embla-carousel-react'
