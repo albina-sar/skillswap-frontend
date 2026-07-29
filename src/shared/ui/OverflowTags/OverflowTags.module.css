@@ -1,24 +1,30 @@
-.tagsWrapper {
+.wrapper {
+  position: relative;
   width: 100%;
-  overflow: hidden;
+  min-width: 0;
 }
 
 .tags {
   display: flex;
   gap: 8px;
   width: 100%;
-  overflow: hidden;
+}
+
+.tags > * {
+  flex-shrink: 0;
+}
+
+.wrap {
+  flex-wrap: wrap;
 }
 
 .measure {
   position: absolute;
+  top: 0;
+  left: 0;
   visibility: hidden;
   display: flex;
   gap: 8px;
   width: 100%;
-}
-
-.wrap {
-  overflow: visible;
-  flex-wrap: wrap;
+  pointer-events: none;
 }
