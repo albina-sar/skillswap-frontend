@@ -8,9 +8,10 @@ import { useLike } from '../hooks'
 interface SkillLikeButtonProps {
   skillId: string
   baseLikeCount: number
+  disabled?: boolean
 }
 
-export function SkillLikeButton({ skillId, baseLikeCount }: SkillLikeButtonProps) {
+export function SkillLikeButton({ skillId, baseLikeCount, disabled = false }: SkillLikeButtonProps) {
   // Подключаем нашу логику
   const { isLiked, totalLikes, toggleLike } = useLike(skillId, baseLikeCount)
 
@@ -22,6 +23,11 @@ export function SkillLikeButton({ skillId, baseLikeCount }: SkillLikeButtonProps
   const location = useLocation()
 
   const handleLikeClick = () => {
+    // Нельзя лайкнуть собственный навык
+    if (disabled) {
+      return
+    }
+
     // Если проверка авторизации еще не завершилась, игнорируем клик
     if (!isAuthChecked) {
       return
@@ -39,5 +45,12 @@ export function SkillLikeButton({ skillId, baseLikeCount }: SkillLikeButtonProps
   // Рендерим готовую UI-кнопку из shared
   const isVisibleLiked = isAuth && isLiked
 
-return <LikeButton isLiked={isVisibleLiked} likeCount={totalLikes} onToggle={handleLikeClick} />
+  return (
+    <LikeButton
+      isLiked={isVisibleLiked}
+      likeCount={totalLikes}
+      onToggle={handleLikeClick}
+      disabled={disabled}
+    />
+  )
 }

@@ -22,6 +22,7 @@ export function SkillCard({ skill }: SkillCardProps) {
   const [recipientName, setRecipientName] = useState('Пользователь')
   const [isRecipientLoading, setIsRecipientLoading] = useState(true)
   const authUser = getAuthUser()
+  const isOwnSkill = Boolean(authUser && authUser.id === skill.authorId)
   const { isProposed, proposeExchange } = useSwapRequest({
     skillId: skill.id,
     fromUserId: authUser?.id ?? '',
@@ -62,7 +63,11 @@ export function SkillCard({ skill }: SkillCardProps) {
       <Card className={styles.card}>
         <div className={styles.actionsRow}>
           <div className={styles.actions}>
-            <SkillLikeButton skillId={skill.id} baseLikeCount={skill.likesCount} />
+            <SkillLikeButton
+              skillId={skill.id}
+              baseLikeCount={skill.likesCount}
+              disabled={isOwnSkill}
+            />
           </div>
         </div>
 
@@ -91,7 +96,7 @@ export function SkillCard({ skill }: SkillCardProps) {
             <Button
               variant="primary"
               size="large"
-              disabled={isProposed || isRecipientLoading}
+              disabled={isOwnSkill || isProposed || isRecipientLoading}
               onClick={() => {
                 if (!authUser) {
                   navigate(ROUTES.LOGIN, {
@@ -100,12 +105,16 @@ export function SkillCard({ skill }: SkillCardProps) {
                   return
                 }
 
+                if (isOwnSkill) {
+                  return
+                }
+
                 proposeExchange()
                 setIsModalOpened(true)
               }}
               className={styles.exchangeButton}
             >
-              {isProposed ? 'Обмен предложен' : 'Предложить обмен'}
+              {isOwnSkill ? 'Ваш навык' : isProposed ? 'Обмен предложен' : 'Предложить обмен'}
             </Button>
           </div>
 

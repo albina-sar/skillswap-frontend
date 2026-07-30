@@ -3,7 +3,12 @@ import clsx from 'clsx'
 import styles from './LikeButton.module.css'
 import type { LikeButtonProps } from './types'
 
-export const LikeButton: React.FC<LikeButtonProps> = ({ isLiked, likeCount, onToggle }) => {
+export const LikeButton: React.FC<LikeButtonProps> = ({
+  isLiked,
+  likeCount,
+  onToggle,
+  disabled = false,
+}) => {
   return (
     <button
       type="button"
@@ -11,6 +16,7 @@ export const LikeButton: React.FC<LikeButtonProps> = ({ isLiked, likeCount, onTo
         [styles.liked]: isLiked,
       })}
       onClick={onToggle}
+      disabled={disabled}
       aria-label={isLiked ? 'Убрать лайк' : 'Поставить лайк'}
     >
       <span className={styles.count}>{likeCount}</span>
