@@ -22,6 +22,14 @@ const INITIAL_VALUES: RegistrationFormValues = {
   skillImages: [],
 }
 
+type DataToValidate = {
+  title: string;
+  categoryId: string;
+  subcategoryId: string;
+  description: string;
+  skillImages: File[];
+};
+
 export const step3SkillSchema = Yup.object().shape({
   title: Yup.string()
     .min(3, 'Название должно быть не менее 3 символов')
@@ -32,7 +40,7 @@ export const step3SkillSchema = Yup.object().shape({
   description: Yup.string().max(500, 'Описание не должно превышать 500 символов'),
   skillImages: Yup.array().min(1, 'Добавьте хотя бы одно изображение')
     .of(
-      Yup.mixed()
+      Yup.mixed<File>()
         .test('fileSize', 'Файл должен быть не более 2 МБ', (file) => {
           if (!file) return true;
           return file.size <= 2 * 1024 * 1024; // 2 Мб
@@ -79,7 +87,6 @@ export function RegistrationForm({
 
   const validateStep = () => {
     const nextErrors: Record<string, string> = {}
-    let dataToValidate: any = {};
 
     if (step === 1) {
       if (!/^\S+@\S+\.\S+$/.test(values.email)) nextErrors.email = 'Введите корректный email'
@@ -95,7 +102,7 @@ export function RegistrationForm({
     }
 
     if (step === 3) {
-      dataToValidate = {
+      let dataToValidate: DataToValidate = {
         title: values.title,
         categoryId: values.categoryId,
         subcategoryId: values.subcategoryId,
