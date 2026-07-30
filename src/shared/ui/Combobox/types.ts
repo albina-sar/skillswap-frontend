@@ -10,4 +10,5 @@ export interface ComboboxProps {
   name: string
   searchable?: boolean
   onChange: (value: string) => void
+  error?: string
 }

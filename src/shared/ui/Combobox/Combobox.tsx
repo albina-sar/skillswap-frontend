@@ -11,6 +11,7 @@ export function Combobox({
   name,
   searchable = false,
   onChange,
+  error,
 }: ComboboxProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [query, setQuery] = useState('')
@@ -48,7 +49,7 @@ export function Combobox({
       </label>
 
       <div className={styles.selectWrapper}>
-        <div className={`${styles.control} ${isOpen ? styles.controlOpen : ''}`}>
+        <div className={`${styles.control} ${error ? styles.comboboxError : ''} ${isOpen ? styles.controlOpen : ''}`}>
           <input
             id={name}
             className={styles.searchInput}

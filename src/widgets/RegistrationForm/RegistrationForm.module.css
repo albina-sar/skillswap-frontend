@@ -58,8 +58,8 @@
 }
 
 .inputError input,
-.calendarError input,
-.comboboxError button {
+.inputError textarea,
+.calendarError input {
   border-color: var(--error);
 }
 

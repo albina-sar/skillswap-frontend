@@ -10,13 +10,11 @@ export const NotificationsContent = ({
   onReadAll,
   onClear,
 }: NotificationsContentProps) => {
-  // Фильтруем уведомления по isRead
   const newNotifications = notifications.filter((n) => !n.isRead)
   const viewedNotifications = notifications.filter((n) => n.isRead)
 
   return (
     <div className={styles.container}>
-      {/* Заголовок: Новые уведомления */}
       <div className={styles.sectionHeader}>
         <h2 className={styles.sectionTitle}>Новые уведомления</h2>
         <button className={styles.linkButton} onClick={onReadAll}>
@@ -24,7 +22,6 @@ export const NotificationsContent = ({
         </button>
       </div>
 
-      {/* Список новых уведомлений */}
       {newNotifications.length > 0 ? (
         <div className={styles.notificationList}>
           {newNotifications.map((item) => (
@@ -39,7 +36,6 @@ export const NotificationsContent = ({
         <p className={styles.emptyState}>Новых уведомлений нет</p>
       )}
 
-      {/* Просмотренные */}
       <div className={styles.sectionHeader}>
         <h3 className={styles.sectionTitle}>Просмотренные</h3>
         <button className={styles.linkButton} onClick={onClear}>
@@ -65,7 +61,6 @@ export const NotificationsContent = ({
   )
 }
 
-// Карточка уведомления
 interface NotificationCardProps {
   item: NotificationItem
   onAction?: (id: string) => void
@@ -80,7 +75,7 @@ const NotificationCard = ({ item, onAction, isViewed = false }: NotificationCard
         <div className={styles.cardTextWrapper}>
           <div className={styles.cardHeader}>
             <span className={clsx(styles.cardText, styles.cardTitle)}>
-              {item.senderName} {item.title}
+              {item.title}
             </span>
             <span className={clsx(styles.cardText, styles.cardDate)}>{item.date}</span>
           </div>

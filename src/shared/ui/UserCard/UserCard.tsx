@@ -5,6 +5,8 @@ import { Tag } from '@/shared/ui/Tag'
 import { SkillLikeButton } from '@/features/like'
 import type { Skill, Subcategory, User } from '@/shared/types'
 import { OverflowTags } from '@/shared/ui/OverflowTags'
+import { getAuthUser } from '@/features/auth/model/authUtils'
+import { useSwapRequest } from '@/features/requests'
 
 import styles from './UserCard.module.css'
 
@@ -71,8 +73,18 @@ export function UserCard({
 }: UserCardProps) {
   const age = getAge(user.dateOfBirth)
 
+  const authUser = getAuthUser()
+
+  const { isProposed } = useSwapRequest({
+    skillId: teachSkill.id,
+    fromUserId: authUser?.id ?? '',
+    toUserId: user.id,
+    senderName: authUser?.name ?? 'Пользователь',
+    recipientName: user.name,
+  })
+
   return (
-    <Card className={styles.userCard}>
+    <Card className={`${styles.userCard} ${variant === 'skill' ? styles.skillCard : ''}`}>
       <header className={styles.header}>
         <div className={styles.user}>
           <AvatarUI image={user.photo} name={user.name} size="md" />
@@ -123,8 +135,14 @@ export function UserCard({
         </div>
 
         {variant === 'catalog' && (
-          <Button className={styles.button} variant="primary" size="large" onClick={onDetailsClick}>
-            Подробнее
+          <Button
+            className={styles.button}
+            variant="primary"
+            size="large"
+            disabled={isProposed}
+            onClick={onDetailsClick}
+          >
+            {isProposed ? 'Обмен предложен' : 'Подробнее'}
           </Button>
         )}
       </div>

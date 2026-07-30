@@ -3,4 +3,5 @@ import { FilterGroupConfig, FiltersState } from "@/features/filters/model/filter
 export type FilterSectionProps = {
   groups: FilterGroupConfig[];
   onFiltersChange: (values: FiltersState) => void;
+  values: FiltersState
 };

@@ -61,26 +61,28 @@ const previewImages = useMemo(
         </p>
       </div>
 
-      <div className={`${styles.field} ${errors.categoryId ? styles.comboboxError : ''}`}>
+      <div className={styles.field}>
         <Combobox
           value={categoryId}
           options={categoryOptions}
           label="Категория навыка"
           name="teaching-category"
           onChange={onChangeCategory}
+          error={errors.categoryId}
         />
         <p className={styles.errorSlot} role={errors.categoryId ? 'alert' : undefined}>
           {errors.categoryId || ' '}
         </p>
       </div>
 
-      <div className={`${styles.field} ${errors.subcategoryId ? styles.comboboxError : ''}`}>
+      <div  className={styles.field}>
         <Combobox
           value={subcategoryId}
           options={teachingSubcategoryOptions}
           label="Подкатегория навыка"
           name="teaching-subcategory"
           onChange={onChangeSubcategory}
+          error={errors.subcategoryId}
         />
         <p className={styles.errorSlot} role={errors.subcategoryId ? 'alert' : undefined}>
           {errors.subcategoryId || ' '}
@@ -95,7 +97,7 @@ const previewImages = useMemo(
           label="Описание"
           placeholder="Коротко опишите, чему можете научить"
           name="registration-description"
-          className={errors.description ? styles.inputError : ''}
+          className={errors.description ? styles.inputError : ''} 
         />
         <p className={styles.errorSlot} role={errors.description ? 'alert' : undefined}>
           {errors.description || ' '}
@@ -103,6 +105,9 @@ const previewImages = useMemo(
       </div>
 
       <ImageUpload className={styles.imageUpload} onChange={onChangeImages} accept="image/jpeg,image/png" />
+      <p className={styles.errorSlot} role={errors.skillImages ? 'alert' : undefined}>
+          {errors.skillImages || ' '}
+      </p>
 
       <div className={styles.actions}>
         <Button type="button" variant="outline" size="large" onClick={onBack}>
@@ -124,6 +129,7 @@ const previewImages = useMemo(
     onDone={onOpenSuccessModal}
   />
 </Modal>
+
 
       <ModalSuccessSuggestion isModalOpened={isSuccessModalOpen} onCloseModal={onCloseSuccessModal} />
     </>

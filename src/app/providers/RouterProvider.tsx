@@ -1,9 +1,13 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, useEffect } from 'react'
 import { ROUTES } from '@/shared/lib/constants'
 import { Layout } from '@/app/layouts/Layout'
+import { useAppDispatch } from '@/store/hooks'
+import { fetchUsersThunk } from '@/entities/user/model/usersSlice'
+import { loadSkills } from '@/entities/skill/model/skillsSlice'
 import { PrivateRoute } from './PrivateRoute'
 import { OnlyUnAuth } from './OnlyUnAuth'
+
 
 // Lazy-загрузка страниц — каждая страница грузится только при переходе на неё
 const CatalogPage = lazy(() => import('@/pages/CatalogPage'))
@@ -16,6 +20,14 @@ const RegistrationPage = lazy(() => import('@/pages/RegistrationPage'))
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'))
 
 export function AppRouter() {
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+      dispatch(fetchUsersThunk())
+      dispatch(loadSkills())
+    }, [dispatch])
+
   return (
     <BrowserRouter>
       <Suspense fallback={<div>Загрузка...</div>}>
