@@ -3,7 +3,7 @@ import { Outlet, useNavigate } from 'react-router-dom'
 import { getAccountProfile, selectAccountProfile } from '@/entities/account/model/accountSlice'
 import { getUserData, selectIsAuth, selectUserData } from '@/entities/auth/model/authSlice'
 import { CATEGORIES_DATA, LOCAL_STORAGE_KEYS, ROUTES } from '@/shared/lib/constants'
-import type { Notification, User } from '@/shared/types'
+import type { Notification, SwapRequest, User } from '@/shared/types'
 import { CategoryList } from '@/shared/ui/CategoryList'
 import { Footer } from '@/shared/ui/Footer'
 import { Header } from '@/shared/ui/Header'
@@ -35,6 +35,39 @@ const getNotificationsFromStorage = (): Notification[] => {
   } catch {
     return []
   }
+}
+
+// ФУНКЦИЯ ФОРМАТИРОВАНИЯ ДАТЫ С "СЕГОДНЯ"/"ВЧЕРА"/"ЗАВТРА"
+const formatNotificationDate = (dateString: string): string => {
+  const date = new Date(dateString)
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+
+  const yesterday = new Date(today)
+  yesterday.setDate(yesterday.getDate() - 1)
+
+  const tomorrow = new Date(today)
+  tomorrow.setDate(tomorrow.getDate() + 1)
+
+  const targetDate = new Date(date)
+  targetDate.setHours(0, 0, 0, 0)
+
+  if (targetDate.getTime() === today.getTime()) {
+    return 'Сегодня'
+  }
+
+  if (targetDate.getTime() === yesterday.getTime()) {
+    return 'Вчера'
+  }
+
+  if (targetDate.getTime() === tomorrow.getTime()) {
+    return 'Завтра'
+  }
+
+  return new Intl.DateTimeFormat('ru-RU', {
+    day: 'numeric',
+    month: 'long',
+  }).format(date)
 }
 
 export function Layout() {
@@ -89,28 +122,19 @@ export function Layout() {
         ? { ...GUEST_USER, id: authUserData.id, name: authUserData.name }
         : GUEST_USER
 
-  // Фильтруем уведомления для текущего пользователя
+  // ФОРМИРУЕМ УВЕДОМЛЕНИЯ ДЛЯ ПОЛЬЗОВАТЕЛЯ
   const userNotifications = notifications
     .filter((n) => n.userId === authUserId)
     .map((n) => ({
       id: n.id,
-      senderName: n.title.split(' ')[0] || 'Пользователь', // заглушка
+      senderName: n.title.split(' ')[0] || 'Пользователь',
       title: n.title,
       description: n.description,
-      date: formatDate(n.createdAt),
+      date: formatNotificationDate(n.createdAt),
       isRead: n.isRead,
     }))
 
   const hasNotifications = userNotifications.some((item) => !item.isRead)
-
-  // Форматируем дату
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString)
-    return new Intl.DateTimeFormat('ru-RU', {
-      day: 'numeric',
-      month: 'long',
-    }).format(date)
-  }
 
   // Обработчик "Прочитать все"
   const handleReadAll = () => {
@@ -132,20 +156,27 @@ export function Layout() {
     window.dispatchEvent(new Event('skillswap:notifications-changed'))
   }
 
-  // Обработчик "Перейти" — переход на страницу навыка
+  // ОБРАБОТЧИК "ПЕРЕЙТИ" (с типизированными запросами)
   const handleNotificationAction = (id: string) => {
-    // Ищем уведомление по id
     const notification = notifications.find((n) => n.id === id)
-    if (notification) {
-      // Ищем запрос по requestId, чтобы получить skillId
-      const requests = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEYS.REQUESTS) ?? '[]')
-      const request = requests.find((r: any) => r.id === notification.requestId)
-      if (request) {
-        navigate(`${ROUTES.SKILL.replace(':id', request.skillId)}`)
-        return
-      }
+
+    if (!notification) {
+      navigate(ROUTES.HOME)
+      return
     }
-    // fallback — на главную
+
+    // Получаем все запросы из localStorage
+    const requestsData = localStorage.getItem(LOCAL_STORAGE_KEYS.REQUESTS) ?? '[]'
+    const requests: SwapRequest[] = JSON.parse(requestsData)
+
+    // Находим запрос по requestId
+    const request = requests.find((r: SwapRequest) => r.id === notification.requestId)
+
+    if (request) {
+      navigate(`${ROUTES.SKILL.replace(':id', request.skillId)}`)
+      return
+    }
+
     navigate(ROUTES.HOME)
   }
 
