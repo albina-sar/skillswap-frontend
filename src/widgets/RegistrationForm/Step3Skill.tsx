@@ -92,7 +92,7 @@ export function Step3Skill({
       </div>
 
       <ImageUpload className={styles.imageUpload} onChange={onChangeImages} accept="image/jpeg,image/png" />
-      <p className={styles.errorSlot} role={errors.description ? 'alert' : undefined}>
+      <p className={styles.errorSlot} role={errors.skillImages ? 'alert' : undefined}>
           {errors.skillImages || ' '}
       </p>
 

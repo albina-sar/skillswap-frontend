@@ -126,7 +126,6 @@ export function RegistrationForm({
     }
 
     setErrors(nextErrors)
-    console.log('Ошибки:', nextErrors);
     return Object.keys(nextErrors).length === 0
   }
 
