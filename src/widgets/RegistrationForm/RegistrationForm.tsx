@@ -120,9 +120,6 @@ export function RegistrationForm({
               path = 'skillImages';
             }
             if (path === 'skillImages') {
-              if (!nextErrors.skillImages) {
-                nextErrors.skillImages = 'd';
-              }
               nextErrors.skillImages = validationErr.message;
             } else if (path) {
               nextErrors[path] = validationErr.message;
