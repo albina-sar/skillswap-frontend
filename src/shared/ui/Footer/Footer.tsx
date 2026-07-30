@@ -59,3 +59,4 @@ export function Footer({ categories, isSkillsOpen, onSkillsOpenChange }: FooterP
     </footer>
   )
 }
+

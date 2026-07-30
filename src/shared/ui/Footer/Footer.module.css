@@ -3,6 +3,7 @@
   height: 232px;
   background-color: var(--background-secondary);
   position: relative;
+  min-width: 1440px;
 }
 
 .inner {

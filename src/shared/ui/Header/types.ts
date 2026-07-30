@@ -9,3 +9,4 @@ export type HeaderProps = {
   isSkillsOpen: boolean
   onSkillsOpenChange: (value: boolean) => void
 }
+
