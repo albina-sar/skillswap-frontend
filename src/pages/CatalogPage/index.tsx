@@ -10,9 +10,20 @@ import { Section } from '@/shared/ui/Section'
 import { UserCard } from '@/shared/ui/UserCard'
 import { FilterSection } from '@/shared/ui/filter-section'
 import { useCatalogFilters } from './hooks/useCatalogFilters'
-import { filterGroups } from '@/features/filters/model/filterGroups'
+import {
+  filterGroups,
+  getDefaultFilterValues,
+} from '@/features/filters/model/filterGroups'
+import { allSubcategoriesMap, categoriesMap, citiesMap } from './lib/maps'
 
 import styles from './CatalogPage.module.css'
+
+type ActiveFilter = {
+  groupId: string
+  value: string
+  label: string
+  type: 'radio' | 'checkbox'
+}
 
 const CARDS_PER_PAGE = 20
 const RECOMMENDED_INITIAL_COUNT = 3
@@ -57,6 +68,70 @@ export default function CatalogPage() {
   const { filteredSkills, filters, handleFiltersChange } = useCatalogFilters(
     selectedSkillId ?? undefined,
   )
+  const defaultFilters = useMemo(() => getDefaultFilterValues(filterGroups), [])
+
+const activeFilters = useMemo(() => {
+  const result: ActiveFilter[] = []
+
+  filterGroups.forEach((group) => {
+    const value = filters[group.id]
+    const defaultValue = defaultFilters[group.id]
+
+    if (group.type === 'radio') {
+      if (value !== defaultValue) {
+        const option = group.options.find((item) => item.id === value)
+
+        result.push({
+          groupId: group.id,
+          value: value as string,
+          label: option?.name ?? String(value),
+          type: 'radio',
+        })
+      }
+
+      return
+    }
+
+    if (Array.isArray(value)) {
+      value.forEach((item) => {
+        const category = categoriesMap.get(item)
+        const subcategory = allSubcategoriesMap.get(item)
+        const city = citiesMap.get(item)
+
+        result.push({
+          groupId: group.id,
+          value: item,
+          label: category?.name ?? subcategory?.name ?? city ?? item,
+          type: 'checkbox',
+        })
+      })
+    }
+  })
+
+  return result
+}, [filters, defaultFilters])
+const handleRemoveFilter = (filter: ActiveFilter) => {
+  const currentValue = filters[filter.groupId]
+  const defaultValue = defaultFilters[filter.groupId]
+
+  if (filter.type === 'radio') {
+    handleFiltersChange({
+      ...filters,
+      [filter.groupId]: defaultValue,
+    })
+
+    return
+  }
+
+  handleFiltersChange({
+    ...filters,
+    [filter.groupId]: Array.isArray(currentValue)
+      ? currentValue.filter((value) => value !== filter.value)
+      : [],
+  })
+}
+
+const isFiltering = activeFilters.length > 0
 
   const users = useAppSelector(selectUsers)
   const skills = useAppSelector(selectSkills)
@@ -169,77 +244,119 @@ export default function CatalogPage() {
         </aside>
 
         <main className={styles.main}>
-          {/* Популярное */}
-          <Section
-            title="Популярное"
-            showAllButton
-            onSeeAll={() => setIsPopularExpanded(!isPopularExpanded)}
-            isExpanded={isPopularExpanded}
-          >
-            <div className={styles.cardsGrid}>
-              {displayedPopularCards.map(({ user, teachSkill, learnSkills }) => (
-                <UserCard
-                  key={user.id}
-                  user={user}
-                  teachSkill={teachSkill}
-                  learnSkills={learnSkills}
-                  onDetailsClick={() => navigate(`/skill/${teachSkill.id}`)}
-                />
-              ))}
-            </div>
-          </Section>
+  {activeFilters.length > 0 && (
+    <div className={styles.activeFilters}>
+      {activeFilters.map((filter) => (
+        <button
+          key={`${filter.groupId}-${filter.value}`}
+          type="button"
+          className={styles.activeFilter}
+          onClick={() => handleRemoveFilter(filter)}
+        >
+          {filter.label}
+          <span className={styles.activeFilterIcon}>×</span>
+        </button>
+      ))}
+    </div>
+  )}
 
-          {/* Новое */}
-          <Section
-            title="Новое"
-            showAllButton
-            onSeeAll={() => setIsNewExpanded(!isNewExpanded)}
-            isExpanded={isNewExpanded}
-          >
-            <div className={styles.cardsGrid}>
-              {displayedNewCards.map(({ user, teachSkill, learnSkills }) => (
-                <UserCard
-                  key={user.id}
-                  user={user}
-                  teachSkill={teachSkill}
-                  learnSkills={learnSkills}
-                  onDetailsClick={() => navigate(`/skill/${teachSkill.id}`)}
-                />
-              ))}
-            </div>
-          </Section>
+  {isFiltering ? (
+  <section className={styles.filteredSection}>
+    <div className={styles.filteredHeader}>
+      <h2 className={styles.filteredTitle}>
+        Подходящие предложения: {cardItems.length}
+      </h2>
+    </div>
 
-          {/* Рекомендуем (с бесконечным скроллом) */}
-          <Section title="Рекомендуем">
-            <div className={styles.cardsGrid}>
-              {displayedRecommendedCards.map(({ user, teachSkill, learnSkills }) => (
-                <UserCard
-                  key={user.id}
-                  user={user}
-                  teachSkill={teachSkill}
-                  learnSkills={learnSkills}
-                  onDetailsClick={() => navigate(`/skill/${teachSkill.id}`)}
-                />
-              ))}
-            </div>
+    {cardItems.length > 0 ? (
+      <div className={styles.cardsGrid}>
+        {cardItems.map(({ user, teachSkill, learnSkills }) => (
+          <UserCard
+            key={user.id}
+            user={user}
+            teachSkill={teachSkill}
+            learnSkills={learnSkills}
+            onDetailsClick={() => navigate(`/skill/${teachSkill.id}`)}
+          />
+        ))}
+      </div>
+    ) : (
+      <p className={styles.empty}>Ничего не найдено</p>
+    )}
+  </section>
+) : (
+  <>
+    {/* Популярное */}
+    <Section
+      title="Популярное"
+      showAllButton
+      onSeeAll={() => setIsPopularExpanded(!isPopularExpanded)}
+      isExpanded={isPopularExpanded}
+    >
+      <div className={styles.cardsGrid}>
+        {displayedPopularCards.map(({ user, teachSkill, learnSkills }) => (
+          <UserCard
+            key={user.id}
+            user={user}
+            teachSkill={teachSkill}
+            learnSkills={learnSkills}
+            onDetailsClick={() => navigate(`/skill/${teachSkill.id}`)}
+          />
+        ))}
+      </div>
+    </Section>
 
-            {/* Элемент-триггер для Intersection Observer */}
-            {hasMoreRecommended && (
-              <div ref={loadMoreRef} className={styles.loadMoreTrigger}>
-                {isLoadingRecommended ? (
-                  <p className={styles.loadingText}>Загрузка...</p>
-                ) : (
-                  <p className={styles.loadingText}>Загружаем ещё...</p>
-                )}
-              </div>
-            )}
+    {/* Новое */}
+    <Section
+      title="Новое"
+      showAllButton
+      onSeeAll={() => setIsNewExpanded(!isNewExpanded)}
+      isExpanded={isNewExpanded}
+    >
+      <div className={styles.cardsGrid}>
+        {displayedNewCards.map(({ user, teachSkill, learnSkills }) => (
+          <UserCard
+            key={user.id}
+            user={user}
+            teachSkill={teachSkill}
+            learnSkills={learnSkills}
+            onDetailsClick={() => navigate(`/skill/${teachSkill.id}`)}
+          />
+        ))}
+      </div>
+    </Section>
 
-            {/* Счётчик */}
-            <div className={styles.counter}>
-              Показано {displayedRecommendedCards.length} из {shuffledRecommendedCards.length} рекомендаций
-            </div>
-          </Section>
-        </main>
+    {/* Рекомендуем */}
+    <Section title="Рекомендуем">
+      <div className={styles.cardsGrid}>
+        {displayedRecommendedCards.map(({ user, teachSkill, learnSkills }) => (
+          <UserCard
+            key={user.id}
+            user={user}
+            teachSkill={teachSkill}
+            learnSkills={learnSkills}
+            onDetailsClick={() => navigate(`/skill/${teachSkill.id}`)}
+          />
+        ))}
+      </div>
+
+      {hasMoreRecommended && (
+        <div ref={loadMoreRef} className={styles.loadMoreTrigger}>
+          {isLoadingRecommended ? (
+            <p className={styles.loadingText}>Загрузка...</p>
+          ) : (
+            <p className={styles.loadingText}>Загружаем ещё...</p>
+          )}
+        </div>
+      )}
+
+      <div className={styles.counter}>
+        Показано {displayedRecommendedCards.length} из {shuffledRecommendedCards.length} рекомендаций
+      </div>
+    </Section>
+  </>
+)}
+</main>
       </div>
     </div>
   )
