@@ -134,6 +134,12 @@
   padding: 0;
 }
 
+html,
+body,
+#root {
+  min-width: 0;
+  overflow-x: hidden;
+}
 
 body {
   font-family: var(--font-sans);
