@@ -80,7 +80,8 @@ export function Layout() {
   const authUserId = isAuth ? authUserData.id : undefined
 
   // ===== СОСТОЯНИЯ =====
-  const [isSkillsOpen, setIsSkillsOpen] = useState(false)
+  const [isHeaderSkillsOpen, setIsHeaderSkillsOpen] = useState(false)
+  const [isFooterSkillsOpen, setIsFooterSkillsOpen] = useState(false)
   const [notifications, setNotifications] = useState<Notification[]>(() =>
     getNotificationsFromStorage(),
   )
@@ -179,8 +180,8 @@ export function Layout() {
           isAuth={isAuth}
           user={user}
           onSearch={handleSearch}
-          isSkillsOpen={isSkillsOpen}
-          onSkillsOpenChange={setIsSkillsOpen}
+          isSkillsOpen={isHeaderSkillsOpen}
+          onSkillsOpenChange={setIsHeaderSkillsOpen}
           categories={
             <CategoryList
               categories={CATEGORIES_DATA}
@@ -204,7 +205,6 @@ export function Layout() {
         <Outlet />
       </div>
 
-      {/* ===== FOOTER ===== */}
       <Footer
         categories={
           <CategoryList
@@ -213,8 +213,8 @@ export function Layout() {
             onSubcategoryClick={handleSubcategoryClick}
           />
         }
-        isSkillsOpen={isSkillsOpen}
-        onSkillsOpenChange={setIsSkillsOpen}
+        isSkillsOpen={isFooterSkillsOpen}
+        onSkillsOpenChange={setIsFooterSkillsOpen}
       />
     </div>
   )

@@ -8,7 +8,6 @@
   width: 100%;
   padding-block: var(--space-md);
   background-color: var(--background-main);
-  overflow: hidden;
 }
 
 .main {
