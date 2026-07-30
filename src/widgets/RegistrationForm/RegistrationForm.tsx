@@ -102,7 +102,7 @@ export function RegistrationForm({
     }
 
     if (step === 3) {
-      let dataToValidate: DataToValidate = {
+      const dataToValidate: DataToValidate = {
         title: values.title,
         categoryId: values.categoryId,
         subcategoryId: values.subcategoryId,
