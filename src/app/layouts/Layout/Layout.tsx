@@ -43,8 +43,6 @@ const GUEST_USER: User = {
   wantsToLearn: [],
 }
 
-const handleSearch = () => {}
-
 export function Layout() {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
@@ -119,7 +117,6 @@ export function Layout() {
         <Header
           isAuth={isAuth}
           user={user}
-          onSearch={handleSearch}
           isSkillsOpen={isHeaderSkillsOpen}
           onSkillsOpenChange={setIsHeaderSkillsOpen}
           categories={
