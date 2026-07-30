@@ -3,7 +3,7 @@ import { Outlet, useNavigate } from 'react-router-dom'
 import { getAccountProfile, selectAccountProfile } from '@/entities/account/model/accountSlice'
 import { getUserData, selectIsAuth, selectUserData } from '@/entities/auth/model/authSlice'
 import { CATEGORIES_DATA, LOCAL_STORAGE_KEYS, ROUTES } from '@/shared/lib/constants'
-import type { Notification, SwapRequest, User } from '@/shared/types'
+import type { Category, Notification, Subcategory, SwapRequest, User } from '@/shared/types'
 import { CategoryList } from '@/shared/ui/CategoryList'
 import { Footer } from '@/shared/ui/Footer'
 import { Header } from '@/shared/ui/Header'
@@ -22,10 +22,6 @@ const GUEST_USER: User = {
   skills: [],
   wantsToLearn: [],
 }
-
-const handleSearch = () => {}
-const handleCategoryClick = () => {}
-const handleSubcategoryClick = () => {}
 
 // Функция для чтения уведомлений из localStorage
 const getNotificationsFromStorage = (): Notification[] => {
@@ -73,9 +69,11 @@ const formatNotificationDate = (dateString: string): string => {
 export function Layout() {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+
   const isAuth = useAppSelector(selectIsAuth)
   const authUserData = useAppSelector(selectUserData)
   const profile = useAppSelector(selectAccountProfile)
+
   const authUserId = isAuth ? authUserData.id : undefined
 
   // Состояние для уведомлений
@@ -83,14 +81,18 @@ export function Layout() {
     getNotificationsFromStorage(),
   )
 
-  // Загружаем данные пользователя
+  // Управление меню навыков для Header и Footer
+  const [isHeaderSkillsOpen, setIsHeaderSkillsOpen] = useState(false)
+  const [isFooterSkillsOpen, setIsFooterSkillsOpen] = useState(false)
+
   useEffect(() => {
     dispatch(getUserData())
   }, [dispatch])
 
-  // Загружаем профиль, если есть userId
   useEffect(() => {
-    if (authUserId) dispatch(getAccountProfile(authUserId))
+    if (authUserId) {
+      dispatch(getAccountProfile(authUserId))
+    }
   }, [authUserId, dispatch])
 
   // Отслеживаем изменения в localStorage (другие вкладки)
@@ -112,7 +114,8 @@ export function Layout() {
     }
 
     window.addEventListener('skillswap:notifications-changed', handleNotificationsChange)
-    return () => window.removeEventListener('skillswap:notifications-changed', handleNotificationsChange)
+    return () =>
+      window.removeEventListener('skillswap:notifications-changed', handleNotificationsChange)
   }, [])
 
   const user =
@@ -138,9 +141,7 @@ export function Layout() {
 
   // Обработчик "Прочитать все"
   const handleReadAll = () => {
-    const updated = notifications.map((n) =>
-      n.userId === authUserId ? { ...n, isRead: true } : n,
-    )
+    const updated = notifications.map((n) => (n.userId === authUserId ? { ...n, isRead: true } : n))
     localStorage.setItem(LOCAL_STORAGE_KEYS.NOTIFICATIONS, JSON.stringify(updated))
     setNotifications(updated)
     window.dispatchEvent(new Event('skillswap:notifications-changed'))
@@ -148,9 +149,7 @@ export function Layout() {
 
   // Обработчик "Очистить" (удаляем просмотренные)
   const handleClearNotifications = () => {
-    const updated = notifications.filter(
-      (n) => n.userId !== authUserId || !n.isRead,
-    )
+    const updated = notifications.filter((n) => n.userId !== authUserId || !n.isRead)
     localStorage.setItem(LOCAL_STORAGE_KEYS.NOTIFICATIONS, JSON.stringify(updated))
     setNotifications(updated)
     window.dispatchEvent(new Event('skillswap:notifications-changed'))
@@ -180,13 +179,39 @@ export function Layout() {
     navigate(ROUTES.HOME)
   }
 
+  const navigateToCatalog = (skillId: string) => {
+    const params = new URLSearchParams({
+      skills: skillId,
+    })
+
+    navigate({
+      pathname: '/',
+      search: params.toString(),
+    })
+  }
+
+  const handleCategoryClick = (category: Category) => {
+    navigateToCatalog(category.id)
+
+    setIsHeaderSkillsOpen(false)
+    setIsFooterSkillsOpen(false)
+  }
+
+  const handleSubcategoryClick = (subcategory: Subcategory) => {
+    navigateToCatalog(subcategory.id)
+
+    setIsHeaderSkillsOpen(false)
+    setIsFooterSkillsOpen(false)
+  }
+
   return (
     <div className={styles.layout}>
       <header className={styles.header}>
         <Header
           isAuth={isAuth}
           user={user}
-          onSearch={handleSearch}
+          isSkillsOpen={isHeaderSkillsOpen}
+          onSkillsOpenChange={setIsHeaderSkillsOpen}
           categories={
             <CategoryList
               categories={CATEGORIES_DATA}
@@ -210,7 +235,17 @@ export function Layout() {
         <Outlet />
       </div>
 
-      <Footer />
+      <Footer
+        isSkillsOpen={isFooterSkillsOpen}
+        onSkillsOpenChange={setIsFooterSkillsOpen}
+        categories={
+          <CategoryList
+            categories={CATEGORIES_DATA}
+            onCategoryClick={handleCategoryClick}
+            onSubcategoryClick={handleSubcategoryClick}
+          />
+        }
+      />
     </div>
   )
 }

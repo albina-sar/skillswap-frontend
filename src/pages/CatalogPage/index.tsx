@@ -1,15 +1,16 @@
 import { useState, useEffect, useMemo, useRef, useCallback } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
-import { fetchUsersThunk, selectUsers } from '@/entities/user/model/usersSlice'
-import { loadSkills, selectSkills } from '@/entities/skill/model/skillsSlice'
-import { filterGroups } from '@/features/filters/model/filterGroups'
-import { useAppDispatch, useAppSelector } from '@/store/hooks'
+import { selectUsers } from '@/entities/user/model/usersSlice'
+import { selectSkills } from '@/entities/skill/model/skillsSlice'
+import { useAppSelector } from '@/store/hooks'
 import { CATEGORIES_DATA } from '@/shared/lib/constants'
 import type { Skill, Subcategory, User } from '@/shared/types'
-import { FilterSection } from '@/shared/ui/filter-section'
 import { Section } from '@/shared/ui/Section'
 import { UserCard } from '@/shared/ui/UserCard'
+import { FilterSection } from '@/shared/ui/filter-section'
+import { useCatalogFilters } from './hooks/useCatalogFilters'
+import { filterGroups } from '@/features/filters/model/filterGroups'
 
 import styles from './CatalogPage.module.css'
 
@@ -48,21 +49,23 @@ export default function CatalogPage() {
   const loadMoreRef = useRef<HTMLDivElement | null>(null)
   const observerRef = useRef<IntersectionObserver | null>(null)
 
-  const dispatch = useAppDispatch()
   const navigate = useNavigate()
+
+  const [searchParams] = useSearchParams()
+  const selectedSkillId = searchParams.get('skills')
+
+  const { filteredSkills, filters, handleFiltersChange } = useCatalogFilters(
+    selectedSkillId ?? undefined,
+  )
 
   const users = useAppSelector(selectUsers)
   const skills = useAppSelector(selectSkills)
 
-  useEffect(() => {
-    dispatch(fetchUsersThunk())
-    dispatch(loadSkills())
-  }, [dispatch])
-
-  // Все карточки
+  // Все карточки (уже отфильтрованные)
   const cardItems = useMemo(
     () =>
       users
+        .filter((user) => filteredSkills.some((skill) => skill.authorId === user.id))
         .map((user) => {
           const teachSkill = getUserTeachSkill(user, skills)
 
@@ -77,7 +80,7 @@ export default function CatalogPage() {
           }
         })
         .filter((item): item is NonNullable<typeof item> => Boolean(item)),
-    [users, skills],
+    [users, skills, filteredSkills],
   )
 
   // Популярные
@@ -85,9 +88,7 @@ export default function CatalogPage() {
     .filter((card) => card.teachSkill.likesCount > 40)
     .sort((a, b) => b.teachSkill.likesCount - a.teachSkill.likesCount)
 
-  const displayedPopularCards = isPopularExpanded
-    ? popularCards
-    : popularCards.slice(0, 3)
+  const displayedPopularCards = isPopularExpanded ? popularCards : popularCards.slice(0, 3)
 
   // Новые
   const newCards = useMemo(() => {
@@ -100,14 +101,11 @@ export default function CatalogPage() {
       .filter((item) => new Date(item.teachSkill.createdAt) >= threshold)
       .sort(
         (a, b) =>
-          new Date(b.teachSkill.createdAt).getTime() -
-          new Date(a.teachSkill.createdAt).getTime(),
+          new Date(b.teachSkill.createdAt).getTime() - new Date(a.teachSkill.createdAt).getTime(),
       )
   }, [cardItems])
 
-  const displayedNewCards = isNewExpanded
-    ? newCards
-    : newCards.slice(0, 3)
+  const displayedNewCards = isNewExpanded ? newCards : newCards.slice(0, 3)
 
   // Рекомендуемые (с бесконечным скроллом)
   const shuffledRecommendedCards = useMemo(() => shuffleArray(cardItems), [cardItems])
@@ -163,7 +161,11 @@ export default function CatalogPage() {
     <div className={styles.page}>
       <div className={styles.content}>
         <aside className={styles.sidebar}>
-          <FilterSection groups={filterGroups} onFiltersChange={() => {}} />
+          <FilterSection
+            groups={filterGroups}
+            values={filters}
+            onFiltersChange={handleFiltersChange}
+          />
         </aside>
 
         <main className={styles.main}>
