@@ -2,6 +2,7 @@ import { LOCAL_STORAGE_KEYS } from '@/shared/lib/constants'
 import type { Notification, RequestStatus, SwapRequest } from '@/shared/types'
 
 export const REQUESTS_CHANGED_EVENT = 'skillswap:requests-changed'
+export const NOTIFICATIONS_CHANGED_EVENT = 'skillswap:notifications-changed'
 
 interface CreateRequestParams {
   skillId: string
@@ -36,6 +37,7 @@ function addNotification(notification: Notification): void {
     LOCAL_STORAGE_KEYS.NOTIFICATIONS,
     JSON.stringify([...notifications, notification]),
   )
+  window.dispatchEvent(new Event(NOTIFICATIONS_CHANGED_EVENT))
 }
 
 function makeNotification(
@@ -95,6 +97,8 @@ export function createSwapRequest(
   }
 
   saveRequests([...requests, pendingRequest])
+
+  // УВЕДОМЛЕНИЕ ДЛЯ ПОЛУЧАТЕЛЯ
   addNotification(
     makeNotification(
       pendingRequest,
@@ -105,11 +109,23 @@ export function createSwapRequest(
     ),
   )
 
+  // УВЕДОМЛЕНИЕ ДЛЯ ОТПРАВИТЕЛЯ
+  addNotification(
+    makeNotification(
+      pendingRequest,
+      fromUserId,
+      `Вы предложили обмен ${recipientName}`,
+      'Ожидайте ответа от пользователя',
+      createdAt,
+    ),
+  )
+
   const status: RequestStatus = random() < 0.5 ? 'accepted' : 'rejected'
   const updatedAt = new Date().toISOString()
   const resolvedRequest = { ...pendingRequest, status, updatedAt }
 
   saveRequests([...requests, resolvedRequest])
+
   addNotification(
     makeNotification(
       resolvedRequest,
