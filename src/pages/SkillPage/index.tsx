@@ -1,11 +1,13 @@
-import { useEffect, useMemo, useState } from 'react'
-import { useLocation, useParams } from 'react-router-dom'
+import { useEffect, useMemo } from 'react'
+import { useParams } from 'react-router-dom'
 
-import { fetchSkillById } from '@/api/skills'
-import { fetchUsers } from '@/api/users'
+import { loadSkills, selectSkills } from '@/entities/skill/model/skillsSlice'
+import { fetchUsersThunk, selectUsers } from '@/entities/user/model/usersSlice'
+import { selectAccountProfile } from '@/entities/account/model/accountSlice'
+import { useAppDispatch, useAppSelector } from '@/store/hooks'
 
 import { CATEGORIES_DATA } from '@/shared/lib/constants'
-import type { Skill, Subcategory, User } from '@/shared/types'
+import type { Subcategory, User } from '@/shared/types'
 
 import { Section } from '@/shared/ui/Section'
 import { SkillCard } from '@/shared/ui/SkillCard'
@@ -23,45 +25,32 @@ const getLearnSkills = (user: User): Subcategory[] =>
     )
     .filter(Boolean) as Subcategory[]
 
-// Только что созданный навык (например, сразу после регистрации) может прийти
-// напрямую через state роутера — тогда не нужно повторно идти в API за ним
-interface SkillPageLocationState {
-  skill?: Skill
-  author?: User
-}
-
 export default function SkillPage() {
   const { id } = useParams()
-  const location = useLocation()
-  const preloaded = location.state as SkillPageLocationState | null
-  const preloadedSkillId = preloaded?.skill?.id
+  const dispatch = useAppDispatch()
 
-  const [skill, setSkill] = useState<Skill | null>(preloaded?.skill ?? null)
-  const [users, setUsers] = useState<User[]>(preloaded?.author ? [preloaded.author] : [])
+  const skills = useAppSelector(selectSkills)
+  const users = useAppSelector(selectUsers)
+  const accountProfile = useAppSelector(selectAccountProfile)
 
   useEffect(() => {
-    if (!id) return
-    if (preloadedSkillId === id) return
+    dispatch(loadSkills())
+    dispatch(fetchUsersThunk())
+  }, [dispatch])
 
-    const skillId = id
-
-    async function loadData() {
-      const [currentSkill, allUsers] = await Promise.all([fetchSkillById(skillId), fetchUsers()])
-
-      if (!currentSkill) return
-
-      setSkill(currentSkill)
-      setUsers(allUsers)
-    }
-
-    loadData()
-  }, [id, preloadedSkillId])
+  const skill = useMemo(() => skills.find((item) => item.id === id) ?? null, [skills, id])
 
   const currentUser = useMemo(() => {
     if (!skill) return null
 
-    return users.find((user) => user.id === skill.authorId) ?? null
-  }, [skill, users])
+    // Автор только что созданного навыка может ещё не попасть в общий список
+    // пользователей (`usersSlice` читает только статический users.json) —
+    // тогда берём его из собственного профиля в accountSlice
+    return (
+      users.find((user) => user.id === skill.authorId) ??
+      (accountProfile?.id === skill.authorId ? accountProfile : null)
+    )
+  }, [skill, users, accountProfile])
 
   const learnSkills = useMemo(() => {
     if (!currentUser) return []
