@@ -4,11 +4,7 @@
   display: flex;
   align-items: center;
   gap: var(--space-2xl);
-  min-width: 320px;
-  width: 100%;
-  max-width: 1440px;
-  margin: 0 auto;
-  box-sizing: border-box;
+  min-width: 1440px;
 }
 
 .logoLink {
@@ -35,17 +31,9 @@
   flex-shrink: 0;
 }
 
-/* ===== КОНТЕЙНЕР ПОИСКА ===== */
-.searchInput {
-  min-width: 120px;
-  flex: 1;
-  max-width: 400px;
-}
-
 .authBar {
   display: flex;
   align-items: center;
-  flex-shrink: 0;
 }
 
 .authBar.auth {
@@ -60,79 +48,21 @@
   display: flex;
   align-items: center;
   gap: var(--space-xl);
-  flex-shrink: 0;
 }
 
 .authFalse {
   display: flex;
-  gap: var(--space-xs);
-  flex-shrink: 0;
+  gap: var(--space-xs)
 }
 
 .quickActions {
   display: flex;
   align-items: center;
   gap: var(--space-lg);
-  flex-shrink: 0;
 }
 
-/* ===== ИМЯ ПОЛЬЗОВАТЕЛЯ (с многоточием) ===== */
-.userName {
-  max-width: 120px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-family: var(--font-sans);
-  font-size: 16px;
-  line-height: 24px;
-  color: var(--text-primary);
-}
-
-/* ===== АДАПТИВ ДЛЯ ПЛАНШЕТОВ ===== */
-@media (width <= 1024px) {
-  .headerContainer {
-    padding: 0 20px;
-    gap: var(--space-lg);
-    flex-wrap: wrap;
-  }
-
-  .navigation {
-    gap: var(--space-md);
-  }
-
-  .searchInput {
-    min-width: 100px;
-    max-width: 250px;
-  }
-
-  .userName {
-    max-width: 80px;
-  }
-}
-
-/* ===== АДАПТИВ ДЛЯ МОБИЛЬНЫХ ===== */
-@media (width <= 768px) {
-  .headerContainer {
-    padding: 0 12px;
-    gap: var(--space-sm);
-    flex-wrap: wrap;
-  }
-
-  .navigation {
-    gap: var(--space-xs);
-  }
-
-  .navButton {
-    font-size: 14px;
-  }
-
-  .searchInput {
-    min-width: 80px;
-    max-width: 160px;
-  }
-
-  .userName {
-    max-width: 60px;
-    font-size: 14px;
-  }
+.searchWrapper {
+  position: relative;
+  flex: 1;
+  max-width: inherit;
 }

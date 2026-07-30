@@ -18,6 +18,12 @@
   background-position: 50% bottom;
   background-size: 0% 2px;
   transition: background-size 0.3s ease;
+  display: inline-block;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: middle;
 }
 
 .container:hover .text {

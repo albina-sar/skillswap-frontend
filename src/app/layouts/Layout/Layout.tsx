@@ -1,14 +1,14 @@
+import { useEffect, useState } from 'react'
+import { Outlet, useNavigate } from 'react-router-dom'
 import { getAccountProfile, selectAccountProfile } from '@/entities/account/model/accountSlice'
 import { getUserData, selectIsAuth, selectUserData } from '@/entities/auth/model/authSlice'
 import { CATEGORIES_DATA, LOCAL_STORAGE_KEYS, ROUTES } from '@/shared/lib/constants'
-import type { Notification, SwapRequest, User } from '@/shared/types'
+import type { Category, Notification, Subcategory, SwapRequest, User } from '@/shared/types'
 import { CategoryList } from '@/shared/ui/CategoryList'
 import { Footer } from '@/shared/ui/Footer'
 import { Header } from '@/shared/ui/Header'
 import { NotificationsContent } from '@/shared/ui/NotificationsContent'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
-import { useEffect, useState } from 'react'
-import { Outlet, useNavigate } from 'react-router-dom'
 import styles from './Layout.module.css'
 
 const GUEST_USER: User = {
@@ -23,13 +23,7 @@ const GUEST_USER: User = {
   wantsToLearn: [],
 }
 
-const handleSearch = (value: string) => {
-  console.log('Search query:', value)
-}
-
-const handleCategoryClick = () => {}
-const handleSubcategoryClick = () => {}
-
+// Функция для чтения уведомлений из localStorage
 const getNotificationsFromStorage = (): Notification[] => {
   try {
     const data = localStorage.getItem(LOCAL_STORAGE_KEYS.NOTIFICATIONS)
@@ -39,6 +33,7 @@ const getNotificationsFromStorage = (): Notification[] => {
   }
 }
 
+// ФУНКЦИЯ ФОРМАТИРОВАНИЯ ДАТЫ С "СЕГОДНЯ"/"ВЧЕРА"/"ЗАВТРА"
 const formatNotificationDate = (dateString: string): string => {
   const date = new Date(dateString)
   const today = new Date()
@@ -74,29 +69,33 @@ const formatNotificationDate = (dateString: string): string => {
 export function Layout() {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+
   const isAuth = useAppSelector(selectIsAuth)
   const authUserData = useAppSelector(selectUserData)
   const profile = useAppSelector(selectAccountProfile)
+
   const authUserId = isAuth ? authUserData.id : undefined
 
-  // ===== СОСТОЯНИЯ =====
-  const [isHeaderSkillsOpen, setIsHeaderSkillsOpen] = useState(false)
-  const [isFooterSkillsOpen, setIsFooterSkillsOpen] = useState(false)
+  // Состояние для уведомлений
   const [notifications, setNotifications] = useState<Notification[]>(() =>
     getNotificationsFromStorage(),
   )
 
-  // Загружаем данные пользователя
+  // Управление меню навыков для Header и Footer
+  const [isHeaderSkillsOpen, setIsHeaderSkillsOpen] = useState(false)
+  const [isFooterSkillsOpen, setIsFooterSkillsOpen] = useState(false)
+
   useEffect(() => {
     dispatch(getUserData())
   }, [dispatch])
 
-  // Загружаем профиль, если есть userId
   useEffect(() => {
-    if (authUserId) dispatch(getAccountProfile(authUserId))
+    if (authUserId) {
+      dispatch(getAccountProfile(authUserId))
+    }
   }, [authUserId, dispatch])
 
-  // Отслеживаем изменения в localStorage
+  // Отслеживаем изменения в localStorage (другие вкладки)
   useEffect(() => {
     const handleStorageChange = (event: StorageEvent) => {
       if (event.key === LOCAL_STORAGE_KEYS.NOTIFICATIONS) {
@@ -108,7 +107,7 @@ export function Layout() {
     return () => window.removeEventListener('storage', handleStorageChange)
   }, [])
 
-  // Отслеживаем изменения в этой же вкладке
+  // Отслеживаем изменения в этой же вкладке (событие от requestStorage)
   useEffect(() => {
     const handleNotificationsChange = () => {
       setNotifications(getNotificationsFromStorage())
@@ -126,6 +125,7 @@ export function Layout() {
         ? { ...GUEST_USER, id: authUserData.id, name: authUserData.name }
         : GUEST_USER
 
+  // ФОРМИРУЕМ УВЕДОМЛЕНИЯ ДЛЯ ПОЛЬЗОВАТЕЛЯ
   const userNotifications = notifications
     .filter((n) => n.userId === authUserId)
     .map((n) => ({
@@ -139,6 +139,7 @@ export function Layout() {
 
   const hasNotifications = userNotifications.some((item) => !item.isRead)
 
+  // Обработчик "Прочитать все"
   const handleReadAll = () => {
     const updated = notifications.map((n) => (n.userId === authUserId ? { ...n, isRead: true } : n))
     localStorage.setItem(LOCAL_STORAGE_KEYS.NOTIFICATIONS, JSON.stringify(updated))
@@ -146,6 +147,7 @@ export function Layout() {
     window.dispatchEvent(new Event('skillswap:notifications-changed'))
   }
 
+  // Обработчик "Очистить" (удаляем просмотренные)
   const handleClearNotifications = () => {
     const updated = notifications.filter((n) => n.userId !== authUserId || !n.isRead)
     localStorage.setItem(LOCAL_STORAGE_KEYS.NOTIFICATIONS, JSON.stringify(updated))
@@ -153,6 +155,7 @@ export function Layout() {
     window.dispatchEvent(new Event('skillswap:notifications-changed'))
   }
 
+  // ОБРАБОТЧИК "ПЕРЕЙТИ" (с типизированными запросами)
   const handleNotificationAction = (id: string) => {
     const notification = notifications.find((n) => n.id === id)
 
@@ -161,8 +164,11 @@ export function Layout() {
       return
     }
 
+    // Получаем все запросы из localStorage
     const requestsData = localStorage.getItem(LOCAL_STORAGE_KEYS.REQUESTS) ?? '[]'
     const requests: SwapRequest[] = JSON.parse(requestsData)
+
+    // Находим запрос по requestId
     const request = requests.find((r: SwapRequest) => r.id === notification.requestId)
 
     if (request) {
@@ -173,13 +179,37 @@ export function Layout() {
     navigate(ROUTES.HOME)
   }
 
+  const navigateToCatalog = (skillId: string) => {
+    const params = new URLSearchParams({
+      skills: skillId,
+    })
+
+    navigate({
+      pathname: '/',
+      search: params.toString(),
+    })
+  }
+
+  const handleCategoryClick = (category: Category) => {
+    navigateToCatalog(category.id)
+
+    setIsHeaderSkillsOpen(false)
+    setIsFooterSkillsOpen(false)
+  }
+
+  const handleSubcategoryClick = (subcategory: Subcategory) => {
+    navigateToCatalog(subcategory.id)
+
+    setIsHeaderSkillsOpen(false)
+    setIsFooterSkillsOpen(false)
+  }
+
   return (
     <div className={styles.layout}>
       <header className={styles.header}>
         <Header
           isAuth={isAuth}
           user={user}
-          onSearch={handleSearch}
           isSkillsOpen={isHeaderSkillsOpen}
           onSkillsOpenChange={setIsHeaderSkillsOpen}
           categories={
@@ -206,6 +236,8 @@ export function Layout() {
       </div>
 
       <Footer
+        isSkillsOpen={isFooterSkillsOpen}
+        onSkillsOpenChange={setIsFooterSkillsOpen}
         categories={
           <CategoryList
             categories={CATEGORIES_DATA}
@@ -213,8 +245,6 @@ export function Layout() {
             onSubcategoryClick={handleSubcategoryClick}
           />
         }
-        isSkillsOpen={isFooterSkillsOpen}
-        onSkillsOpenChange={setIsFooterSkillsOpen}
       />
     </div>
   )

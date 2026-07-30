@@ -1,26 +1,24 @@
 .footer {
   width: 100%;
+  height: 232px;
   background-color: var(--background-secondary);
   position: relative;
-  padding: 32px 36px 32px 32px;
-  box-sizing: border-box;
+  min-width: 1440px;
 }
 
 .inner {
-  max-width: 1440px;
-  margin: 0 auto;
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px 193px;
+  height: 100%;
+  padding: 32px 36px 32px 32px;
+  display: grid;
+  grid-template-columns: 159px 1020px;
+  column-gap: 193px;
 }
 
 .brand {
+  height: 168px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-width: 159px;
-  height: 168px;
 }
 
 .copyright {
@@ -31,12 +29,14 @@
 }
 
 .nav {
-  flex: 1;
-  min-width: 280px;
+  width: 1020px;
+  height: 60px;
+  margin-top: 60px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-auto-flow: column;
+  grid-template-columns: repeat(3, 324px);
+  grid-template-rows: repeat(2, 24px);
   gap: 12px 24px;
-  align-content: start;
 }
 
 .link {
@@ -58,49 +58,4 @@
 .link:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 4px;
-}
-
-/* ===== АДАПТИВ ДЛЯ ПЛАНШЕТОВ ===== */
-@media (width <= 1024px) {
-  .footer {
-    padding: 24px 20px;
-  }
-
-  .inner {
-    gap: 32px;
-  }
-
-  .nav {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px 16px;
-  }
-
-  .brand {
-    height: 140px;
-  }
-}
-
-/* ===== АДАПТИВ ДЛЯ МОБИЛЬНЫХ ===== */
-@media (width <= 768px) {
-  .footer {
-    padding: 20px 16px;
-  }
-
-  .inner {
-    flex-direction: column;
-    gap: 24px;
-  }
-
-  .brand {
-    height: auto;
-    gap: 16px;
-    min-width: unset;
-  }
-
-  .nav {
-    grid-template-columns: 1fr;
-    gap: 8px;
-    min-width: unset;
-    width: 100%;
-  }
 }

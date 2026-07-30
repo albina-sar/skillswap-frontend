@@ -15,6 +15,7 @@ export function Footer({ categories, isSkillsOpen, onSkillsOpenChange }: FooterP
       <div className={styles.inner}>
         <div className={styles.brand}>
           <Logo />
+
           <span className={styles.copyright}>SkillSwap — 2025</span>
         </div>
 
@@ -58,3 +59,4 @@ export function Footer({ categories, isSkillsOpen, onSkillsOpenChange }: FooterP
     </footer>
   )
 }
+
