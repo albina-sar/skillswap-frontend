@@ -1,67 +1,138 @@
 .headerContainer {
-    position: relative;
-    padding: 0 36px;
-    display: flex;
-    align-items: center;
-    gap: var(--space-2xl);
+  position: relative;
+  padding: 0 36px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xl);
+  min-width: 320px;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .logoLink {
-    display: flex;
-    flex-shrink: 0;
+  display: flex;
+  flex-shrink: 0;
 }
 
 .navigation {
-    list-style-type: none;
-    display: flex;
-    gap: var(--space-xl);
-    flex-shrink: 0;
+  list-style-type: none;
+  display: flex;
+  gap: var(--space-xl);
+  flex-shrink: 0;
 }
 
 .navButton {
-    color: var(--text-primary);
-    text-wrap-mode: nowrap;
-    display: flex;
-    gap: var(--space-2xs);
-    flex-shrink: 0;
+  color: var(--text-primary);
+  text-wrap-mode: nowrap;
+  display: flex;
+  gap: var(--space-2xs);
+  flex-shrink: 0;
 }
 
 .navButton img {
-    flex-shrink: 0;
+  flex-shrink: 0;
+}
+
+/* ===== КОНТЕЙНЕР ПОИСКА ===== */
+.searchInput {
+  min-width: 120px;
+  flex: 1;
+  max-width: 400px;
 }
 
 .authBar {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 .authBar.auth {
-    gap: var(--space-lg);
+  gap: var(--space-lg);
 }
 
 .authBar.unAuth {
-    gap: var(--space-2xl);
+  gap: var(--space-2xl);
 }
 
 .authTrue {
-    display: flex;
-    align-items: center;
-    gap: var(--space-xl);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xl);
+  flex-shrink: 0;
 }
 
 .authFalse {
-    display: flex;
-    gap: var(--space-xs)
+  display: flex;
+  gap: var(--space-xs);
+  flex-shrink: 0;
 }
 
 .quickActions {
-    display: flex;
-    align-items: center;
-    gap: var(--space-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  flex-shrink: 0;
 }
 
-.searchWrapper {
-  position: relative;
-  flex: 1;
-  max-width: inherit;
+/* ===== ИМЯ ПОЛЬЗОВАТЕЛЯ (с многоточием) ===== */
+.userName {
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--text-primary);
+}
+
+/* ===== АДАПТИВ ДЛЯ ПЛАНШЕТОВ ===== */
+@media (width <= 1024px) {
+  .headerContainer {
+    padding: 0 20px;
+    gap: var(--space-lg);
+    flex-wrap: wrap;
+  }
+
+  .navigation {
+    gap: var(--space-md);
+  }
+
+  .searchInput {
+    min-width: 100px;
+    max-width: 250px;
+  }
+
+  .userName {
+    max-width: 80px;
+  }
+}
+
+/* ===== АДАПТИВ ДЛЯ МОБИЛЬНЫХ ===== */
+@media (width <= 768px) {
+  .headerContainer {
+    padding: 0 12px;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+  }
+
+  .navigation {
+    gap: var(--space-xs);
+  }
+
+  .navButton {
+    font-size: 14px;
+  }
+
+  .searchInput {
+    min-width: 80px;
+    max-width: 160px;
+  }
+
+  .userName {
+    max-width: 60px;
+    font-size: 14px;
+  }
 }
