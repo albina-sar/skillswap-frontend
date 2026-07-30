@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import { getAccountProfile, selectAccountProfile } from '@/entities/account/model/accountSlice'
 import { getUserData, selectIsAuth, selectUserData } from '@/entities/auth/model/authSlice'
 import { CATEGORIES_DATA } from '@/shared/lib/constants'
-import type { User } from '@/shared/types'
+import type { Category, Subcategory, User } from '@/shared/types'
 import { CategoryList } from '@/shared/ui/CategoryList'
 import { Footer } from '@/shared/ui/Footer'
 import { Header } from '@/shared/ui/Header'
@@ -44,22 +44,31 @@ const GUEST_USER: User = {
 }
 
 const handleSearch = () => {}
-const handleCategoryClick = () => {}
-const handleSubcategoryClick = () => {}
 
 export function Layout() {
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+
   const isAuth = useAppSelector(selectIsAuth)
   const authUserData = useAppSelector(selectUserData)
   const profile = useAppSelector(selectAccountProfile)
+
   const authUserId = isAuth ? authUserData.id : undefined
+
+  const [notifications, setNotifications] = useState(MOCK_NOTIFICATIONS)
+
+  // Управление меню навыков для Header и Footer
+  const [isHeaderSkillsOpen, setIsHeaderSkillsOpen] = useState(false)
+  const [isFooterSkillsOpen, setIsFooterSkillsOpen] = useState(false)
 
   useEffect(() => {
     dispatch(getUserData())
   }, [dispatch])
 
   useEffect(() => {
-    if (authUserId) dispatch(getAccountProfile(authUserId))
+    if (authUserId) {
+      dispatch(getAccountProfile(authUserId))
+    }
   }, [authUserId, dispatch])
 
   const user =
@@ -69,8 +78,6 @@ export function Layout() {
         ? { ...GUEST_USER, id: authUserData.id, name: authUserData.name }
         : GUEST_USER
 
-  // TODO: весь блок ниже — временная заглушка на локальном useState.
-  const [notifications, setNotifications] = useState(MOCK_NOTIFICATIONS)
   const hasNotifications = notifications.some((item) => !item.isRead)
 
   const handleReadAll = () => {
@@ -81,6 +88,31 @@ export function Layout() {
     setNotifications((prev) => prev.filter((item) => !item.isRead))
   }
 
+  const navigateToCatalog = (skillId: string) => {
+    const params = new URLSearchParams({
+      skills: skillId,
+    })
+
+    navigate({
+      pathname: '/',
+      search: params.toString(),
+    })
+  }
+
+  const handleCategoryClick = (category: Category) => {
+    navigateToCatalog(category.id)
+
+    setIsHeaderSkillsOpen(false)
+    setIsFooterSkillsOpen(false)
+  }
+
+  const handleSubcategoryClick = (subcategory: Subcategory) => {
+    navigateToCatalog(subcategory.id)
+
+    setIsHeaderSkillsOpen(false)
+    setIsFooterSkillsOpen(false)
+  }
+
   return (
     <div className={styles.layout}>
       <header className={styles.header}>
@@ -88,6 +120,8 @@ export function Layout() {
           isAuth={isAuth}
           user={user}
           onSearch={handleSearch}
+          isSkillsOpen={isHeaderSkillsOpen}
+          onSkillsOpenChange={setIsHeaderSkillsOpen}
           categories={
             <CategoryList
               categories={CATEGORIES_DATA}
@@ -111,7 +145,17 @@ export function Layout() {
         <Outlet />
       </div>
 
-      <Footer />
+      <Footer
+        isSkillsOpen={isFooterSkillsOpen}
+        onSkillsOpenChange={setIsFooterSkillsOpen}
+        categories={
+          <CategoryList
+            categories={CATEGORIES_DATA}
+            onCategoryClick={handleCategoryClick}
+            onSubcategoryClick={handleSubcategoryClick}
+          />
+        }
+      />
     </div>
   )
 }
