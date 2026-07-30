@@ -1,5 +1,6 @@
-import { ChangeEvent, FormEvent, useEffect, useMemo, useRef, useState } from 'react'
+import { ChangeEvent, FormEvent, useEffect, useMemo, useState } from 'react'
 import { MOCK_CITIES, GENDER_OPTIONS } from '@/shared/lib/constants'
+import { fileToDataUrl } from '@/shared/lib/helpers'
 import { AvatarUI } from '@/shared/ui/avatar'
 import { Button } from '@/shared/ui/button/button'
 import { Input } from '@/shared/ui/Input'
@@ -33,19 +34,11 @@ export function PersonalDataForm({
 }: PersonalDataFormProps) {
   const [values, setValues] = useState<Profile>(initialValues)
   const [photoPreview, setPhotoPreview] = useState(initialValues.photo)
-  const photoUrlRef = useRef<string | null>(null)
 
   useEffect(() => {
     setValues(initialValues)
     setPhotoPreview(initialValues.photo)
   }, [initialValues])
-
-  useEffect(
-    () => () => {
-      if (photoUrlRef.current) URL.revokeObjectURL(photoUrlRef.current)
-    },
-    [],
-  )
 
   const isChanged = useMemo(
     () =>
@@ -62,13 +55,11 @@ export function PersonalDataForm({
     setValues((current) => ({ ...current, [field]: value }))
   }
 
-  const handlePhotoChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handlePhotoChange = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
     if (!file) return
 
-    if (photoUrlRef.current) URL.revokeObjectURL(photoUrlRef.current)
-    const nextPhoto = URL.createObjectURL(file)
-    photoUrlRef.current = nextPhoto
+    const nextPhoto = await fileToDataUrl(file)
     setPhotoPreview(nextPhoto)
     updateField('photo')(nextPhoto)
   }

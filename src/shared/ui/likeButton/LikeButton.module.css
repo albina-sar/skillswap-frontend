@@ -11,7 +11,7 @@
   transition: color 0.2s ease;
 }
 
-.button:hover:not(.liked):not(:disabled) {
+.button:hover:not(.liked, :disabled) {
   color: var(--accent-color, #abd27a);
 }
 
