@@ -1,20 +1,15 @@
-import { useState } from 'react'
+import type { ReactNode } from 'react'
 import { Logo } from '@/shared/ui/Logo'
 import { Popover } from '@/shared/ui/Popover'
-import { CategoryList } from '@/shared/ui/CategoryList'
-import { CATEGORIES_DATA } from '@/shared/lib/constants'
 import styles from './Footer.module.css'
 
-export function Footer() {
-  const [isSkillsOpen, setIsSkillsOpen] = useState(false)
-  const handleCategoryClick = () => {
-    setIsSkillsOpen(false)
-  }
+type FooterProps = {
+  categories: ReactNode
+  isSkillsOpen: boolean
+  onSkillsOpenChange: (value: boolean) => void
+}
 
-  const handleSubcategoryClick = () => {
-    setIsSkillsOpen(false)
-  }
-
+export function Footer({ categories, isSkillsOpen, onSkillsOpenChange }: FooterProps) {
   return (
     <footer className={styles.footer}>
       <div className={styles.inner}>
@@ -38,14 +33,10 @@ export function Footer() {
             placement="top-start"
             size="large"
             isOpen={isSkillsOpen}
-            onOpenChange={setIsSkillsOpen}
+            onOpenChange={onSkillsOpenChange}
             anchorToContainer
           >
-            <CategoryList
-              categories={CATEGORIES_DATA}
-              onCategoryClick={handleCategoryClick}
-              onSubcategoryClick={handleSubcategoryClick}
-            />
+            {categories}
           </Popover>
 
           <button className={styles.link} type="button">

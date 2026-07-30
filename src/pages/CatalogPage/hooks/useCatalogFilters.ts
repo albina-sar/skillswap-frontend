@@ -13,7 +13,7 @@ import {
 } from '../../../features/filters/model/filterGroups'
 import { citiesMap } from '../lib/maps'
 
-export function useCatalogFilters() {
+export function useCatalogFilters(initialSkill?: string) {
   const dispatch = useAppDispatch()
   const skills = useAppSelector(selectSkills)
   const users = useAppSelector(selectUsers)
@@ -33,17 +33,34 @@ export function useCatalogFilters() {
   }, [users])
 
   // Состояние фильтров
-  const [filters, setFilters] = useState<FiltersState>(getDefaultFilterValues(filterGroups))
+  const [filters, setFilters] = useState<FiltersState>(() => {
+    const defaults = getDefaultFilterValues(filterGroups)
+
+    if (initialSkill) {
+      defaults.skills = [initialSkill]
+    }
+
+    return defaults
+  })
 
   const handleFiltersChange = (newFilters: FiltersState) => {
     setFilters(newFilters)
   }
 
+  useEffect(() => {
+    if (!initialSkill) return
+
+    setFilters((prev) => ({
+      ...prev,
+      skills: [initialSkill],
+    }))
+  }, [initialSkill])
+
   // Логика фильтрации
   const filteredSkills = useMemo(() => {
     return skills.filter((skill) => {
       const author = usersMap.get(skill.authorId)
-      const skillLearningType = (skill as any).learningType ?? 'any'
+      const skillLearningType = skill.learningType ?? 'any'
 
       // Фильтр по типу
       if (filters.learningType !== 'any' && skillLearningType !== filters.learningType) return false
