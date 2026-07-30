@@ -3,6 +3,7 @@ import { lazy, Suspense } from 'react'
 import { ROUTES } from '@/shared/lib/constants'
 import { Layout } from '@/app/layouts/Layout'
 import { PrivateRoute } from './PrivateRoute'
+import { OnlyUnAuth } from './OnlyUnAuth'
 
 // Lazy-загрузка страниц — каждая страница грузится только при переходе на неё
 const CatalogPage = lazy(() => import('@/pages/CatalogPage'))
@@ -19,9 +20,31 @@ export function AppRouter() {
     <BrowserRouter>
       <Suspense fallback={<div>Загрузка...</div>}>
         <Routes>
-          <Route path={ROUTES.LOGIN} element={<LoginPage />} />
-          <Route path={ROUTES.REGISTER} element={<RegistrationPage />} />
-          <Route path={`${ROUTES.REGISTER}/step/:step`} element={<RegistrationPage />} />
+          {/* Публичные роуты, доступные неавторизованным пользователям */}
+          <Route
+            path={ROUTES.LOGIN}
+            element={
+              <OnlyUnAuth>
+                <LoginPage />
+              </OnlyUnAuth>
+            }
+          />
+          <Route
+            path={ROUTES.REGISTER}
+            element={
+              <OnlyUnAuth>
+                <RegistrationPage />
+              </OnlyUnAuth>
+            }
+          />
+          <Route
+            path={`${ROUTES.REGISTER}/step/:step`}
+            element={
+              <OnlyUnAuth>
+                <RegistrationPage />
+              </OnlyUnAuth>
+            }
+          />
 
           <Route element={<Layout />}>
             <Route path={ROUTES.HOME} element={<CatalogPage />} />
