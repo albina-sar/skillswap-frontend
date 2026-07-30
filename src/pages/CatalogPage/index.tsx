@@ -62,13 +62,28 @@ export default function CatalogPage() {
 
   const navigate = useNavigate()
 
-  const [searchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams()
   const selectedSkillId = searchParams.get('skills')
 
   const { filteredSkills, filters, handleFiltersChange } = useCatalogFilters(
     selectedSkillId ?? undefined,
   )
   const defaultFilters = useMemo(() => getDefaultFilterValues(filterGroups), [])
+
+ 
+  useEffect(() => {
+    const nextValue = Array.isArray(filters.skills) ? filters.skills[0] : undefined
+
+    setSearchParams((prev) => {
+      const next = new URLSearchParams(prev)
+      if (nextValue) {
+        next.set('skills', nextValue)
+      } else {
+        next.delete('skills')
+      }
+      return next
+    }, { replace: true })
+  }, [filters.skills, setSearchParams])
 
 const activeFilters = useMemo(() => {
   const result: ActiveFilter[] = []
