@@ -18,16 +18,18 @@ export const SimilarOffersComponent: FC = () => {
   }
 
   const currentSkill = skills.find((skill) => skill.id === id)
-  const currentUser = users.find((user) => user.skills.includes(id))
+
+  if (!currentSkill) return null
 
   const similarSkillsID = skills
-    .filter((skill) => skill.id !== id && skill.subcategoryId === currentSkill?.subcategoryId)
+    .filter((skill) => skill.id !== id && skill.subcategoryId === currentSkill.subcategoryId)
     .map((skill) => skill.id)
 
   const similarAuthors = users
     .filter(
       (user) =>
-        user.id !== currentUser!.id && user.skills.some((id) => similarSkillsID.includes(id)),
+        user.id !== currentSkill.authorId &&
+        user.skills.some((skillId) => similarSkillsID.includes(skillId)),
     )
     .map((user) => user.id)
 
