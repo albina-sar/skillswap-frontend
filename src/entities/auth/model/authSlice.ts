@@ -102,7 +102,7 @@ export const authSlice = createSlice({
             .addCase(clearUser.fulfilled, (state) => {
                 state.isLoading = false;
                 state.isAuth = false;
-                state.isAuthChecked = false;
+                state.isAuthChecked = true;
                 state.userData = initialState.userData;
             })
             .addCase(clearUser.rejected, (state, action) => {
