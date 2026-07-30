@@ -5,6 +5,7 @@ import { Step2Profile } from './Step2Profile'
 import { Step3Skill } from './Step3Skill'
 import type { RegistrationFormProps, RegistrationFormValues, RegistrationStep } from './types'
 import styles from './RegistrationForm.module.css'
+import * as Yup from 'yup';
 
 const INITIAL_VALUES: RegistrationFormValues = {
   email: '',
@@ -20,6 +21,36 @@ const INITIAL_VALUES: RegistrationFormValues = {
   description: '',
   skillImages: [],
 }
+
+type DataToValidate = {
+  title: string;
+  categoryId: string;
+  subcategoryId: string;
+  description: string;
+  skillImages: File[];
+};
+
+export const step3SkillSchema = Yup.object().shape({
+  title: Yup.string()
+    .min(3, 'Название должно быть не менее 3 символов')
+    .max(50, 'Название не должно превышать 50 символов')
+    .required('Обязательное поле'),
+  categoryId: Yup.string().required('Обязательное поле'),
+  subcategoryId: Yup.string().required('Обязательное поле'),
+  description: Yup.string().max(500, 'Описание не должно превышать 500 символов'),
+  skillImages: Yup.array().min(1, 'Добавьте хотя бы одно изображение')
+    .of(
+      Yup.mixed<File>()
+        .test('fileSize', 'Файл должен быть не более 2 МБ', (file) => {
+          if (!file) return true;
+          return file.size <= 2 * 1024 * 1024; // 2 Мб
+        })
+        .test('fileType', 'Файл должен иметь формат JPEG или PNG', (file) => {
+          if (!file) return true;
+          return ['image/jpeg', 'image/jpg', 'image/png'].includes(file.type);
+        })
+    )
+});
 
 export function RegistrationForm({
   initialStep = 1,
@@ -71,10 +102,31 @@ export function RegistrationForm({
     }
 
     if (step === 3) {
-      if (!values.title.trim()) nextErrors.title = 'Введите название навыка'
-      if (!values.categoryId) nextErrors.categoryId = 'Выберите категорию'
-      if (!values.subcategoryId) nextErrors.subcategoryId = 'Выберите подкатегорию'
-      if (!values.description.trim()) nextErrors.description = 'Добавьте описание'
+      let dataToValidate: DataToValidate = {
+        title: values.title,
+        categoryId: values.categoryId,
+        subcategoryId: values.subcategoryId,
+        description: values.description,
+        skillImages: Array.isArray(values.skillImages) ? values.skillImages : [],
+      };
+
+      try {
+        step3SkillSchema.validateSync(dataToValidate, { abortEarly: false });
+      } catch (err) {
+        if (err instanceof Yup.ValidationError && err.inner) {
+          err.inner.forEach((validationErr) => {
+            let path = validationErr.path;
+            if (path && path.startsWith('skillImages[')) {
+              path = 'skillImages';
+            }
+            if (path === 'skillImages') {
+              nextErrors.skillImages = validationErr.message;
+            } else if (path) {
+              nextErrors[path] = validationErr.message;
+            }
+          });
+        }
+      }
     }
 
     setErrors(nextErrors)
