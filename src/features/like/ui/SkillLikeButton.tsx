@@ -37,5 +37,7 @@ export function SkillLikeButton({ skillId, baseLikeCount }: SkillLikeButtonProps
   }
 
   // Рендерим готовую UI-кнопку из shared
-  return <LikeButton isLiked={isLiked} likeCount={totalLikes} onToggle={handleLikeClick} />
+  const isVisibleLiked = isAuth && isLiked
+
+return <LikeButton isLiked={isVisibleLiked} likeCount={totalLikes} onToggle={handleLikeClick} />
 }
