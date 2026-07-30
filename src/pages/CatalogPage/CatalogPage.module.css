@@ -72,6 +72,7 @@
     gap: 16px;
   }
 }
+
 .activeFilters {
   display: flex;
   flex-wrap: wrap;
