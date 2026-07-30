@@ -59,6 +59,7 @@ export interface Step3SkillProps {
   errors: Record<string, string>
   isCompleteModalOpen: boolean
   isSuccessModalOpen: boolean
+  skillImages: File[]
   onChangeTitle: (value: string) => void
   onChangeCategory: (categoryId: string) => void
   onChangeSubcategory: (subcategoryId: string) => void

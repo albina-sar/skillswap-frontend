@@ -1,5 +1,5 @@
-import { useRef, useState } from 'react'
-import { generatePath, Link, useLocation, useNavigate, useParams } from 'react-router-dom'
+import { useState } from 'react'
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import CloseIcon from '@/shared/assets/icons/CrossBlack.svg'
 import BoardImage from '@/shared/assets/images/board.svg'
 import LampImage from '@/shared/assets/images/lamp.svg'
@@ -9,7 +9,7 @@ import { saveUser } from '@/entities/auth/model/authSlice'
 import { createSkill } from '@/entities/skill/model/skillsSlice'
 import { fileToDataUrl, generateId } from '@/shared/lib/helpers'
 import { ROUTES } from '@/shared/lib/constants'
-import type { Skill, User, UserAccount } from '@/shared/types'
+import type { UserAccount } from '@/shared/types'
 import { Card } from '@/shared/ui/Card'
 import { HintCard } from '@/shared/ui/HintCard'
 import { Logo } from '@/shared/ui/Logo'
@@ -65,8 +65,6 @@ export default function RegistrationPage() {
   const [currentStep, setCurrentStep] = useState<RegistrationStep>(initialStep)
   const currentHint = hints[currentStep]
 
-  const createdSkillRef = useRef<{ skill: Skill; author: User } | null>(null)
-
   const handleComplete = async (values: RegistrationFormValues) => {
     try {
       const id = generateId()
@@ -102,26 +100,16 @@ export default function RegistrationPage() {
         }),
       ).unwrap()
 
-      const author = await dispatch(
+      await dispatch(
         updateAccountProfile({ id: profile.id, updates: { skills: [skill.id] } }),
       ).unwrap()
-
-      createdSkillRef.current = { skill, author }
     } catch {
       // TODO: показать пользователю ошибку регистрации
     }
   }
 
   const handleSuccessModalClose = () => {
-    if (from) {
-      navigate(from, { replace: true })
-      return
-    }
-
-    if (!createdSkillRef.current) return
-
-    const { skill, author } = createdSkillRef.current
-    navigate(generatePath(ROUTES.SKILL, { id: skill.id }), { state: { skill, author } })
+    navigate(from ?? ROUTES.HOME, { replace: true })
   }
 
   return (

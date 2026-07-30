@@ -1,0 +1,72 @@
+.empty {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.02em;
+  color: var(--text-primary);
+}
+
+.sliderWrapper {
+  position: relative;
+  overflow: visible;
+  width: 100%;
+}
+
+.embla {
+  overflow: hidden;
+  width: 100%;
+}
+
+.emblaContainer {
+  display: flex;
+}
+
+.emblaSlide {
+  flex: 0 0 auto;
+  min-width: 0;
+  display: flex;
+}
+
+.slideCard {
+  flex: 0 0 324px;
+  min-width: 0;
+}
+
+.btnArrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 32px;
+  height: 32px;
+  background-color: #f1f1f1;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    opacity 0.2s,
+    visibility 0.2s,
+    background-color 0.2s;
+}
+
+.btnArrow:hover {
+  background-color: #e5e5e5;
+}
+
+.btnPrev {
+  left: -20px;
+}
+
+.btnNext {
+  right: -20px;
+}
+
+.btnDisabled {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}

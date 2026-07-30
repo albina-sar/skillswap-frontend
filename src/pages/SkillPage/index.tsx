@@ -12,6 +12,7 @@ import { SkillCard } from '@/shared/ui/SkillCard'
 import { UserCard } from '@/shared/ui/UserCard'
 
 import styles from './SkillPage.module.css'
+import { SimilarOffers } from '@/components/similar-offers/similar-offers'
 
 const getLearnSkills = (user: User): Subcategory[] =>
   user.wantsToLearn
@@ -83,7 +84,8 @@ export default function SkillPage() {
             variant="skill"
           />
 
-          <SkillCard skill={skill} isFavorite={false} onFavoriteClick={() => {}} />
+          {/* Убрала isFavorite и onFavoriteClick */}
+          <SkillCard skill={skill} />
         </div>
 
         <Section
@@ -91,7 +93,7 @@ export default function SkillPage() {
           className={styles.section}
           titleClassName={styles.sectionTitle}
         >
-          <div className={styles.similarSkills} />
+          <SimilarOffers />
         </Section>
       </div>
     </main>
