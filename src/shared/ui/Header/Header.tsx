@@ -10,6 +10,7 @@ import { useAppDispatch } from '@/store/hooks'
 import { useSearchSuggestions } from '@/features/search/model/useSearchSuggestions'
 
 import { Logo } from '../Logo'
+import ChevronDown from '@/shared/assets/icons/ChevronDown.svg';
 import { Input } from '../Input'
 import { ThemeToggle } from '../theme-toggle'
 import { FavoriteButton } from '../favorite-button'
@@ -116,7 +117,7 @@ export const Header = ({
                 <button className={styles.navButton}>
                   Все навыки
                   <img
-                    src="src/shared/assets/icons/ChevronDown.svg"
+                    src={ChevronDown}
                     alt="Стрелка вниз"
                     width={24}
                     height={24}
