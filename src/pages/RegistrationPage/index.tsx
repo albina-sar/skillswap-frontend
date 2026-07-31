@@ -63,6 +63,7 @@ export default function RegistrationPage() {
   const dispatch = useAppDispatch()
   const initialStep = getInitialStep(step)
   const [currentStep, setCurrentStep] = useState<RegistrationStep>(initialStep)
+  const [userProfile, setUserProfile] = useState<{ id: string; name: string; email: string } | null>(null)
   const currentHint = hints[currentStep]
 
   const handleComplete = async (values: RegistrationFormValues) => {
@@ -84,7 +85,8 @@ export default function RegistrationPage() {
       }
 
       const profile = await dispatch(registerAccount(account)).unwrap()
-      await dispatch(saveUser({ id: profile.id, name: profile.name, email: profile.email })).unwrap()
+      // Сохраняем профиль для позднего использования, но НЕ устанавливаем isAuth здесь
+      setUserProfile({ id: profile.id, name: profile.name, email: profile.email })
 
       const skillImageUrls = await Promise.all(values.skillImages.map(fileToDataUrl))
       const skill = await dispatch(
@@ -108,7 +110,11 @@ export default function RegistrationPage() {
     }
   }
 
-  const handleSuccessModalClose = () => {
+  const handleSuccessModalClose = async () => {
+    // Устанавливаем isAuth ПОСЛЕ закрытия успешной модали
+    if (userProfile) {
+      await dispatch(saveUser({ id: userProfile.id, name: userProfile.name, email: userProfile.email })).unwrap()
+    }
     navigate(from ?? ROUTES.HOME, { replace: true })
   }
 

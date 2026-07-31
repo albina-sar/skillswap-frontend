@@ -1,4 +1,4 @@
-import { Navigate } from 'react-router-dom'
+import { Navigate, useLocation } from 'react-router-dom'
 import { useAppSelector } from '@/store/hooks'
 import { selectIsAuth, selectIsAuthChecked } from '@/entities/auth/model/authSlice'
 import { ROUTES } from '@/shared/lib/constants'
@@ -10,6 +10,7 @@ interface OnlyUnAuthProps {
 export function OnlyUnAuth({ children }: OnlyUnAuthProps) {
   const isAuth = useAppSelector(selectIsAuth)
   const isAuthChecked = useAppSelector(selectIsAuthChecked)
+  const location = useLocation();
 
   // Пока идёт проверка авторизации - показываем лоадер
   if (!isAuthChecked) {
@@ -18,7 +19,8 @@ export function OnlyUnAuth({ children }: OnlyUnAuthProps) {
 
   // Если пользователь авторизован - редиректим его на главную
   if (isAuth) {
-    return <Navigate to={ROUTES.HOME} replace />
+    const from = location.state?.from || { pathname: ROUTES.HOME };
+    return <Navigate replace to={from} />;
   }
 
   return <>{children}</>
