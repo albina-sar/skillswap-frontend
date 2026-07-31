@@ -119,16 +119,16 @@ const previewImages = useMemo(
       </div>
 
       <Modal isOpen={isCompleteModalOpen} onClose={onCloseCompleteModal}>
-  <SuggestionPreview
-    title={title}
-    categoryName={selectedCategory?.name ?? ''}
-    subcategoryName={selectedSubcategory?.name ?? ''}
-    description={description}
-    images={previewImages}
-    onEdit={onCloseCompleteModal}
-    onDone={onOpenSuccessModal}
-  />
-</Modal>
+        <SuggestionPreview
+          title={title}
+          categoryName={selectedCategory?.name ?? ''}
+          subcategoryName={selectedSubcategory?.name ?? ''}
+          description={description}
+          images={previewImages}
+          onEdit={onCloseCompleteModal}
+          onDone={onOpenSuccessModal}
+        />
+      </Modal>
 
 
       <ModalSuccessSuggestion isModalOpened={isSuccessModalOpen} onCloseModal={onCloseSuccessModal} />
