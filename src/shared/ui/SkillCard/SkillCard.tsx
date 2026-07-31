@@ -15,6 +15,9 @@ import type { SkillCardProps } from './types'
 
 import styles from './SkillCard.module.css'
 
+import shareIcon from '@/shared/assets/icons/share.svg'
+import moreIcon from '@/shared/assets/icons/more-square.svg'
+
 export function SkillCard({ skill }: SkillCardProps) {
   const navigate = useNavigate()
   const location = useLocation()
@@ -68,6 +71,14 @@ export function SkillCard({ skill }: SkillCardProps) {
               baseLikeCount={skill.likesCount}
               disabled={isOwnSkill}
             />
+
+            <button type="button" className={styles.iconButton} aria-label="Поделиться">
+              <img src={shareIcon} alt="" />
+            </button>
+
+            <button type="button" className={styles.iconButton} aria-label="Дополнительное меню">
+              <img src={moreIcon} alt="" />
+            </button>
           </div>
         </div>
 
