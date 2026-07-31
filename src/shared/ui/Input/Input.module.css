@@ -36,8 +36,8 @@
   font-size: var(--font-size-base);
   font-family: inherit;
   background-color: var(--input-bg);
-  border: 1px solid var(--toggle);
-  border-radius: var(--radius-md);
+  border: 1px solid var(--text-caption);
+  border-radius: var(--radius-lg);
   color: var(--text-primary);
   transition: all 0.2s ease;
   outline: none;

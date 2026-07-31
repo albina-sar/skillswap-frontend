@@ -10,16 +10,16 @@ interface Props {
 
 export function ModalSuccessSuggestion (props: Props) {
   return (
-    <div>
       <Modal isOpen={props.isModalOpened} onClose={props.onCloseModal}>
-        <img src={doneIcon} alt="Иконка уведомления" />
-        <div className={styles.textContent}>
-          <h2 className={styles.title}>Ваше предложение создано</h2>
-          <p className={styles.textParagraph}>Теперь вы можете предложить обмен</p>
+        <div className={styles.modalSucces}>
+          <img src={doneIcon} alt="Иконка уведомления" className={styles.icon} />
+          <div className={styles.textContent}>
+            <h2 className={styles.title}>Ваше предложение создано</h2>
+            <p className={styles.textParagraph}>Теперь вы можете предложить обмен</p>
+          </div>
+          <Button type="button" variant="primary" size="large" onClick={props.onCloseModal}>Готово</Button>
         </div>
-        <Button type="button" variant="primary" size="large" onClick={props.onCloseModal}>Готово</Button>
       </Modal>
-    </div>
   );
 };
 
