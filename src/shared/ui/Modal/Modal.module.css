@@ -20,6 +20,6 @@
   background: white;
   border-radius: var(--radius-lg);
   min-width: 300px;
-  max-width: 90%;
+  max-width: 100%;
   position: relative;
 }
