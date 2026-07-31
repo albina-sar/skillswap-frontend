@@ -280,7 +280,7 @@
     "city": "Казань",
     "gender": "женский",
     "dateOfBirth": "1993-09-12",
-    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0XkzUo8WqkFv7QqF6sZxJ9Y7W9HJk7X_0xYQv4U5n9A&s=10",
+    "photo": "https://i.pravatar.cc/300?img=47",
     "about": "Люблю изучать языки и путешествовать. Могу помочь с английским и испанским.",
     "skills": ["skill_026"],
     "wantsToLearn": ["304", "202", "305"]
@@ -291,7 +291,7 @@
     "city": "Москва",
     "gender": "мужской",
     "dateOfBirth": "1988-12-05",
-    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjK1X6dT5Lh0zF_4JzY9U5X0S7W8X9Y0Z1a2B3C4D5E6F&s=10",
+    "photo": "https://i.pravatar.cc/300?img=52",
     "about": "Интересуюсь автомобилями и технологиями. Могу помочь с ремонтом и программированием.",
     "skills": ["skill_027"],
     "wantsToLearn": ["103", "204", "602"]
@@ -302,7 +302,7 @@
     "city": "Санкт-Петербург",
     "gender": "женский",
     "dateOfBirth": "1994-11-21",
-    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0Xf2GJ8Y5W6K9R4A7b7U8V7W6X7Y8Z9V0a1B2C3D4E5F&s=10",
+    "photo": "https://i.pravatar.cc/300?img=44",
     "about": "Люблю готовить и заниматься фитнесом. Могу помочь с диетами и тренировками.",
     "skills": ["skill_028"],
     "wantsToLearn": ["404", "506", "601"]
@@ -313,7 +313,7 @@
     "city": "Новосибирск",
     "gender": "мужской",
     "dateOfBirth": "1990-03-14",
-    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvK1X2Y3Z4W5U6V7W8X9Y0Z1A2B3C4D5E6F7G8H9I0J&s=10",
+    "photo": "https://i.pravatar.cc/300?img=59",
     "about": "Занимаюсь спортом и программированием. Готов помочь с кодом и тренировками.",
     "skills": ["skill_029"],
     "wantsToLearn": ["501", "205", "602"]
@@ -324,7 +324,7 @@
     "city": "Казань",
     "gender": "женский",
     "dateOfBirth": "1996-07-19",
-    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxYzG7W8X9Y0Z1A2B3C4D5E6F7G8H9I0J1K2L3M4N5O&s=10",
+    "photo": "https://i.pravatar.cc/300?img=32",
     "about": "Люблю музыку и искусство. Могу помочь с живописью и дизайном.",
     "skills": ["skill_030"],
     "wantsToLearn": ["301", "602", "203"]
@@ -335,7 +335,7 @@
     "city": "Москва",
     "gender": "мужской",
     "dateOfBirth": "1991-02-10",
-    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQk5z0L8W9X0Z1A2B3C4D5E6F7G8H9I0J1K2L3M4N5O6P&s=10",
+    "photo": "https://i.pravatar.cc/300?img=13",
     "about": "Интересуюсь спортом и гаджетами. Могу помочь с обзорами и рекомендациями.",
     "skills": ["skill_031"],
     "wantsToLearn": ["102", "206", "603"]
@@ -346,7 +346,7 @@
     "city": "Екатеринбург",
     "gender": "женский",
     "dateOfBirth": "1995-04-11",
-    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0XfYzG1W2V3U4W5X6Y7Z8A9B0C1D2E3F4G5H6I7J8K&s=10",
+    "photo": "https://i.pravatar.cc/300?img=65",
     "about": "Люблю йогу и медитации. Могу помочь с релаксацией и здоровьем.",
     "skills": ["skill_032"],
     "wantsToLearn": ["502", "204", "404"]
@@ -357,7 +357,7 @@
     "city": "Курск",
     "gender": "мужской",
     "dateOfBirth": "1989-05-25",
-    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0XfYzG1W2V3U4W5X6Y7Z8A9B0C1D2E3F4G5H6I7J8K&s=10",
+    "photo": "https://i.pravatar.cc/300?img=68",
     "about": "Занимаюсь музыкой и техникой. Могу помочь с ремонтом и настройкой гаджетов.",
     "skills": ["skill_033"],
     "wantsToLearn": ["103", "306", "405"]
@@ -368,7 +368,7 @@
     "city": "Томск",
     "gender": "женский",
     "dateOfBirth": "1997-09-30",
-    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzYzG7W8X9Y0Z1A2B3C4D5E6F7G8H9I0J1K2L3M4N5O6P&s=10",
+    "photo": "https://i.pravatar.cc/300?img=41",
     "about": "Люблю живопись и дизайн. Могу помочь с арт-проектами.",
     "skills": ["skill_034"],
     "wantsToLearn": ["107", "203", "406"]
@@ -379,7 +379,7 @@
     "city": "Волгоград",
     "gender": "мужской",
     "dateOfBirth": "1992-03-03",
-    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0XfYzG1W2V3U4W5X6Y7Z8A9B0C1D2E3F4G5H6I7J8K&s=10",
+    "photo": "https://i.pravatar.cc/300?img=15",
     "about": "Интересуюсь спортом и кулинарией. Готов помочь с рецептами и тренировками.",
     "skills": ["skill_035"],
     "wantsToLearn": ["504", "204", "502"]
@@ -390,7 +390,7 @@
     "city": "Воронеж",
     "gender": "женский",
     "dateOfBirth": "1996-08-05",
-    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXyYzG7W8Y9Z0Z1A2B3C4D5E6F7G8H9I0J1K2L3M4N5O6P&s=10",
+    "photo": "https://i.pravatar.cc/300?img=27",
     "about": "Люблю читать и писать. Могу помочь с литературой и английским.",
     "skills": ["skill_036"],
     "wantsToLearn": ["105", "304", "601"]
@@ -401,7 +401,7 @@
     "city": "Киров",
     "gender": "мужской",
     "dateOfBirth": "1989-02-18",
-    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzXyYzG7W8Y9Z0Z1A2B3C4D5E6F7G8H9I0J1K2L3M4N5O6P&s=10",
+    "photo": "https://i.pravatar.cc/300?img=33",
     "about": "Занимаюсь спортом и программированием. Готов помочь с кодом и тренировками.",
     "skills": ["skill_037"],
     "wantsToLearn": ["107", "202", "403"]
@@ -412,7 +412,7 @@
     "city": "Казань",
     "gender": "женский",
     "dateOfBirth": "1994-10-12",
-    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXzYzG7W8Y9Z0Z1A2B3C4D5E6F7G8H9I0J1K2L3M4N5O6P&s=10",
+    "photo": "https://i.pravatar.cc/300?img=48",
     "about": "Люблю фотографию и путешествия. Могу помочь с фото и иностранными языками.",
     "skills": ["skill_038"],
     "wantsToLearn": ["202", "204", "305"]
@@ -423,7 +423,7 @@
     "city": "Москва",
     "gender": "мужской",
     "dateOfBirth": "1990-11-23",
-    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQk0YzG7W8Y9Z0Z1A2B3C4D5E6F7G8H9I0J1K2L3M4N5O6P&s=10",
+    "photo": "https://i.pravatar.cc/300?img=61",
     "about": "Интересуюсь технологиями и спортом. Могу помочь с гаджетами и тренировками.",
     "skills": ["skill_039"],
     "wantsToLearn": ["305", "203", "402"]
@@ -434,7 +434,7 @@
     "city": "Краснодар",
     "gender": "мужской",
     "dateOfBirth": "1987-06-15",
-    "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2YzG7W8Y9Z0Z1A2B3C4D5E6F7G8H9I0J1K2L3M4N5O6P&s=10",
+    "photo": "https://i.pravatar.cc/300?img=53",
     "about": "Люблю музыку и путешествия. Могу помочь с иностранными языками и культурой.",
     "skills": ["skill_040"],
     "wantsToLearn": ["105", "101", "601"]
