@@ -6,7 +6,7 @@
   width: 100%;
   max-width: 324px;
   min-height: 368px;
-  padding: var(--space-lg);
+  padding: var(--space-2xl);
   box-sizing: border-box;
 }
 
@@ -24,6 +24,8 @@
   display: flex;
   align-items: center;
   gap: var(--space-sm);
+  min-width: 0;
+  flex: 1; 
 }
 
 .info {
@@ -31,6 +33,7 @@
   flex-direction: column;
   justify-content: center;
   gap: var(--space-2xs);
+  min-width: 0;
 }
 
 .nameCatalog {
@@ -51,6 +54,9 @@
   line-height: 24px;
   letter-spacing: -0.011em;
   color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .meta {
@@ -61,6 +67,9 @@
   line-height: 16px;
   letter-spacing: 0.02em;
   color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .like {
