@@ -70,7 +70,7 @@ export default function CatalogPage() {
   )
   const defaultFilters = useMemo(() => getDefaultFilterValues(filterGroups), [])
 
- 
+
   useEffect(() => {
     const nextValue = Array.isArray(filters.skills) ? filters.skills[0] : undefined
 
@@ -151,7 +151,7 @@ const isFiltering = activeFilters.length > 0
   const users = useAppSelector(selectUsers)
   const skills = useAppSelector(selectSkills)
 
-  // Все карточки (уже отфильтрованные)
+  // Все карточки
   const cardItems = useMemo(
     () =>
       users
