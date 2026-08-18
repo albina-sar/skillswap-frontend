@@ -1,0 +1,170 @@
+.page {
+  min-height: 100vh;
+  padding: 40px 20px;
+  background-color: var(--background-main);
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 38px;
+  color: var(--text-primary);
+  margin: 0 0 4px;
+}
+
+.subtitle {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--text-caption);
+  margin: 0 0 32px;
+}
+
+.formCard {
+  padding: 40px;
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Загрузка изображения */
+.imageUpload {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.imageLabel {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.imageDropZone {
+  position: relative;
+  border: 2px dashed var(--toggle);
+  border-radius: var(--radius-md);
+  padding: 32px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--input-bg);
+}
+
+.imageDropZone:hover {
+  border-color: var(--text-link);
+  background-color: rgb(80 136 38 / 4%);
+}
+
+.imageInput {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.imagePlaceholder {
+  font-size: 16px;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.imageHint {
+  font-size: 12px;
+  color: var(--text-caption);
+  margin: 4px 0 0;
+}
+
+.previewContainer {
+  position: relative;
+  display: inline-block;
+}
+
+.preview {
+  max-width: 200px;
+  max-height: 150px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+}
+
+.removeImage {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--error);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.removeImage:hover {
+  background: #a8322a;
+}
+
+.imageError {
+  font-size: 13px;
+  color: var(--error);
+  margin: 4px 0 0;
+}
+
+/* Кнопки */
+.actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+/* Адаптив */
+@media (width <= 768px) {
+  .page {
+    padding: 24px 16px;
+  }
+
+  .formCard {
+    padding: 24px;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .imageDropZone {
+    padding: 20px;
+    min-height: 100px;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .actions button {
+    width: 100%;
+  }
+}
