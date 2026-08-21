@@ -6,14 +6,11 @@ import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 
-import { useAppSelector } from '@/store/hooks'
-import { selectSkills } from '@/entities/skill/model/skillsSlice'
 import { CATEGORIES_DATA, ROUTES } from '@/shared/lib/constants'
 import { Input } from '@/shared/ui/Input'
 import { Select } from '@/shared/ui/Select'
 import { Button } from '@/shared/ui/button/button'
 import { Card } from '@/shared/ui/Card/Card'
-import { generateId } from '@/shared/lib/helpers'
 
 import styles from './CreateSkillPage.module.css'
 
@@ -45,7 +42,6 @@ type SkillFormData = yup.InferType<typeof skillSchema>
 
 export default function CreateSkillPage() {
   const navigate = useNavigate()
-  const allSkills = useAppSelector(selectSkills)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [imageError, setImageError] = useState<string>('')
   const [previewImage, setPreviewImage] = useState<string | null>(null)
@@ -56,7 +52,6 @@ export default function CreateSkillPage() {
     watch,
     setValue,
     formState: { errors },
-    reset,
   } = useForm<SkillFormData>({
     resolver: yupResolver(skillSchema),
     defaultValues: {
@@ -71,7 +66,6 @@ export default function CreateSkillPage() {
 
   const selectedCategoryId = watch('categoryId')
 
-  // Находим подкатегории для выбранной категории
   const selectedCategory = CATEGORIES_DATA.find((c) => c.id === selectedCategoryId)
   const subcategoryOptions = selectedCategory
     ? selectedCategory.subcategories.map((sub) => ({
@@ -91,18 +85,15 @@ export default function CreateSkillPage() {
     { value: 'any', label: 'Я учу и учусь' },
   ]
 
-  // Обработчик загрузки изображения
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return
 
-    // Проверка размера (до 2 МБ)
     if (file.size > 2 * 1024 * 1024) {
       setImageError('Размер файла не должен превышать 2 МБ')
       return
     }
 
-    // Проверка типа
     if (!['image/jpeg', 'image/png'].includes(file.type)) {
       setImageError('Допустимые форматы: JPEG, PNG')
       return
@@ -116,12 +107,10 @@ export default function CreateSkillPage() {
     reader.readAsDataURL(file)
   }
 
-  // Отправка формы
   const onSubmit = (data: SkillFormData) => {
     setIsSubmitting(true)
 
     try {
-      // Формируем новый навык
       const newSkill = {
         id: `skill_${Date.now()}`,
         title: data.title,
@@ -130,17 +119,15 @@ export default function CreateSkillPage() {
         subcategoryId: data.subcategoryId,
         tags: data.tags ? data.tags.split(',').map((t) => t.trim()) : [],
         imageUrl: previewImage ? [previewImage] : [],
-        authorId: '1', // TODO: взять ID текущего пользователя из store
+        authorId: '1',
         createdAt: new Date().toISOString(),
         likesCount: 0,
         learningType: data.learningType as 'learn' | 'teach' | 'any',
       }
 
-      // Сохраняем в localStorage
       const savedSkills = JSON.parse(localStorage.getItem('skillswap_created_skills') ?? '[]')
       localStorage.setItem('skillswap_created_skills', JSON.stringify([...savedSkills, newSkill]))
 
-      // Перенаправляем на страницу нового навыка
       navigate(`/skill/${newSkill.id}`)
     } catch (error) {
       console.error('Ошибка при создании навыка:', error)
@@ -165,7 +152,7 @@ export default function CreateSkillPage() {
                 <Input
                   label="Название навыка"
                   placeholder="Введите название вашего навыка"
-                  value={field.value}
+                  value={field.value || ''}
                   onChange={field.onChange}
                   error={errors.title?.message}
                   required
@@ -182,7 +169,7 @@ export default function CreateSkillPage() {
                   label="Я хочу"
                   placeholder="Выберите тип"
                   options={learningTypeOptions}
-                  value={field.value}
+                  value={field.value || ''}
                   onChange={field.onChange}
                   error={errors.learningType?.message}
                   required
@@ -199,10 +186,10 @@ export default function CreateSkillPage() {
                   label="Категория навыка"
                   placeholder="Выберите категорию"
                   options={categoryOptions}
-                  value={field.value}
+                  value={field.value || ''}
                   onChange={(value) => {
                     field.onChange(value)
-                    setValue('subcategoryId', '') // сбрасываем подкатегорию
+                    setValue('subcategoryId', '')
                   }}
                   error={errors.categoryId?.message}
                   required
@@ -219,7 +206,7 @@ export default function CreateSkillPage() {
                   label="Подкатегория навыка"
                   placeholder="Выберите подкатегорию"
                   options={subcategoryOptions}
-                  value={field.value}
+                  value={field.value || ''}
                   onChange={field.onChange}
                   error={errors.subcategoryId?.message}
                   required
@@ -237,7 +224,7 @@ export default function CreateSkillPage() {
                   variant="textarea"
                   label="Описание"
                   placeholder="Коротко опишите, чему можете научить"
-                  value={field.value}
+                  value={field.value || ''}
                   onChange={field.onChange}
                   error={errors.description?.message}
                   required
@@ -253,7 +240,7 @@ export default function CreateSkillPage() {
                 <Input
                   label="Теги (через запятую)"
                   placeholder="Например: JavaScript, React, TypeScript"
-                  value={field.value}
+                  value={field.value || ''}
                   onChange={field.onChange}
                   error={errors.tags?.message}
                 />
